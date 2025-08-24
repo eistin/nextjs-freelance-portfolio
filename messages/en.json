@@ -1,6 +1,242 @@
 {
-    "HomePage": {
-      "title": "Hello world!",
-      "about": "Go to the about page"
+    "navigation": {
+      "home": "HOME",
+      "services": "SERVICES",
+      "projects": "PROJECTS",
+      "about": "ABOUT",
+      "contact": "CONTACT",
+      "logo": "EDWIN",
+      "header": {
+        "logoAlt": "Edwin Istin Logo",
+        "name": "Edwin Istin",
+        "tagline": "DevOps / SRE Expert"
+      }
+    },
+    "hero": {
+      "title": "FREELANCE",
+      "subtitle": "DEVOPS . SRE",
+      "description": "Hi, I'm Edwin Istin, DevOps Expert with 8+ years of experience helping tech companies overcome infrastructure challenges with personalized and efficient solutions.",
+      "cta": "Get in touch"
+    },
+    "services": {
+      "title": "SERVICES",
+      "items": {
+        "infrastructure": {
+          "title": "Infrastructure as Code (IaC)",
+          "description": "Save time and avoid manual errors with fully coded infrastructure management. Terraform modules, Terragrunt organization, and Ansible for idempotent resource deployment."
+        },
+        "cicd": {
+          "title": "DevOps & CI/CD",
+          "description": "Simplify and automate your deployment processes for faster and secure application delivery. GitLab CI, GitHub Actions, GitOps (ArgoCD, FluxCD), Docker, Kubernetes, and Helm."
+        },
+        "kubernetes": {
+          "title": "Site Reliability Engineering (SRE)",
+          "description": "Keep control of your performance with proactive monitoring and reliability indicators. Prometheus, Grafana, Loki, Victoria Metrics, and application SLO setup."
+        },
+        "cloud": {
+          "title": "Google Cloud Platform (GCP)",
+          "description": "Design and implement custom cloud architectures that adapt to your current and future needs. GCP architecture definition, Kubernetes migration, and cost optimization."
+        }
+      }
+    },
+    "recentWork": {
+      "title": "RECENT WORK",
+      "viewDetails": "View Details",
+      "view": "View",
+      "seeMore": "See More Projects",
+      "allProjects": "ALL RECENT PROJECTS",
+      "backToHome": "Back to Home",
+      "pageDescription": "Explore all of my recent DevOps and infrastructure projects. Each project showcases different technologies and solutions for modern cloud architecture.",
+      "ctaTitle": "Ready to start your project?",
+      "ctaDescription": "Let's discuss how I can help you build robust, scalable infrastructure for your applications.",
+      "cta": "Get in touch",
+      "projects": {
+        "kubernetes": {
+          "title": "GCP INFRASTRUCTURE FROM SCRATCH",
+          "category": "INFRASTRUCTURE",
+          "description": "Built scalable infrastructure from scratch at Teester startup. Created secure network architecture, implemented Terraform modules, and achieved zero-downtime migration from legacy infrastructure.",
+          "duration": "6 months",
+          "teamSize": "Solo + Lead Dev collaboration"
+        },
+        "cicd": {
+          "title": "PROJECT AUDIT & STARTER KIT",
+          "category": "CONSULTING",
+          "description": "Audited 100+ L'Oréal Paris projects and created standardized starter kit with 15 Terraform modules and 4 boilerplate projects for rapid project deployment with best practices.",
+          "duration": "3 months",
+          "teamSize": "2 DevOps engineers"
+        },
+        "cloud": {
+          "title": "KUBERNETES MIGRATION AT SCALE",
+          "category": "MIGRATION",
+          "description": "Led migration from legacy Compute Instances to GKE at Le Monde. Managed 15+ clusters across multiple newspaper titles, implemented monitoring stack with Prometheus/Grafana/Loki.",
+          "duration": "12 months",
+          "teamSize": "Cross-functional team"
+        },
+        "monitoring": {
+          "title": "MONITORING STACK SETUP",
+          "category": "MONITORING",
+          "description": "Implemented comprehensive monitoring solution with Prometheus, Grafana, and AlertManager. Created custom dashboards and alerting rules for production environments.",
+          "duration": "3 months",
+          "teamSize": "Solo project"
+        },
+        "security": {
+          "title": "SECURITY HARDENING PROJECT",
+          "category": "SECURITY",
+          "description": "Enhanced infrastructure security with Vault integration, RBAC policies, and network security measures. Achieved SOC2 compliance requirements.",
+          "duration": "4 months",
+          "teamSize": "2 engineers"
+        },
+        "automation": {
+          "title": "INFRASTRUCTURE AUTOMATION",
+          "category": "AUTOMATION",
+          "description": "Built end-to-end infrastructure automation using Ansible and Terraform. Reduced manual deployment time by 90% with CI/CD pipeline integration.",
+          "duration": "5 months",
+          "teamSize": "Solo + QA collaboration"
+        }
+      }
+    },
+    "testimonials": {
+      "title": "TESTIMONIALS",
+      "verifiedClient": "Verified Client"
+    },
+    "stories": {
+      "title": "STORIES",
+      "readMore": "Read more",
+      "subtitle": "Insights, tutorials, and thoughts on DevOps, cloud infrastructure, and automation best practices.",
+      "readTime": "min read",
+      "viewsLabel": "views",
+      "likesLabel": "likes",
+      "commentsLabel": "comments",
+      "stayUpdated": "Stay Updated",
+      "newsletterDescription": "Get the latest DevOps insights delivered to your inbox",
+      "subscribeNewsletter": "Subscribe to Newsletter",
+      "viewAllArticles": "View All Articles",
+      "authorRole": "DevOps Engineer",
+      "items": {
+        "landing": {
+          "title": "CREATE A LANDING PAGE THAT PERFORMS GREAT",
+          "date": "POSTED ON AUG 28",
+          "category": "HELP",
+          "description": "Discover the essential techniques and strategies for creating landing pages that not only look great but also convert visitors into customers. Learn about performance optimization, user experience, and conversion rate optimization."
+        },
+        "career1": {
+          "title": "STARTING AND GROWING A CAREER IN WEB DESIGN",
+          "date": "POSTED ON AUG 28",
+          "category": "HELP",
+          "description": "Essential tips and strategies for building a successful career in web design and development."
+        },
+        "career2": {
+          "title": "STARTING AND GROWING A CAREER IN WEB DESIGN",
+          "date": "POSTED ON AUG 28",
+          "category": "HELP",
+          "description": "Essential tips and strategies for building a successful career in web design and development."
+        }
+      }
+    },
+    "about": {
+      "title": "ABOUT ME",
+      "description": "I'm Edwin Istin, a passionate DevOps engineer with over 8 years of experience in crafting reliable and scalable infrastructure solutions. My journey began with discovering containerization technologies like LXC and Docker, which sparked my deep curiosity for the DevOps world. I've since developed extensive expertise in Kubernetes, Cloud Platforms (especially GCP), and Infrastructure-as-Code tools like Terraform and Ansible. I thrive on solving complex infrastructure challenges and helping companies scale efficiently.",
+      "stats": {
+        "experience": {
+          "number": "8+",
+          "label": "Years Of Experience"
+        },
+        "projects": {
+          "number": "20+",
+          "label": "Complete Projects"
+        },
+        "satisfaction": {
+          "number": "100%",
+          "label": "Client Satisfaction"
+        }
+      }
+    },
+    "contact": {
+      "title": "CONTACT ME",
+      "ready": "Are you ready?",
+      "heading": "SCALE YOUR INFRASTRUCTURE TO THE NEXT LEVEL",
+      "description": "Ready to eliminate deployment headaches and scale with confidence? Let's discuss your infrastructure challenges and build a solution that grows with your business.",
+      "selectedService": "Selected Service",
+      "inquiryAbout": "Inquiry about",
+      "social": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+      },
+      "info": {
+        "email": "istin.edwin@gmail.com",
+        "phone": "+33 6 16 28 14 84",
+        "location": "Rennes, Bretagne, France"
+      },
+      "form": {
+        "fullName": {
+          "label": "FULL NAME",
+          "placeholder": "Steve Milner"
+        },
+        "email": {
+          "label": "EMAIL ADDRESS",
+          "placeholder": "example@mail.com"
+        },
+        "subject": {
+          "label": "SUBJECT",
+          "placeholder": "Your Subject"
+        },
+        "message": {
+          "label": "YOUR MESSAGE",
+          "placeholder": "Write Your message"
+        },
+        "submit": "Send Me Message",
+        "sending": "Sending...",
+        "success": "Message sent successfully! I'll get back to you soon.",
+        "error": "Failed to send message. Please try again later.",
+        "serviceNotConfigured": "Email service is not configured. Please contact the administrator."
+      }
+    },
+    "companies": {
+      "swiss": "Swiss",
+      "bristol": "Bristol",
+      "leafe": "Leafe",
+      "greenish": "Greenish",
+      "italic": "Italic",
+      "ankara": "Ankara"
+    },
+    "projectDetail": {
+      "backToProjects": "Back to Projects",
+      "client": "Client",
+      "duration": "Duration",
+      "teamSize": "Team Size", 
+      "impact": "Impact",
+      "success": "Success",
+      "technologiesUsed": "TECHNOLOGIES USED",
+      "projectImpact": "Project Impact"
+    },
+    "email": {
+      "subject": "New Contact Request from Edwin's Portfolio",
+      "title": "New Contact Request",
+      "footer": "This email was sent from Edwin's portfolio contact form."
+    },
+    "errors": {
+      "projectNotFound": "Project Not Found",
+      "fullNameRequired": "Full name is required",
+      "invalidEmail": "Invalid email address", 
+      "subjectRequired": "Subject is required",
+      "messageRequired": "Message is required",
+      "validationFailed": "Please fix the errors below"
+    },
+    "header": {
+      "logoAlt": "Edwin Istin Logo",
+      "profileAlt": "Edwin Istin Profile",
+      "name": "EDWIN ISTIN",
+      "tagline": "DevOps • SRE • Freelance"
+    },
+    "companyLogos": {
+      "alivio": "Alivio",
+      "breteuil": "Breteuil",
+      "lemonde": "Le Monde",
+      "leoai": "Leo AI",
+      "loreal": "L'Oréal",
+      "nexelec": "Nexelec",
+      "skeepers": "Skeepers"
     }
   }

@@ -6,4 +6,11 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: "fr",
+
+  pathnames: {
+    "/": "/",
+    // "/pathnames": {
+    //   fr: "/pfadnamen",
+    // },
+  },
 });
