@@ -110,7 +110,7 @@ export default function StoriesSection() {
       </motion.div>
 
       <motion.div
-        className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}

@@ -81,10 +81,10 @@ export default function ContactSection() {
   ];
 
   const formVariants = {
-    hidden: { opacity: 0, x: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
         duration: 0.6,
         ease: [0.21, 0.47, 0.32, 0.98],
@@ -93,10 +93,10 @@ export default function ContactSection() {
   };
 
   const leftVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
         duration: 0.6,
         ease: [0.21, 0.47, 0.32, 0.98],
@@ -115,7 +115,7 @@ export default function ContactSection() {
         {t("title")}
       </motion.h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         {/* Left side - Contact Info */}
         <motion.div
           className="space-y-8"
@@ -266,7 +266,7 @@ export default function ContactSection() {
               )}
 
               <form id="contact-form" action={handleSubmit} className="space-y-6 flex-1 flex flex-col">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <motion.div
                     className="space-y-2"
                     whileHover={{ scale: 1.02 }}

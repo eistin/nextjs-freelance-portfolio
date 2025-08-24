@@ -70,12 +70,12 @@ export default function AboutSection() {
         {t("title")}
       </motion.h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
         {/* Left side - Image and visual elements */}
         <motion.div
           className="lg:col-span-2 relative"
-          initial={{ opacity: 0, x: -50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {/* Decorative background element */}
