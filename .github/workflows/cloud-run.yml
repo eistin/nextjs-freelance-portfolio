@@ -38,10 +38,12 @@ jobs:
         env:
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
           FROM_EMAIL_DOMAIN: ${{ vars.FROM_EMAIL_DOMAIN }}
+          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL }}
         run: |-
           docker build \
             --build-arg CONTACT_EMAIL=$CONTACT_EMAIL \
             --build-arg FROM_EMAIL_DOMAIN=$FROM_EMAIL_DOMAIN \
+            --build-arg NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL \
             -t ${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
           docker push ${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 

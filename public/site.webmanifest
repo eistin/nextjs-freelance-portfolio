@@ -1,0 +1,24 @@
+{
+  "name": "Edwin Istin - DevOps & SRE Engineer",
+  "short_name": "Edwin Istin",
+  "description": "Expert DevOps & SRE Engineer specializing in Infrastructure as Code, CI/CD, Kubernetes, and Cloud Architecture",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#ffffff",
+  "theme_color": "#5530E0",
+  "icons": [
+    {
+      "src": "/cloud-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/cloud-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["technology", "business", "productivity"],
+  "lang": "en",
+  "orientation": "portrait-primary"
+}

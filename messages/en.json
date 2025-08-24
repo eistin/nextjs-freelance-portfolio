@@ -241,6 +241,13 @@
     },
     "metadata": {
       "title": "Edwin Istin - DevOps & SRE Engineer",
-      "description": "Expert DevOps & SRE Engineer specializing in Infrastructure as Code, CI/CD, Kubernetes, and Cloud Architecture"
+      "description": "Expert DevOps & SRE Engineer specializing in Infrastructure as Code, CI/CD, Kubernetes, and Cloud Architecture",
+      "keywords": "DevOps Engineer, SRE, Infrastructure as Code, CI/CD, Kubernetes, Google Cloud Platform, Terraform, Ansible, Docker, GitOps, Site Reliability Engineering, Freelance DevOps",
+      "author": "Edwin Istin",
+      "ogTitle": "Edwin Istin - Expert DevOps & SRE Engineer",
+      "ogDescription": "Transform your infrastructure with 8+ years of DevOps expertise. Specializing in Kubernetes, GCP, Infrastructure as Code, and CI/CD automation.",
+      "ogImage": "/og-image.png",
+      "twitterTitle": "Edwin Istin - DevOps & SRE Expert",
+      "twitterDescription": "DevOps & SRE Engineer with 8+ years experience. Kubernetes • GCP • Infrastructure as Code • CI/CD"
     }
   }
