@@ -269,3 +269,67 @@ pre.hljs {
 .hljs-strong {
   @apply font-bold;
 }
+
+/* Simple working infinite scroll animations */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%); /* Move 1/3 of tripled content */
+  }
+}
+
+@keyframes scroll-mobile {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%); /* Move 1/3 of tripled content */
+  }
+}
+
+/* Pause on hover */
+.animate-scroll:hover,
+.animate-scroll-mobile:hover {
+  animation-play-state: paused;
+}
+
+/* Line clamp utilities for proper text truncation with ellipsis */
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Fallback for browsers that don't support line-clamp */
+@supports not (-webkit-line-clamp: 4) {
+  .line-clamp-4 {
+    max-height: 5.6em; /* 4 lines × 1.4 line-height */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .line-clamp-4::after {
+    content: '...';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-left: 20px;
+    background: linear-gradient(to right, transparent, var(--card) 70%);
+    color: var(--muted-foreground);
+  }
+}
+
