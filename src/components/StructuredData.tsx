@@ -9,6 +9,9 @@ export async function StructuredData({ locale }: { locale: string }) {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Edwin Istin",
+    "givenName": "Edwin",
+    "familyName": "Istin",
+    "alternateName": ["Edwin", "Ed Istin", "Edwin I."],
     "jobTitle": locale === 'fr' ? "Ingénieur DevOps & SRE" : "DevOps & SRE Engineer",
     "description": t('description'),
     "url": baseUrl,
@@ -23,7 +26,19 @@ export async function StructuredData({ locale }: { locale: string }) {
       "@type": "PostalAddress",
       "addressLocality": "Rennes",
       "addressRegion": "Bretagne",
-      "addressCountry": "FR"
+      "addressCountry": "France",
+      "addressCountryCode": "FR"
+    },
+    "birthPlace": locale === 'fr' ? "Rennes, France" : "Rennes, France",
+    "homeLocation": {
+      "@type": "Place",
+      "name": "Rennes",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rennes",
+        "addressRegion": "Bretagne",
+        "addressCountry": "France"
+      }
     },
     "worksFor": {
       "@type": "Organization",
