@@ -1,6 +1,46 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import localFont from "next/font/local";
+import "@/app/globals.css";
+import { ServiceProvider } from "@/contexts/ServiceContext";
+
+const archivGrotesk = localFont({
+  src: [
+    {
+      path: "./fonts/ArchivGrotesk-Hairline2.otf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ArchivGrotesk-Light2.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ArchivGrotesk-Regular2.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ArchivGrotesk-Normal2.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ArchivGrotesk-SemiBold2.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ArchivGrotesk-Bold2.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-archiv-grotesk",
+  display: "swap",
+});
 
 export default async function LocaleLayout({
   children,
@@ -17,8 +57,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      <body className={`${archivGrotesk.variable} font-sans`}>
+        <NextIntlClientProvider>
+          <ServiceProvider>
+            {children}
+          </ServiceProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

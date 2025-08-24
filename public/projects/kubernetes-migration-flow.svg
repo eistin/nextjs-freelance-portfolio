@@ -1,0 +1,156 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="k8sBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#326ce5;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#326ce5;stop-opacity:0.6"/>
+    </linearGradient>
+    <linearGradient id="legacyRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0.6"/>
+    </linearGradient>
+    <linearGradient id="migrationGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.6"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1f2937" text-anchor="middle">Kubernetes Migration at Scale</text>
+  <text x="400" y="50" font-family="Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Legacy Infrastructure → Modern Container Orchestration</text>
+  
+  <!-- Legacy Infrastructure (Left Side) -->
+  <rect x="50" y="80" width="200" height="350" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2" filter="url(#shadow)"/>
+  <text x="150" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">Legacy Infrastructure</text>
+  
+  <!-- Compute Engine VMs -->
+  <rect x="70" y="130" width="160" height="80" rx="6" fill="url(#legacyRed)" filter="url(#shadow)"/>
+  <text x="150" y="155" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">Compute Engine VMs</text>
+  <text x="150" y="175" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">50+ Instances</text>
+  
+  <!-- VM Icons -->
+  <rect x="85" y="185" width="20" height="15" rx="2" fill="white" opacity="0.8"/>
+  <rect x="115" y="185" width="20" height="15" rx="2" fill="white" opacity="0.8"/>
+  <rect x="145" y="185" width="20" height="15" rx="2" fill="white" opacity="0.8"/>
+  <rect x="175" y="185" width="20" height="15" rx="2" fill="white" opacity="0.8"/>
+  
+  <!-- Manual Processes -->
+  <rect x="70" y="230" width="160" height="60" rx="6" fill="#fbbf24" opacity="0.8" filter="url(#shadow)"/>
+  <text x="150" y="250" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">Manual Processes</text>
+  <text x="150" y="265" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• SSH Deployments</text>
+  <text x="150" y="278" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Manual Scaling</text>
+  
+  <!-- Limited Monitoring -->
+  <rect x="70" y="310" width="160" height="60" rx="6" fill="#6b7280" opacity="0.8" filter="url(#shadow)"/>
+  <text x="150" y="330" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">Basic Monitoring</text>
+  <text x="150" y="345" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Cloud Monitoring</text>
+  <text x="150" y="358" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Limited Visibility</text>
+  
+  <!-- Migration Arrow -->
+  <path d="M 270 250 Q 350 200 430 250" stroke="url(#migrationGreen)" stroke-width="4" fill="none" filter="url(#glow)"/>
+  <polygon points="425,245 435,250 425,255 430,250" fill="#10b981"/>
+  <text x="350" y="220" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#10b981" text-anchor="middle">Migration</text>
+  <text x="350" y="235" font-family="Arial, sans-serif" font-size="10" fill="#10b981" text-anchor="middle">12 months</text>
+  
+  <!-- Modern Kubernetes (Right Side) -->
+  <rect x="450" y="80" width="300" height="350" rx="10" fill="#eff6ff" stroke="#326ce5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#326ce5" text-anchor="middle">Modern Kubernetes Platform</text>
+  
+  <!-- GKE Clusters -->
+  <rect x="470" y="130" width="120" height="100" rx="6" fill="url(#k8sBlue)" filter="url(#shadow)"/>
+  <text x="530" y="150" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">GKE Clusters</text>
+  <text x="530" y="165" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">15+ Clusters</text>
+  
+  <!-- Kubernetes Pods -->
+  <g transform="translate(480, 175)">
+    <!-- Cluster 1 -->
+    <rect x="0" y="0" width="30" height="25" rx="3" fill="white" opacity="0.2"/>
+    <circle cx="8" cy="8" r="2" fill="white"/>
+    <circle cx="15" cy="8" r="2" fill="white"/>
+    <circle cx="22" cy="8" r="2" fill="white"/>
+    <circle cx="8" cy="17" r="2" fill="white"/>
+    <circle cx="15" cy="17" r="2" fill="white"/>
+    <circle cx="22" cy="17" r="2" fill="white"/>
+    
+    <!-- Cluster 2 -->
+    <rect x="35" y="0" width="30" height="25" rx="3" fill="white" opacity="0.2"/>
+    <circle cx="43" cy="8" r="2" fill="white"/>
+    <circle cx="50" cy="8" r="2" fill="white"/>
+    <circle cx="57" cy="8" r="2" fill="white"/>
+    <circle cx="43" cy="17" r="2" fill="white"/>
+    <circle cx="50" cy="17" r="2" fill="white"/>
+    <circle cx="57" cy="17" r="2" fill="white"/>
+    
+    <!-- Cluster 3 -->
+    <rect x="70" y="0" width="30" height="25" rx="3" fill="white" opacity="0.2"/>
+    <circle cx="78" cy="8" r="2" fill="white"/>
+    <circle cx="85" cy="8" r="2" fill="white"/>
+    <circle cx="92" cy="8" r="2" fill="white"/>
+    <circle cx="78" cy="17" r="2" fill="white"/>
+    <circle cx="85" cy="17" r="2" fill="white"/>
+    <circle cx="92" cy="17" r="2" fill="white"/>
+  </g>
+  
+  <!-- GitOps & Automation -->
+  <rect x="610" y="130" width="120" height="100" rx="6" fill="#10b981" opacity="0.8" filter="url(#shadow)"/>
+  <text x="670" y="150" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">GitOps Pipeline</text>
+  <text x="670" y="170" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Automated Deployments</text>
+  <text x="670" y="183" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Helm Charts</text>
+  <text x="670" y="196" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• GitLab CI</text>
+  <text x="670" y="209" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Auto-scaling</text>
+  
+  <!-- Monitoring Stack -->
+  <rect x="470" y="250" width="120" height="100" rx="6" fill="#8b5cf6" opacity="0.8" filter="url(#shadow)"/>
+  <text x="530" y="270" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">Monitoring Stack</text>
+  <text x="530" y="290" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Prometheus</text>
+  <text x="530" y="303" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Grafana</text>
+  <text x="530" y="316" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Loki</text>
+  <text x="530" y="329" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• 99.9% Uptime</text>
+  
+  <!-- Service Mesh -->
+  <rect x="610" y="250" width="120" height="100" rx="6" fill="#06b6d4" opacity="0.8" filter="url(#shadow)"/>
+  <text x="670" y="270" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">Service Mesh</text>
+  <text x="670" y="290" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Istio</text>
+  <text x="670" y="303" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Traffic Management</text>
+  <text x="670" y="316" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Security Policies</text>
+  <text x="670" y="329" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">• Load Balancing</text>
+  
+  <!-- Benefits Section -->
+  <rect x="470" y="370" width="260" height="50" rx="6" fill="#f0fdf4" stroke="#10b981" stroke-width="1"/>
+  <text x="490" y="385" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#166534">Migration Results:</text>
+  <text x="490" y="400" font-family="Arial, sans-serif" font-size="9" fill="#166534">• 40% faster deployments • 60% better resource utilization</text>
+  <text x="490" y="413" font-family="Arial, sans-serif" font-size="9" fill="#166534">• 30% cost reduction • Zero major incidents</text>
+  
+  <!-- Timeline -->
+  <rect x="300" y="420" width="200" height="60" rx="6" fill="white" stroke="#e5e7eb" filter="url(#shadow)"/>
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Migration Timeline</text>
+  
+  <!-- Timeline dots -->
+  <circle cx="320" cy="455" r="3" fill="#dc2626"/>
+  <text x="325" y="459" font-family="Arial, sans-serif" font-size="8" fill="#64748b">Assessment</text>
+  
+  <circle cx="360" cy="455" r="3" fill="#f59e0b"/>
+  <text x="365" y="459" font-family="Arial, sans-serif" font-size="8" fill="#64748b">Setup</text>
+  
+  <circle cx="400" cy="455" r="3" fill="#8b5cf6"/>
+  <text x="405" y="459" font-family="Arial, sans-serif" font-size="8" fill="#64748b">Migration</text>
+  
+  <circle cx="440" cy="455" r="3" fill="#10b981"/>
+  <text x="445" y="459" font-family="Arial, sans-serif" font-size="8" fill="#64748b">Complete</text>
+  
+  <line x1="320" y1="455" x2="440" y2="455" stroke="#e5e7eb" stroke-width="2"/>
+  
+  <text x="400" y="475" font-family="Arial, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">0 → 6 → 10 → 12 months</text>
+</svg>

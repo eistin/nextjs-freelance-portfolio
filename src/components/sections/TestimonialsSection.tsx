@@ -1,0 +1,235 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { Star } from "lucide-react";
+import { type Testimonial } from "@/lib/testimonials";
+
+interface TestimonialsSectionProps {
+  testimonials: Testimonial[];
+}
+
+export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+  const t = useTranslations("testimonials");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  // Duplicate testimonials for infinite scroll effect
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  
+
+
+  return (
+    <section className="container mx-auto" ref={ref}>
+      <motion.h2
+        className="text-3xl font-bold text-center mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.6 }}
+      >
+        {t("title")}
+      </motion.h2>
+
+      {/* Desktop Infinite Scroll */}
+      <div className="hidden lg:block overflow-hidden">
+        <motion.div
+          className="flex gap-4"
+          animate={{
+            x: ["-0%", "-50%"],
+          }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 30,
+              ease: "linear",
+            },
+          }}
+        >
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <Dialog key={`${testimonial.slug}-${index}`}>
+              <DialogTrigger asChild>
+                <Card className="flex-shrink-0 w-80 h-64 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer">
+                  <CardContent className="p-5 h-full flex flex-col">
+                    {/* Rating Stars */}
+                    <div className="flex gap-1 mb-3">
+                      {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-primary text-primary"
+                        />
+                      ))}
+                    </div>
+
+                    {/* Testimonial Content */}
+                    <blockquote className="text-sm mb-4 text-muted-foreground flex-grow overflow-hidden">
+                      <div className="line-clamp-4">
+                        &ldquo;{testimonial.content}&rdquo;
+                      </div>
+                    </blockquote>
+
+                    {/* Author Info */}
+                    <div className="flex items-center gap-3 mt-auto">
+                      <Avatar className="w-10 h-10">
+                        <AvatarImage src={testimonial.metadata.avatar} />
+                        <AvatarFallback className="text-sm bg-primary/10 text-primary">
+                          {testimonial.metadata.name.charAt(0)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h4 className="font-semibold text-sm">
+                          {testimonial.metadata.name}
+                        </h4>
+                        <p className="text-xs text-muted-foreground">
+                          {testimonial.metadata.role}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-3 mb-4">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={testimonial.metadata.avatar} />
+                      <AvatarFallback className="bg-primary/10 text-primary">
+                        {testimonial.metadata.name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h3 className="font-semibold text-lg">
+                        {testimonial.metadata.name}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonial.metadata.role} • {testimonial.metadata.company}
+                      </p>
+                    </div>
+                  </DialogTitle>
+                </DialogHeader>
+                
+                {/* Rating Stars */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-primary text-primary"
+                    />
+                  ))}
+                </div>
+                
+                {/* Full Testimonial Content */}
+                <blockquote className="text-base text-muted-foreground leading-relaxed">
+                  &ldquo;{testimonial.content}&rdquo;
+                </blockquote>
+              </DialogContent>
+            </Dialog>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Mobile Infinite Scroll */}
+      <div className="lg:hidden overflow-hidden">
+        <motion.div
+          className="flex gap-4"
+          animate={{
+            x: ["-0%", "-50%"],
+          }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 25,
+              ease: "linear",
+            },
+          }}
+        >
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <Dialog key={`${testimonial.slug}-mobile-${index}`}>
+              <DialogTrigger asChild>
+                <Card className="flex-shrink-0 w-72 h-60 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer">
+                  <CardContent className="p-4 h-full flex flex-col">
+                    {/* Rating Stars */}
+                    <div className="flex gap-1 mb-3">
+                      {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-primary text-primary"
+                        />
+                      ))}
+                    </div>
+                    
+                    {/* Testimonial Text */}
+                    <blockquote className="text-sm mb-3 text-muted-foreground flex-grow overflow-hidden">
+                      <div className="line-clamp-3">
+                        &ldquo;{testimonial.content}&rdquo;
+                      </div>
+                    </blockquote>
+                    
+                    {/* Author Info */}
+                    <div className="flex items-center gap-3 mt-auto">
+                      <Avatar className="w-9 h-9">
+                        <AvatarImage src={testimonial.metadata.avatar} />
+                        <AvatarFallback className="text-xs bg-primary/10 text-primary">
+                          {testimonial.metadata.name.charAt(0)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h4 className="font-semibold text-sm">
+                          {testimonial.metadata.name}
+                        </h4>
+                        <p className="text-xs text-muted-foreground">
+                          {testimonial.metadata.role}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-3 mb-4">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={testimonial.metadata.avatar} />
+                      <AvatarFallback className="bg-primary/10 text-primary">
+                        {testimonial.metadata.name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h3 className="font-semibold text-lg">
+                        {testimonial.metadata.name}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonial.metadata.role} • {testimonial.metadata.company}
+                      </p>
+                    </div>
+                  </DialogTitle>
+                </DialogHeader>
+                
+                {/* Rating Stars */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-primary text-primary"
+                    />
+                  ))}
+                </div>
+                
+                {/* Full Testimonial Content */}
+                <blockquote className="text-base text-muted-foreground leading-relaxed">
+                  &ldquo;{testimonial.content}&rdquo;
+                </blockquote>
+              </DialogContent>
+            </Dialog>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}

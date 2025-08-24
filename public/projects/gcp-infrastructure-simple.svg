@@ -1,0 +1,69 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5530E0;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGradient)"/>
+  
+  <!-- Main Title -->
+  <text x="400" y="60" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1f2937" text-anchor="middle">Infrastructure from Scratch</text>
+  <text x="400" y="85" font-family="Arial, sans-serif" font-size="14" fill="#64748b" text-anchor="middle">6 months • Zero-downtime migration</text>
+  
+  <!-- Before Section -->
+  <rect x="50" y="120" width="300" height="300" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="200" y="150" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#dc2626" text-anchor="middle">BEFORE</text>
+  
+  <!-- Problem Icons -->
+  <circle cx="120" cy="200" r="30" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="120" y="205" font-family="Arial, sans-serif" font-size="20" fill="#dc2626" text-anchor="middle">⚠️</text>
+  <text x="120" y="240" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Security Issues</text>
+  
+  <circle cx="280" cy="200" r="30" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="280" y="205" font-family="Arial, sans-serif" font-size="20" fill="#dc2626" text-anchor="middle">👷</text>
+  <text x="280" y="240" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Manual Setup</text>
+  
+  <circle cx="120" cy="320" r="30" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="120" y="325" font-family="Arial, sans-serif" font-size="20" fill="#dc2626" text-anchor="middle">📈</text>
+  <text x="120" y="360" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Can't Scale</text>
+  
+  <circle cx="280" cy="320" r="30" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="280" y="325" font-family="Arial, sans-serif" font-size="20" fill="#dc2626" text-anchor="middle">🔧</text>
+  <text x="280" y="360" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">No Automation</text>
+  
+  <!-- Arrow -->
+  <path d="M 370 270 L 430 270" stroke="url(#primaryGradient)" stroke-width="4" fill="none"/>
+  <polygon points="425,265 435,270 425,275" fill="#5530E0"/>
+  
+  <!-- After Section -->
+  <rect x="450" y="120" width="300" height="300" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="600" y="150" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#10b981" text-anchor="middle">AFTER</text>
+  
+  <!-- Solution Icons -->
+  <circle cx="520" cy="200" r="30" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="520" y="205" font-family="Arial, sans-serif" font-size="20" fill="#10b981" text-anchor="middle">🔒</text>
+  <text x="520" y="240" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Private Networks</text>
+  
+  <circle cx="680" cy="200" r="30" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="680" y="205" font-family="Arial, sans-serif" font-size="20" fill="#10b981" text-anchor="middle">⚡</text>
+  <text x="680" y="240" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Auto Deploy</text>
+  
+  <circle cx="520" cy="320" r="30" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="520" y="325" font-family="Arial, sans-serif" font-size="20" fill="#10b981" text-anchor="middle">📊</text>
+  <text x="520" y="360" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Auto Scaling</text>
+  
+  <circle cx="680" cy="320" r="30" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+  <text x="680" y="325" font-family="Arial, sans-serif" font-size="20" fill="#10b981" text-anchor="middle">🏗️</text>
+  <text x="680" y="360" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">Terraform IaC</text>
+  
+  <!-- Key Achievement -->
+  <rect x="200" y="440" width="400" height="50" rx="25" fill="url(#primaryGradient)"/>
+  <text x="400" y="470" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">🎯 Zero-Downtime Migration Achieved</text>
+</svg>
