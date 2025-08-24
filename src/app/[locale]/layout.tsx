@@ -112,7 +112,7 @@ export async function generateMetadata({
       },
     },
     verification: {
-      google: "your-google-verification-code",
+      google: "eAXhj6LexxkmYYyLkQ2SPAc9vE6S9siJ147TJhSWEs8",
     },
   };
 }
