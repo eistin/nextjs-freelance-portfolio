@@ -16,15 +16,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build arguments for environment variables
-ARG CONTACT_EMAIL
-ARG FROM_EMAIL_DOMAIN
-ARG NEXT_PUBLIC_BASE_URL
-
-# Set environment variables from build args
-ENV CONTACT_EMAIL=$CONTACT_EMAIL
-ENV FROM_EMAIL_DOMAIN=$FROM_EMAIL_DOMAIN
-ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+# Environment variables will be set at runtime via Cloud Run
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
