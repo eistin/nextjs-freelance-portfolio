@@ -75,8 +75,11 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: "/cloud-icon.png",
-      shortcut: "/cloud-icon.png",
+      icon: [
+        { url: "/cloud-icon.png", sizes: "any", type: "image/png" },
+        { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      ],
+      shortcut: "/favicon.png",
       apple: "/cloud-icon.png",
     },
     manifest: "/site.webmanifest",
