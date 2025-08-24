@@ -1,6 +1,6 @@
 ---
 name: "MOHAMED EL MANSOURI"
-role: "Lead DevOps - Groupe Le Monde"
+role: "Lead DevOps"
 company: "Groupe Le Monde"
 featured: true
 avatar: "/testimonials/mohamed.jpg"

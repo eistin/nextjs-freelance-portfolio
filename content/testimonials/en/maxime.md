@@ -1,6 +1,6 @@
 ---
 name: "MAXIME BACONNAIS"
-role: "Lead Tech - Teester"
+role: "Lead Tech"
 company: "Teester (now Skeepers)"
 featured: true
 avatar: "/testimonials/maxime.jpg"
