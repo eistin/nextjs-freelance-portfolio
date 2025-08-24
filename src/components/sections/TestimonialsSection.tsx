@@ -18,11 +18,6 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
   const t = useTranslations("testimonials");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
-  // Duplicate testimonials for infinite scroll effect
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
-  
-
 
   return (
     <section className="container mx-auto" ref={ref}>
@@ -37,21 +32,15 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
 
       {/* Desktop Infinite Scroll */}
       <div className="hidden lg:block overflow-hidden">
-        <motion.div
-          className="flex gap-4"
-          animate={{
-            x: ["-0%", "-50%"],
-          }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 30,
-              ease: "linear",
-            },
+        <div 
+          className="flex animate-scroll gap-6"
+          style={{
+            animation: 'scroll 30s linear infinite',
+            width: 'max-content'
           }}
         >
-          {duplicatedTestimonials.map((testimonial, index) => (
+          {/* Triple the testimonials for seamless loop */}
+          {[...testimonials, ...testimonials, ...testimonials].map((testimonial, index) => (
             <Dialog key={`${testimonial.slug}-${index}`}>
               <DialogTrigger asChild>
                 <Card className="flex-shrink-0 w-80 h-64 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer">
@@ -130,26 +119,20 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
               </DialogContent>
             </Dialog>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Mobile Infinite Scroll */}
       <div className="lg:hidden overflow-hidden">
-        <motion.div
-          className="flex gap-4"
-          animate={{
-            x: ["-0%", "-50%"],
-          }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 25,
-              ease: "linear",
-            },
+        <div 
+          className="flex animate-scroll-mobile gap-4"
+          style={{
+            animation: 'scroll-mobile 25s linear infinite',
+            width: 'max-content'
           }}
         >
-          {duplicatedTestimonials.map((testimonial, index) => (
+          {/* Triple the testimonials for seamless loop */}
+          {[...testimonials, ...testimonials, ...testimonials].map((testimonial, index) => (
             <Dialog key={`${testimonial.slug}-mobile-${index}`}>
               <DialogTrigger asChild>
                 <Card className="flex-shrink-0 w-72 h-60 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer">
@@ -228,7 +211,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
               </DialogContent>
             </Dialog>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
