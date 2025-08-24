@@ -15,7 +15,7 @@ export async function StructuredData({ locale }: { locale: string }) {
     "sameAs": [
       "https://www.linkedin.com/in/edwinistin",
       "https://github.com/edwinistin",
-      "https://twitter.com/edwinistin"
+      "https://twitter.com/Stini46111608"
     ],
     "email": "istin.edwin@gmail.com",
     "telephone": "+33616281484",

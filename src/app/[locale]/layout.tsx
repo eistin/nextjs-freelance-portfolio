@@ -101,7 +101,7 @@ export async function generateMetadata({
       title: t("twitterTitle"),
       description: t("twitterDescription"),
       images: [t("ogImage")],
-      creator: "@edwinistin",
+      creator: "@Stini46111608",
     },
     alternates: {
       canonical: currentUrl,
