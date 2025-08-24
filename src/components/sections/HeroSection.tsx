@@ -88,14 +88,14 @@ export default function HeroSection() {
 
       {/* Company Logos Infinite Carousel with Fade */}
       <motion.div
-        className="mt-20 relative"
+        className="mt-12 lg:mt-20 relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.8 }}
       >
-        {/* Fade gradients */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        {/* Responsive Fade gradients */}
+        <div className="absolute left-0 top-0 bottom-0 w-8 lg:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 lg:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         {/* Carousel Container */}
         <div className="overflow-hidden w-full relative">
@@ -105,35 +105,31 @@ export default function HeroSection() {
               x: ["0%", "-100%"],
             }}
             transition={{
-              duration: 30,
+              duration: 25,
               ease: "linear",
               repeat: Infinity,
             }}
           >
-            {/* Duplicated content */}
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex items-center gap-16 shrink-0 px-8">
+            {/* Duplicated content for infinite scroll */}
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center gap-4 md:gap-6 lg:gap-16 shrink-0 px-3 md:px-4 lg:px-8">
                 {companyLogos.map((company) => (
                   <div
                     key={`${company.key}-${i}`}
-                    className="flex-shrink-0 h-12 flex items-center"
+                    className="flex-shrink-0 h-8 md:h-10 lg:h-12 flex items-center"
                   >
                     <Image
                       src={company.src}
                       alt={company.alt}
                       width={120}
                       height={48}
-                      className="h-full w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                      className="h-full w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 max-w-[80px] md:max-w-[100px] lg:max-w-[120px]"
                     />
                   </div>
                 ))}
               </div>
             ))}
           </motion.div>
-
-          {/* Gradient Fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
         </div>
       </motion.div>
     </section>
