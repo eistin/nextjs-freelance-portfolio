@@ -36,12 +36,10 @@ jobs:
 
       - name: Build and Push Container
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
           FROM_EMAIL_DOMAIN: ${{ vars.FROM_EMAIL_DOMAIN }}
         run: |-
           docker build \
-            --build-arg RESEND_API_KEY=$RESEND_API_KEY \
             --build-arg CONTACT_EMAIL=$CONTACT_EMAIL \
             --build-arg FROM_EMAIL_DOMAIN=$FROM_EMAIL_DOMAIN \
             -t ${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
@@ -51,4 +49,5 @@ jobs:
         run: |-
           gcloud run services update ${{ env.SERVICE_NAME }} \
             --region ${{ env.REGION }} \
-            --image ${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+            --image ${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
+            --set-env-vars RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
