@@ -1,10 +1,7 @@
-'use client';
+import { getTranslations } from 'next-intl/server';
 
-import { useLocale, useTranslations } from 'next-intl';
-
-export function StructuredData() {
-  const locale = useLocale();
-  const t = useTranslations();
+export async function StructuredData({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: 'metadata' });
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://edwindev.cloud';
 
@@ -13,7 +10,7 @@ export function StructuredData() {
     "@type": "Person",
     "name": "Edwin Istin",
     "jobTitle": locale === 'fr' ? "Ingénieur DevOps & SRE" : "DevOps & SRE Engineer",
-    "description": t('metadata.description'),
+    "description": t('description'),
     "url": baseUrl,
     "sameAs": [
       "https://www.linkedin.com/in/edwinistin",

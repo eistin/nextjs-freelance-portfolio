@@ -133,7 +133,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
-        <StructuredData />
+        <StructuredData locale={locale} />
       </head>
       <body className={`${archivGrotesk.variable} font-sans`}>
         <NextIntlClientProvider>
