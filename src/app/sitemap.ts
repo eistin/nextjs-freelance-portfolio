@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
-import { projects } from '@/lib/projects';
+import { getProjectSlugs } from '@/lib/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://edwindev.cloud';
@@ -26,16 +26,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  // Generate URLs for project pages in all locales
+  // Get project slugs and generate URLs for project pages in all locales
+  const projectSlugs = getProjectSlugs('en'); // Get English slugs as reference
   const projectUrls = routing.locales.flatMap((locale) =>
-    Object.keys(projects).map((projectId) => ({
-      url: `${baseUrl}/${locale}/projects/${projectId}`,
+    projectSlugs.map((projectSlug) => ({
+      url: `${baseUrl}/${locale}/projects/${projectSlug}`,
       lastModified: new Date(),
       changeFrequency: 'yearly' as const,
       priority: 0.6,
       alternates: {
         languages: Object.fromEntries(
-          routing.locales.map((lang) => [lang, `${baseUrl}/${lang}/projects/${projectId}`])
+          routing.locales.map((lang) => [lang, `${baseUrl}/${lang}/projects/${projectSlug}`])
         ),
       },
     }))
