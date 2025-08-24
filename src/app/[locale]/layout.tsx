@@ -1,6 +1,7 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 import localFont from "next/font/local";
 import "@/app/globals.css";
 import { ServiceProvider } from "@/contexts/ServiceContext";
@@ -43,15 +44,24 @@ const archivGrotesk = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Edwin Istin - DevOps & SRE Engineer",
-  description: "Expert DevOps & SRE Engineer specializing in Infrastructure as Code, CI/CD, Kubernetes, and Cloud Architecture",
-  icons: {
-    icon: "/cloud-icon.png",
-    shortcut: "/cloud-icon.png",
-    apple: "/cloud-icon.png",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    icons: {
+      icon: "/cloud-icon.png",
+      shortcut: "/cloud-icon.png",
+      apple: "/cloud-icon.png",
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,

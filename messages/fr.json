@@ -238,5 +238,9 @@
       "loreal": "L'Oréal",
       "nexelec": "Nexelec",
       "skeepers": "Skeepers"
+    },
+    "metadata": {
+      "title": "Edwin Istin - Ingénieur DevOps & SRE",
+      "description": "Expert Ingénieur DevOps & SRE spécialisé en Infrastructure as Code, CI/CD, Kubernetes et Architecture Cloud"
     }
   }
