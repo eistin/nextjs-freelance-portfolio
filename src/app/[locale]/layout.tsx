@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import localFont from "next/font/local";
 import "@/app/globals.css";
 import { ServiceProvider } from "@/contexts/ServiceContext";
+import { Metadata } from "next";
 
 const archivGrotesk = localFont({
   src: [
@@ -41,6 +42,16 @@ const archivGrotesk = localFont({
   variable: "--font-archiv-grotesk",
   display: "swap",
 });
+
+export const metadata: Metadata = {
+  title: "Edwin Istin - DevOps & SRE Engineer",
+  description: "Expert DevOps & SRE Engineer specializing in Infrastructure as Code, CI/CD, Kubernetes, and Cloud Architecture",
+  icons: {
+    icon: "/cloud-icon.png",
+    shortcut: "/cloud-icon.png",
+    apple: "/cloud-icon.png",
+  },
+};
 
 export default async function LocaleLayout({
   children,
