@@ -98,20 +98,16 @@ export default function HeroSection() {
         <div className="absolute right-0 top-0 bottom-0 w-8 lg:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         {/* Carousel Container */}
-        <div className="overflow-hidden w-full relative">
-          <motion.div
-            className="flex"
-            animate={{
-              x: ["0%", "-100%"],
-            }}
-            transition={{
-              duration: 25,
-              ease: "linear",
-              repeat: Infinity,
+        <div className="overflow-hidden w-full relative carousel-container">
+          <div
+            className="flex will-change-transform"
+            style={{
+              animation: 'scroll 25s linear infinite',
+              width: 'fit-content'
             }}
           >
             {/* Duplicated content for infinite scroll */}
-            {[...Array(3)].map((_, i) => (
+            {[...Array(2)].map((_, i) => (
               <div key={i} className="flex items-center gap-4 md:gap-6 lg:gap-16 shrink-0 px-3 md:px-4 lg:px-8">
                 {companyLogos.map((company) => (
                   <div
@@ -129,7 +125,7 @@ export default function HeroSection() {
                 ))}
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </section>

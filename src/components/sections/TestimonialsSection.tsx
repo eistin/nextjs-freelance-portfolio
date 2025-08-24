@@ -20,7 +20,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="container mx-auto" ref={ref}>
+    <section className="container mx-auto overflow-hidden" ref={ref}>
       <motion.h2
         className="text-3xl font-bold text-center mb-8"
         initial={{ opacity: 0, y: 20 }}
@@ -31,16 +31,16 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       </motion.h2>
 
       {/* Desktop Infinite Scroll */}
-      <div className="hidden lg:block overflow-hidden">
+      <div className="hidden lg:block overflow-hidden w-full relative carousel-container">
         <div 
-          className="flex animate-scroll gap-6"
+          className="flex gap-6 will-change-transform"
           style={{
             animation: 'scroll 30s linear infinite',
-            width: 'max-content'
+            width: 'fit-content'
           }}
         >
-          {/* Triple the testimonials for seamless loop */}
-          {[...testimonials, ...testimonials, ...testimonials].map((testimonial, index) => (
+          {/* Double the testimonials for seamless loop */}
+          {[...testimonials, ...testimonials].map((testimonial, index) => (
             <Dialog key={`${testimonial.slug}-${index}`}>
               <DialogTrigger asChild>
                 <Card className="flex-shrink-0 w-80 h-64 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer">
@@ -123,19 +123,19 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       </div>
 
       {/* Mobile Infinite Scroll */}
-      <div className="lg:hidden overflow-hidden">
+      <div className="lg:hidden overflow-hidden w-full relative carousel-container">
         <div 
-          className="flex animate-scroll-mobile gap-4"
+          className="flex gap-4 will-change-transform"
           style={{
             animation: 'scroll-mobile 25s linear infinite',
-            width: 'max-content'
+            width: 'fit-content'
           }}
         >
-          {/* Triple the testimonials for seamless loop */}
-          {[...testimonials, ...testimonials, ...testimonials].map((testimonial, index) => (
+          {/* Double the testimonials for seamless loop */}
+          {[...testimonials, ...testimonials].map((testimonial, index) => (
             <Dialog key={`${testimonial.slug}-mobile-${index}`}>
               <DialogTrigger asChild>
-                <Card className="flex-shrink-0 w-72 h-60 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer">
+                <Card className="flex-shrink-0 w-64 sm:w-72 h-60 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer">
                   <CardContent className="p-4 h-full flex flex-col">
                     {/* Rating Stars */}
                     <div className="flex gap-1 mb-3">
