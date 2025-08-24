@@ -182,6 +182,7 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
   }
 }
 
@@ -276,7 +277,7 @@ pre.hljs {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.333%); /* Move 1/3 of tripled content */
+    transform: translateX(-50%); /* Move 1/2 of doubled content */
   }
 }
 
@@ -285,7 +286,7 @@ pre.hljs {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.333%); /* Move 1/3 of tripled content */
+    transform: translateX(-50%); /* Move 1/2 of doubled content */
   }
 }
 
@@ -293,6 +294,13 @@ pre.hljs {
 .animate-scroll:hover,
 .animate-scroll-mobile:hover {
   animation-play-state: paused;
+}
+
+/* Force contain carousel content */
+.carousel-container {
+  contain: layout style;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Line clamp utilities for proper text truncation with ellipsis */
