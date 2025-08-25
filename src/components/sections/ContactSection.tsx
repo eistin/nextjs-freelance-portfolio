@@ -156,7 +156,7 @@ export default function ContactSection() {
             </motion.p>
 
             <motion.h3
-              className="text-3xl font-bold mb-4 leading-tight"
+              className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 leading-tight sm:leading-tight"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: 0.3 }}

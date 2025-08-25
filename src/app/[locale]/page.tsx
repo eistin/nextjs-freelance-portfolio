@@ -21,7 +21,7 @@ export default async function HomePage({ params }: Props) {
       <Header />
       <main>
         {/* Hero Section - Special padding for first section */}
-        <div id="home" className="pt-24 pb-20 px-6">
+        <div id="home" className="pt-20 sm:pt-16 md:pt-24 pb-20 px-6">
           <HeroSection />
         </div>
 
