@@ -82,8 +82,8 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   </CardContent>
                 </Card>
               </DialogTrigger>
-              <DialogContent className="max-w-2xl">
-                <DialogHeader>
+              <DialogContent className="max-w-2xl max-h-[90vh] sm:max-h-[85vh] flex flex-col">
+                <DialogHeader className="flex-shrink-0">
                   <DialogTitle className="flex items-center gap-3 mb-4">
                     <Avatar className="w-12 h-12">
                       <AvatarImage src={testimonial.metadata.avatar} />
@@ -102,20 +102,22 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   </DialogTitle>
                 </DialogHeader>
                 
-                {/* Rating Stars */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-primary text-primary"
-                    />
-                  ))}
+                <div className="overflow-y-auto flex-1 -mx-2 px-2">
+                  {/* Rating Stars */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-5 h-5 fill-primary text-primary"
+                      />
+                    ))}
+                  </div>
+                  
+                  {/* Full Testimonial Content */}
+                  <blockquote className="text-base text-muted-foreground leading-relaxed">
+                    &ldquo;{testimonial.content}&rdquo;
+                  </blockquote>
                 </div>
-                
-                {/* Full Testimonial Content */}
-                <blockquote className="text-base text-muted-foreground leading-relaxed">
-                  &ldquo;{testimonial.content}&rdquo;
-                </blockquote>
               </DialogContent>
             </Dialog>
           ))}
@@ -174,8 +176,8 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   </CardContent>
                 </Card>
               </DialogTrigger>
-              <DialogContent className="max-w-2xl">
-                <DialogHeader>
+              <DialogContent className="max-w-2xl max-h-[90vh] sm:max-h-[85vh] flex flex-col">
+                <DialogHeader className="flex-shrink-0">
                   <DialogTitle className="flex items-center gap-3 mb-4">
                     <Avatar className="w-12 h-12">
                       <AvatarImage src={testimonial.metadata.avatar} />
@@ -194,20 +196,22 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   </DialogTitle>
                 </DialogHeader>
                 
-                {/* Rating Stars */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-primary text-primary"
-                    />
-                  ))}
+                <div className="overflow-y-auto flex-1 -mx-2 px-2">
+                  {/* Rating Stars */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-5 h-5 fill-primary text-primary"
+                      />
+                    ))}
+                  </div>
+                  
+                  {/* Full Testimonial Content */}
+                  <blockquote className="text-base text-muted-foreground leading-relaxed">
+                    &ldquo;{testimonial.content}&rdquo;
+                  </blockquote>
                 </div>
-                
-                {/* Full Testimonial Content */}
-                <blockquote className="text-base text-muted-foreground leading-relaxed">
-                  &ldquo;{testimonial.content}&rdquo;
-                </blockquote>
               </DialogContent>
             </Dialog>
           ))}
