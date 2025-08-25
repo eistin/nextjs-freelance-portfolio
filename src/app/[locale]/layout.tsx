@@ -75,8 +75,16 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: "/cloud-icon.png",
+      icon: "/favicon.png",
+      shortcut: "/favicon.png", 
       apple: "/cloud-icon.png",
+      other: [
+        {
+          rel: "icon",
+          url: "/cloud-icon.png",
+          type: "image/png",
+        }
+      ],
     },
     manifest: "/site.webmanifest",
     openGraph: {
