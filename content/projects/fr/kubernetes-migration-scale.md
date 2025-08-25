@@ -55,7 +55,6 @@ Le Groupe Le Monde faisait face à un défi critique de modernisation d'infrastr
 **Charts Helm Personnalisés** :
 - **Templates réutilisables** pour différents types d'applications
 - **Values configurables** par environnement
-- **Gestion des secrets** via Kubernetes secrets
 - **Configuration ingress** avec certificats SSL automatiques
 - **Paramètres d'auto-scaling** avec HPA (Horizontal Pod Autoscaler)
 
@@ -96,7 +95,6 @@ Le Groupe Le Monde faisait face à un défi critique de modernisation d'infrastr
 - **Loki** : Agrégation et analyse des logs
 - **GitLab CI** : Intégration et déploiement continus
 - **Terraform** : Infrastructure as Code
-- **Istio** : Service mesh pour gestion avancée du trafic
 
 ## Résultats & Impact
 
@@ -108,24 +106,14 @@ Le Groupe Le Monde faisait face à un défi critique de modernisation d'infrastr
 ### ✅ **Excellence Opérationnelle**
 - **Auto-scaling automatisé** lors des pics de trafic (événements importants)
 - **Processus de déploiement cohérents** sur tous les produits
-- **Monitoring complet** avec 99,9% de visibilité uptime
 
-### ✅ **Améliorations Performance**
-- **40% de déploiements plus rapides** comparé à Compute Engine
-- **60% de meilleure utilisation des ressources** grâce à l'orchestration conteneurs
-- **MTTR réduit** d'heures à minutes pour les problèmes courants
 
-### ✅ **Optimisation Coûts**
-- **30% de réduction** des coûts d'infrastructure
-- **Meilleure allocation des ressources** grâce à l'auto-scaling horizontal des pods
-- **Planification capacité améliorée** avec métriques détaillées
 
 ## Expertise Technique Démontrée
 
 ### **Architecture Complexe Multi-Services**
 - Analyse et mapping exhaustif des dépendances inter-services
 - Orchestration sophistiquée des migrations avec gestion des dépendances
-- Intégration service mesh pour contrôle avancé du trafic
 
 ### **Maîtrise des Déploiements Critiques**
 - Stratégies de déploiement zero-downtime pour applications critiques

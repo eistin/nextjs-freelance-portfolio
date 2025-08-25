@@ -55,7 +55,6 @@ Le Monde Group faced a critical infrastructure modernization challenge. Their le
 **Custom Helm Charts**:
 - **Reusable templates** for different application types
 - **Configurable values** per environment
-- **Secret management** via Kubernetes secrets
 - **Ingress configuration** with automated SSL certificates
 - **Auto-scaling parameters** with HPA (Horizontal Pod Autoscaler)
 
@@ -106,7 +105,6 @@ Loki:
 - **Loki**: Log aggregation and analysis
 - **GitLab CI**: Continuous integration and deployment
 - **Terraform**: Infrastructure as Code
-- **Istio**: Service mesh for advanced traffic management
 
 ## Results & Impact
 
@@ -118,24 +116,14 @@ Loki:
 ### ✅ **Operational Excellence**
 - **Automated scaling** during traffic spikes (major events)
 - **Consistent deployment** processes across all products
-- **Comprehensive monitoring** with 99.9% uptime visibility
 
-### ✅ **Performance Improvements**
-- **40% faster deployment** times compared to Compute Engine
-- **60% better resource utilization** through container orchestration
-- **Reduced MTTR** from hours to minutes for common issues
 
-### ✅ **Cost Optimization**
-- **30% reduction** in infrastructure costs
-- **Better resource allocation** through horizontal pod autoscaling
-- **Improved capacity planning** with detailed metrics
 
 ## Technical Expertise Demonstrated
 
 ### **Complex Multi-Service Architecture**
 - Comprehensive analysis and mapping of inter-service dependencies
 - Sophisticated migration orchestration with dependency management
-- Service mesh integration for advanced traffic control
 
 ### **Critical Deployment Mastery**
 - Zero-downtime deployment strategies for mission-critical applications
