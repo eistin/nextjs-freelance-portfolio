@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import {
   Linkedin,
   Github,
+  Download,
   Send,
   MapPin,
   Mail as MailIcon,
@@ -23,6 +24,7 @@ import { useRef, useEffect, useState, useTransition } from "react";
 import { useService } from "@/contexts/ServiceContext";
 import { Badge } from "@/components/ui/badge";
 import { submitContactForm, type ActionResult } from "@/lib/actions";
+import { useAnalytics } from "@/lib/analytics";
 
 export default function ContactSection() {
   const t = useTranslations("contact");
@@ -35,6 +37,7 @@ export default function ContactSection() {
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<ActionResult | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const { trackButtonClick, trackFormEvent } = useAnalytics();
 
   // Update subject when service is selected
   useEffect(() => {
@@ -50,6 +53,8 @@ export default function ContactSection() {
   };
 
   const handleSubmit = (formData: FormData) => {
+    trackFormEvent('submit', 'contact');
+    
     startTransition(async () => {
       setResult(null);
       setErrors({});
@@ -59,6 +64,7 @@ export default function ContactSection() {
       
       if (result.errors) {
         setErrors(result.errors);
+        trackFormEvent('error', 'contact');
       } else if (result.success) {
         // Reset form on success
         const form = document.getElementById('contact-form') as HTMLFormElement;
@@ -69,9 +75,14 @@ export default function ContactSection() {
     });
   };
 
+  const handleSocialClick = (labelKey: string, href: string) => {
+    trackButtonClick(labelKey, href);
+  };
+
   const socialLinks = [
     { icon: Linkedin, href: "https://www.linkedin.com/in/edwin-istin/", labelKey: "linkedin" },
     { icon: Github, href: "https://github.com/eistin", labelKey: "github" },
+    { icon: Download, href: "/CV_DEVOPS_2025.pdf", labelKey: "downloadCv", download: "CV_DEVOPS_EDWIN_ISTIN_2025.pdf" },
   ];
 
   const contactInfo = [
@@ -213,16 +224,39 @@ export default function ContactSection() {
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Button
-                  variant="outline"
-                  size="icon"
-                  asChild
-                  className="hover:border-primary/50 hover:bg-primary/10"
-                >
-                  <Link href={social.href} aria-label={t(`social.${social.labelKey}`)}>
-                    <social.icon className="h-5 w-5" />
-                  </Link>
-                </Button>
+                {social.labelKey === 'downloadCv' ? (
+                  <Button
+                    variant="outline"
+                    asChild
+                    className="hover:border-primary/50 hover:bg-primary/10"
+                  >
+                    <Link 
+                      href={social.href} 
+                      aria-label={t(`social.${social.labelKey}`)}
+                      onClick={() => handleSocialClick(social.labelKey, social.href)}
+                      {...(social.download && { download: social.download })}
+                      className="flex items-center gap-2"
+                    >
+                      <social.icon className="h-5 w-5" />
+                      <span>{t(`social.${social.labelKey}`)}</span>
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    asChild
+                    className="hover:border-primary/50 hover:bg-primary/10"
+                  >
+                    <Link 
+                      href={social.href} 
+                      aria-label={t(`social.${social.labelKey}`)}
+                      onClick={() => handleSocialClick(social.labelKey, social.href)}
+                    >
+                      <social.icon className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                )}
               </motion.div>
             ))}
           </motion.div>
