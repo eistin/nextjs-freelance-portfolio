@@ -162,7 +162,8 @@
         "facebook": "Facebook",
         "twitter": "Twitter",
         "linkedin": "LinkedIn",
-        "github": "GitHub"
+        "github": "GitHub",
+        "downloadCv": "Télécharger mon CV"
       },
       "info": {
         "email": "istin.edwin@gmail.com",
