@@ -38,7 +38,9 @@ src/
 │   ├── navigation.ts      # i18n navigation utilities
 │   └── request.ts         # Server-side i18n setup
 ├── lib/
-│   └── utils.ts           # Utility functions (cn helper)
+│   ├── utils.ts           # Utility functions (cn helper)
+│   ├── projects.ts        # Project data management
+│   └── testimonials.ts    # Testimonials data management
 └── middleware.ts          # i18n middleware for route handling
 ```
 
@@ -70,8 +72,8 @@ The portfolio includes these main sections:
 - Company logos display
 
 ### Content Management
-- **Projects**: Static data defined in `src/lib/projects.ts`
-- **Testimonials**: Static data defined in `src/lib/testimonials.ts`
+- **Projects**: Markdown files in `content/projects/[locale]/` with gray-matter frontmatter
+- **Testimonials**: Markdown files in `content/testimonials/[locale]/` with gray-matter frontmatter
 - **Content assets**: Located in `content/` directory
 - **Images**: Project images in `public/projects/`, company logos in `public/logo_companies/`
 
@@ -84,3 +86,4 @@ Custom Archiv Grotesk font with multiple weights (100-700) loaded via `next/font
 - ESLint configured with Next.js preset
 - PostCSS configured for Tailwind CSS processing
 - All components follow React Server Components pattern where applicable
+- Standalone output configuration for containerized deployment
