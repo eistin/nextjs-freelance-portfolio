@@ -7,6 +7,8 @@ import "@/app/globals.css";
 import { ServiceProvider } from "@/contexts/ServiceContext";
 import { StructuredData } from "@/components/StructuredData";
 import { Metadata } from "next";
+import Script from "next/script";
+import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 
 const archivGrotesk = localFont({
   src: [
@@ -143,6 +145,26 @@ export default async function LocaleLayout({
         <StructuredData locale={locale} />
       </head>
       <body className={`${archivGrotesk.variable} font-sans`}>
+        {/* Google Analytics */}
+        {GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
+        
         <NextIntlClientProvider>
           <ServiceProvider>
             {children}
