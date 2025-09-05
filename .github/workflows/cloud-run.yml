@@ -44,4 +44,4 @@ jobs:
           gcloud run services update ${{ env.SERVICE_NAME }} \
             --region ${{ env.REGION }} \
             --image ${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
-            --set-env-vars RESEND_API_KEY=${{ secrets.RESEND_API_KEY }},CONTACT_EMAIL=${{ vars.CONTACT_EMAIL }},FROM_EMAIL_DOMAIN=${{ vars.FROM_EMAIL_DOMAIN }},NEXT_PUBLIC_BASE_URL=${{ vars.NEXT_PUBLIC_BASE_URL }}
+            --set-env-vars RESEND_API_KEY=${{ secrets.RESEND_API_KEY }},CONTACT_EMAIL=${{ vars.CONTACT_EMAIL }},FROM_EMAIL_DOMAIN=${{ vars.FROM_EMAIL_DOMAIN }},NEXT_PUBLIC_BASE_URL=${{ vars.NEXT_PUBLIC_BASE_URL }},NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
