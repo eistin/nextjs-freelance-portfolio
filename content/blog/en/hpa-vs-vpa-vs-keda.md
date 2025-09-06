@@ -192,18 +192,28 @@ Begin with HPA for most applications. It's stable, well-understood, and covers 8
 ### 2. Monitor Resource Utilization
 Use tools like Prometheus and Grafana to understand your application's resource patterns before implementing autoscaling.
 
-### 3. Set Appropriate Limits
-Always define resource requests and limits to prevent runaway resource consumption:
+### 3. Modern Resource Management Strategy (2025)
+**⚠️ Important**: Best practices have evolved regarding resource limits:
+
+**For CPU** - **Avoid CPU limits** in most cases:
+- CPU limits cause throttling and degrade performance
+- Focus on **accurate CPU requests** based on actual usage
+- Use **HPA** to handle traffic spikes instead of limits
+
+**For Memory** - **Always set memory limits**:
+- Memory cannot be compressed like CPU
+- Exceeding limits = Pod termination (OOM kill)
 
 ```yaml
 resources:
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 100m        # Reserve 0.1 CPU based on actual usage
+    memory: 256Mi    # Reserve based on observed needs
   limits:
-    cpu: 500m
-    memory: 512Mi
+    # cpu: 500m      # ❌ Avoid - causes throttling
+    memory: 512Mi    # ✅ Required - prevents OOM kills
 ```
+
 
 ### 4. Consider Cost Implications
 - **HPA**: Can increase costs during scale-out events
@@ -263,7 +273,35 @@ Choose your autoscaling strategy based on your specific use case:
 
 The key to successful autoscaling is understanding your application's behavior, starting with simple solutions, and gradually adopting more complex strategies as needed.
 
-**Remember**: Autoscaling is not a silver bullet. Proper application architecture, efficient code, and appropriate resource management are equally important for optimal Kubernetes performance.
+## Evolution of Best Practices in 2025
+
+### Why Avoid CPU Limits?
+Kubernetes architects now recommend avoiding CPU limits because:
+
+1. **Artificial throttling**: CPU limits can artificially slow down your application
+2. **Degraded performance**: Even when CPU is available, limits prevent its usage
+3. **HPA more effective**: Horizontal autoscaling handles traffic spikes better
+
+### 2025 Recommended Strategy
+```yaml
+# ✅ Modern recommended configuration
+resources:
+  requests:
+    cpu: "100m"      # Precise request based on profiling
+    memory: "256Mi"   # Request based on actual usage
+  limits:
+    # No CPU limits - let HPA handle load
+    memory: "512Mi"   # Memory limits required to prevent OOM
+```
+
+### Modern Sizing Methodology
+1. **Profile first**: Use Prometheus/Grafana to measure actual usage
+2. **Accurate requests**: Based on historical usage data  
+3. **HPA over limits**: Let HPA handle spikes instead of CPU limits
+4. **Continuous monitoring**: Watch for throttling and adjust requests
+5. **Quality of Service**: Aim for `Guaranteed` class for critical workloads
+
+**Remember**: Autoscaling is not a silver bullet. Proper application architecture, efficient code, and modern resource management (accurate requests + HPA) are essential for optimal Kubernetes performance.
 
 ---
 

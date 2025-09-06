@@ -95,18 +95,27 @@ Commencez avec HPA pour la plupart des applications. C'est stable, bien compris,
 ### 2. Surveillez l'utilisation des ressources
 Utilisez des outils comme Prometheus et Grafana pour comprendre les modèles de ressources de votre application avant d'implémenter l'autoscaling.
 
-### 3. Définissez des limites appropriées
-Définissez toujours des demandes et limites de ressources pour prévenir une consommation excessive :
+### 3. Stratégie de gestion des ressources
+
+**Pour le CPU** - **Évitez les limites CPU** dans la plupart des cas :
+- Les limites CPU causent du throttling et dégradent les performances
+- Concentrez-vous sur des **requests CPU précises** basées sur l'utilisation réelle
+- **HPA gère mieux les pics** : Au lieu de brider le CPU avec des limites, laissez HPA créer de nouvelles répliques pour distribuer la charge
+
+**Pour la mémoire** - **Toujours définir des limites mémoire** :
+- La mémoire ne peut pas être compressée comme le CPU
+- Dépasser les limites = terminaison du Pod (OOM kill)
 
 ```yaml
 resources:
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 100m        # Réserver 0.1 CPU basé sur l'utilisation réelle
+    memory: 256Mi    # Réserver basé sur les besoins observés
   limits:
-    cpu: 500m
-    memory: 512Mi
+    # cpu: 500m      # ❌ Éviter - cause du throttling
+    memory: 512Mi    # ✅ Obligatoire - prévient les OOM kills
 ```
+
 
 ### 4. Considérez les implications de coût
 - **HPA** : Peut augmenter les coûts lors d'événements de montée en charge
