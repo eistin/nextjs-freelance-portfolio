@@ -5,6 +5,7 @@
       "projects": "PROJETS",
       "about": "À PROPOS",
       "contact": "CONTACT",
+      "blog": "BLOG",
       "logo": "EDWIN",
       "header": {
         "logoAlt": "Logo Edwin Istin",
@@ -250,5 +251,14 @@
       "ogImage": "/cloud-icon.png",
       "twitterTitle": "Edwin Istin - Expert DevOps & SRE | Rennes, France",
       "twitterDescription": "Edwin Istin : Ingénieur DevOps & SRE avec 8+ ans d'expérience. Kubernetes • GCP • Infrastructure as Code • CI/CD | Basé à Rennes, France"
+    },
+    "blog": {
+      "title": "Blog - Edwin Istin | Conseils DevOps & SRE",
+      "description": "Conseils DevOps et SRE par Edwin Istin. Tutoriels, bonnes pratiques et conseils d'expert sur Kubernetes, Infrastructure as Code, CI/CD et architecture cloud.",
+      "keywords": "blog DevOps, tutoriels SRE, guide Kubernetes, Infrastructure as Code, bonnes pratiques CI/CD, architecture cloud, blog Edwin Istin, conseils DevOps, Site Reliability Engineering",
+      "ogTitle": "Blog DevOps & SRE par Edwin Istin - Conseils d'Expert & Tutoriels",
+      "ogDescription": "Découvrez les conseils d'expert DevOps et SRE d'Edwin Istin. Tutoriels approfondis sur Kubernetes, Infrastructure as Code, automatisation CI/CD et pratiques d'architecture cloud moderne.",
+      "twitterTitle": "Blog DevOps & SRE | Edwin Istin",
+      "twitterDescription": "Conseils d'expert DevOps & SRE, tutoriels et bonnes pratiques par Edwin Istin. Kubernetes • Infrastructure as Code • CI/CD • Architecture Cloud"
     }
   }
