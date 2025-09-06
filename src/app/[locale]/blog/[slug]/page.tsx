@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <h1 className="text-3xl font-bold mt-12 mb-4 text-gray-900">{children}</h1>
                 ),
                 h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold mt-10 mb-3 text-gray-900">{children}</h2>
+                  <h2 className="text-2xl font-bold mt-10 mb-3 text-primary">{children}</h2>
                 ),
                 h3: ({ children }) => (
                   <h3 className="text-xl font-bold mt-8 mb-2 text-gray-900">{children}</h3>
