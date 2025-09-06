@@ -78,14 +78,26 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: "/favicon.png",
-      shortcut: "/favicon.png", 
-      apple: "/cloud-icon.png",
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon.png", type: "image/png" },
+      ],
+      shortcut: "/favicon.ico",
+      apple: [
+        { url: "/cloud-icon.png", sizes: "180x180", type: "image/png" },
+      ],
       other: [
+        {
+          rel: "icon",
+          url: "/favicon.ico",
+          sizes: "16x16 32x32",
+          type: "image/x-icon",
+        },
         {
           rel: "icon",
           url: "/cloud-icon.png",
           type: "image/png",
+          sizes: "192x192",
         }
       ],
     },
