@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { Menu } from "lucide-react";
+import { Menu, ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -17,6 +19,8 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Header() {
   const t = useTranslations("navigation");
+  const params = useParams();
+  const locale = params.locale as string;
   const [isOpen, setIsOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
@@ -109,6 +113,19 @@ export default function Header() {
                   ))}
                 </NavigationMenuList>
               </NavigationMenu>
+              
+              {/* Blog Button - Different Style */}
+              <Link href={`/${locale}/blog`}>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-200 gap-2 cursor-pointer"
+                >
+                  {t('blog')}
+                  <ExternalLink className="w-3 h-3" />
+                </Button>
+              </Link>
+              
               <LanguageSwitcher />
             </div>
 
@@ -140,7 +157,7 @@ export default function Header() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1, duration: 0.3 }}
-                      className="group flex items-center justify-between py-4 text-left border-b border-gray-100 last:border-b-0"
+                      className="group flex items-center justify-between py-4 text-left border-b border-gray-100"
                       onClick={() => {
                         scrollToSection(item);
                         setIsOpen(false);
@@ -156,6 +173,25 @@ export default function Header() {
                       />
                     </motion.button>
                   ))}
+                  
+                  {/* Blog Button for Mobile */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navItems.length * 0.1, duration: 0.3 }}
+                    className="py-4 border-b border-gray-100 last:border-b-0"
+                  >
+                    <Link href={`/${locale}/blog`} onClick={() => setIsOpen(false)}>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-200 gap-2 w-full cursor-pointer"
+                      >
+                        {t('blog')}
+                        <ExternalLink className="w-3 h-3" />
+                      </Button>
+                    </Link>
+                  </motion.div>
                 </nav>
 
                 {/* Language Switcher for Mobile */}

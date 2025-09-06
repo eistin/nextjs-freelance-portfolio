@@ -40,7 +40,7 @@ export default function LanguageSwitcher() {
         variant="ghost"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
-        className="h-10 px-3 text-gray-700 hover:text-primary hover:bg-gray-100/80 transition-all duration-200 rounded-lg border border-gray-200/60 bg-white/50 backdrop-blur-sm"
+        className="h-10 px-3 text-gray-700 hover:text-primary hover:bg-gray-100/80 transition-all duration-200 rounded-lg border border-gray-200/60 bg-white/50 backdrop-blur-sm cursor-pointer"
       >
         <Globe className="h-4 w-4 mr-2" />
         <div className="flex items-center gap-2">
@@ -71,7 +71,7 @@ export default function LanguageSwitcher() {
               <button
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
-                className={`w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-gray-50/80 transition-colors duration-200 ${
+                className={`w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-gray-50/80 transition-colors duration-200 cursor-pointer ${
                   lang.code === locale
                     ? "bg-gray-100/80 text-primary font-medium"
                     : "text-gray-700"
