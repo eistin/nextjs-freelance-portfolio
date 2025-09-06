@@ -59,6 +59,7 @@ export async function generateMetadata({
   const currentUrl = `${baseUrl}/${locale}`;
 
   return {
+    metadataBase: new URL(baseUrl),
     title: t("title"),
     description: t("description"),
     keywords: t("keywords"),
