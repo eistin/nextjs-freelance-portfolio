@@ -7,6 +7,7 @@ tags: ["Kubernetes", "Autoscaling", "HPA", "VPA", "KEDA", "Performance", "Gestio
 featured: true
 readTime: "10 min de lecture"
 category: "DevOps"
+image: "/blog/hpa-vs-vpa-vs-keda.png"
 ---
 
 # HPA vs VPA vs KEDA : Comparaison des stratégies d'autoscaling Kubernetes
