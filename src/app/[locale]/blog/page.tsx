@@ -128,10 +128,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     <div className="flex flex-col md:flex-row gap-8 items-start">
                       {/* Featured Image */}
                       <div className="w-full md:w-80 h-48 bg-gray-100 rounded-lg overflow-hidden shrink-0 group-hover:opacity-90 transition-opacity">
-                        {post.slug === 'hpa-vs-vpa-vs-keda' ? (
+                        {post.metadata.image ? (
                           <img
-                            src="/blog/hpa-vs-vpa-vs-keda.png"
-                            alt="HPA vs VPA vs KEDA Comparison"
+                            src={post.metadata.image}
+                            alt={post.metadata.title}
                             className="w-full h-full object-cover"
                             loading="lazy"
                             width={320}
