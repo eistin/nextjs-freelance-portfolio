@@ -10,6 +10,7 @@ import remarkGfm from 'remark-gfm';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { BlogStructuredData } from '@/components/BlogStructuredData';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -40,9 +41,10 @@ export async function generateMetadata({
   const post = await getBlogPostBySlug(slug, locale);
 
   if (!post) {
+    const t = await getTranslations({ locale, namespace: "blog" });
     return {
-      title: 'Post Not Found - Edwin Istin Blog',
-      description: 'The requested blog post could not be found.',
+      title: t('postNotFound'),
+      description: t('postNotFoundDescription'),
     };
   }
 
@@ -122,6 +124,7 @@ export async function generateMetadata({
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { locale, slug } = await params;
   const post = await getBlogPostBySlug(slug, locale);
+  const t = await getTranslations({ locale, namespace: "blog" });
 
   if (!post) {
     notFound();
@@ -137,7 +140,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <Link href={`/${locale}/blog`}>
             <Button variant="outline" className="cursor-pointer">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Blog
+              {t("backToBlog")}
             </Button>
           </Link>
           <LanguageSwitcher />
@@ -178,7 +181,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
 
             <p className="text-gray-500">
-              By <span className="font-medium">{post.metadata.author}</span>
+              {t("by")} <span className="font-medium">{post.metadata.author}</span>
             </p>
           </div>
         </div>
@@ -299,7 +302,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="max-w-4xl mx-auto text-center">
           <Link href={`/${locale}/blog`}>
             <Button className="bg-primary text-white hover:bg-primary/90 cursor-pointer">
-              ← Back to All Posts
+              {t("backToAllPosts")}
             </Button>
           </Link>
         </div>

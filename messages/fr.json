@@ -259,6 +259,17 @@
       "ogTitle": "Blog DevOps & SRE par Edwin Istin - Conseils d'Expert & Tutoriels",
       "ogDescription": "Découvrez les conseils d'expert DevOps et SRE d'Edwin Istin. Tutoriels approfondis sur Kubernetes, Infrastructure as Code, automatisation CI/CD et pratiques d'architecture cloud moderne.",
       "twitterTitle": "Blog DevOps & SRE | Edwin Istin",
-      "twitterDescription": "Conseils d'expert DevOps & SRE, tutoriels et bonnes pratiques par Edwin Istin. Kubernetes • Infrastructure as Code • CI/CD • Architecture Cloud"
+      "twitterDescription": "Conseils d'expert DevOps & SRE, tutoriels et bonnes pratiques par Edwin Istin. Kubernetes • Infrastructure as Code • CI/CD • Architecture Cloud",
+      "pageTitle": "BLOG",
+      "pageSubtitle": "Insights, tutoriels et réflexions sur DevOps, SRE et l'infrastructure cloud",
+      "backToHome": "← Retour à l'accueil",
+      "backToBlog": "Retour au Blog",
+      "backToAllPosts": "← Retour à tous les articles",
+      "noPosts": "Aucun article de blog disponible pour le moment.",
+      "featuredImage": "Image à la une",
+      "by": "Par",
+      "readMore": "Lire la suite →",
+      "postNotFound": "Article introuvable - Blog Edwin Istin",
+      "postNotFoundDescription": "L'article demandé est introuvable."
     }
   }

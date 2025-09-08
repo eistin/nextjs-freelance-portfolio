@@ -80,6 +80,7 @@ export async function generateMetadata({
 export default async function BlogPage({ params }: BlogPageProps) {
   const { locale } = await params;
   const blogPosts = await getAllBlogPosts(locale);
+  const t = await getTranslations({ locale, namespace: "blog" });
 
   return (
     <div className="min-h-screen bg-white">
@@ -90,7 +91,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Link href={`/${locale}`}>
             <Button variant="outline" className="cursor-pointer">
-              ← Back to Home
+              {t("backToHome")}
             </Button>
           </Link>
           <LanguageSwitcher />
@@ -101,10 +102,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <section className="pt-16 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 mb-4">
-            BLOG
+            {t("pageTitle")}
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Insights, tutorials, and thoughts on DevOps, SRE, and cloud infrastructure
+            {t("pageSubtitle")}
           </p>
         </div>
       </section>
@@ -114,7 +115,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <div className="max-w-4xl mx-auto">
           {blogPosts.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-gray-600 text-lg">No blog posts available yet.</p>
+              <p className="text-gray-600 text-lg">{t("noPosts")}</p>
             </div>
           ) : (
             <div className="space-y-12">
@@ -140,7 +141,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                           <div className="w-full h-full flex items-center justify-center text-gray-400">
                             <div className="text-center">
                               <Tag className="w-8 h-8 mx-auto mb-2" />
-                              <p className="text-sm">Featured Image</p>
+                              <p className="text-sm">{t("featuredImage")}</p>
                             </div>
                           </div>
                         )}
@@ -178,10 +179,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
                         <div className="flex items-center justify-between">
                           <p className="text-sm text-gray-500">
-                            By {post.metadata.author}
+                            {t("by")} {post.metadata.author}
                           </p>
                           <span className="text-primary font-medium group-hover:underline">
-                            Read more →
+                            {t("readMore")}
                           </span>
                         </div>
                       </div>
