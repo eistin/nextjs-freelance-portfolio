@@ -11,6 +11,7 @@ export interface BlogMetadata {
   featured: boolean;
   readTime: string;
   category: string;
+  image?: string;
 }
 
 export interface BlogPost {
