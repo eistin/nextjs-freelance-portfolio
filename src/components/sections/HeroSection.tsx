@@ -35,12 +35,9 @@ export default function HeroSection() {
     <section className="container mx-auto min-h-[calc(100vh-8rem)] flex flex-col justify-center relative">
       {/* Centered Content */}
       <div className="text-center max-w-4xl mx-auto">
-        {/* Profile Image - Above the title */}
-        <motion.div
-          className="w-32 h-32 lg:w-48 lg:h-48 mx-auto mb-8"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
+        {/* Profile Image - Above the title - Use CSS animation instead of Framer Motion */}
+        <div
+          className="w-32 h-32 lg:w-48 lg:h-48 mx-auto mb-8 animate-fade-in-scale"
           style={{ aspectRatio: '1' }}
         >
           <Image
@@ -49,43 +46,39 @@ export default function HeroSection() {
             width={192}
             height={192}
             priority
+            fetchPriority="high"
             className="w-full h-full object-contain"
           />
-        </motion.div>
+        </div>
 
-        <motion.h1
-          className="text-5xl lg:text-7xl font-bold mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <h1
+          className="text-5xl lg:text-7xl font-bold mb-6 animate-fade-in-up"
+          style={{ animationDelay: '0.1s' }}
         >
           {t("title")}
           <br />
           {t("subtitle")}
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          className="text-lg mb-8 text-muted-foreground max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <p
+          className="text-lg mb-8 text-muted-foreground max-w-2xl mx-auto animate-fade-in-up"
+          style={{ animationDelay: '0.2s' }}
         >
           {t("description")}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+        <div
+          className="animate-fade-in-up"
+          style={{ animationDelay: '0.3s' }}
         >
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="px-8 cursor-pointer"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             {t("cta")}
           </Button>
-        </motion.div>
+        </div>
       </div>
 
       {/* Company Logos Infinite Carousel with Fade */}
