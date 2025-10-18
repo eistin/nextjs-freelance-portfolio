@@ -10,7 +10,8 @@
       "header": {
         "logoAlt": "Edwin Istin Logo",
         "name": "Edwin Istin",
-        "tagline": "DevOps / SRE Expert"
+        "tagline": "DevOps / SRE Expert",
+        "navigateTo": "Navigate to"
       }
     },
     "hero": {

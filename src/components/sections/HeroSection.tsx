@@ -41,12 +41,14 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
+          style={{ aspectRatio: '1' }}
         >
           <Image
             src="/photo.svg"
-            alt="Profile"
+            alt="Edwin Istin, DevOps and SRE Engineer"
             width={192}
             height={192}
+            priority
             className="w-full h-full object-contain"
           />
         </motion.div>

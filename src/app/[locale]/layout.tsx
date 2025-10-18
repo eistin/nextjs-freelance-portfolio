@@ -13,16 +13,6 @@ import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 const archivGrotesk = localFont({
   src: [
     {
-      path: "./fonts/ArchivGrotesk-Hairline2.otf",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "./fonts/ArchivGrotesk-Light2.otf",
-      weight: "300",
-      style: "normal",
-    },
-    {
       path: "./fonts/ArchivGrotesk-Regular2.otf",
       weight: "400",
       style: "normal",
@@ -45,6 +35,8 @@ const archivGrotesk = localFont({
   ],
   variable: "--font-archiv-grotesk",
   display: "swap",
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 export async function generateMetadata({
@@ -60,12 +52,22 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(baseUrl),
-    title: t("title"),
+    title: {
+      default: t("title"),
+      template: `%s | ${t("author")}`,
+    },
     description: t("description"),
     keywords: t("keywords"),
     authors: [{ name: t("author") }],
     creator: t("author"),
     publisher: t("author"),
+    applicationName: "Edwin Istin Portfolio",
+    referrer: "origin-when-cross-origin",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
     robots: {
       index: true,
       follow: true,
@@ -163,9 +165,9 @@ export default async function LocaleLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}

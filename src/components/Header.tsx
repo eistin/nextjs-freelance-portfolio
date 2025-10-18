@@ -85,9 +85,10 @@ export default function Header() {
       >
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <button 
+            <button
               onClick={() => scrollToSection("home")}
               className="relative w-32 h-8 cursor-pointer"
+              aria-label={t('header.logoAlt')}
             >
               <Image
                 src="/logo.svg"
@@ -103,9 +104,18 @@ export default function Header() {
                 <NavigationMenuList>
                   {navItems.map((item) => (
                     <NavigationMenuItem key={item}>
-                      <NavigationMenuLink 
+                      <NavigationMenuLink
                         className="px-4 py-2 hover:text-primary transition-colors cursor-pointer"
                         onClick={() => scrollToSection(item)}
+                        role="button"
+                        aria-label={`${t('header.navigateTo')} ${t(item)}`}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            scrollToSection(item);
+                          }
+                        }}
                       >
                         {t(item)}
                       </NavigationMenuLink>

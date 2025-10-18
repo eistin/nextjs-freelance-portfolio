@@ -102,7 +102,7 @@ export default function AboutSection() {
             <div className="relative overflow-hidden rounded-2xl">
               <Image
                 src="/photo.svg"
-                alt="Profile"
+                alt="Edwin Istin, DevOps and SRE Engineer"
                 width={400}
                 height={400}
                 className="w-full h-full object-cover"

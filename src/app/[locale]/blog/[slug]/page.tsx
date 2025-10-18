@@ -50,8 +50,8 @@ export async function generateMetadata({
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://edwindev.cloud";
   const currentUrl = `${baseUrl}/${locale}/blog/${slug}`;
-  const imageUrl = slug === 'hpa-vs-vpa-vs-keda' 
-    ? `${baseUrl}/blog/hpa-vs-vpa-vs-keda.png`
+  const imageUrl = post.metadata.image
+    ? `${baseUrl}${post.metadata.image}`
     : `${baseUrl}/cloud-icon.png`;
 
   // Create SEO-optimized title and description

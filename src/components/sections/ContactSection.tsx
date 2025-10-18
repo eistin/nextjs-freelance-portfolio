@@ -144,7 +144,7 @@ export default function ContactSection() {
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20">
                 <Image
                   src="/photo.svg"
-                  alt="Profile"
+                  alt="Edwin Istin, DevOps and SRE Engineer"
                   width={128}
                   height={128}
                   className="w-full h-full object-cover"
@@ -314,10 +314,12 @@ export default function ContactSection() {
                       className={`hover:border-primary/50 focus:border-primary transition-colors ${
                         errors.fullName ? "border-red-500" : ""
                       }`}
+                      aria-invalid={errors.fullName ? "true" : "false"}
+                      aria-describedby={errors.fullName ? "fullName-error" : undefined}
                       required
                     />
                     {errors.fullName && (
-                      <p className="text-sm text-red-500 mt-1">{errors.fullName}</p>
+                      <p id="fullName-error" className="text-sm text-red-500 mt-1" role="alert">{errors.fullName}</p>
                     )}
                   </motion.div>
                   <motion.div
@@ -334,10 +336,12 @@ export default function ContactSection() {
                       className={`hover:border-primary/50 focus:border-primary transition-colors ${
                         errors.email ? "border-red-500" : ""
                       }`}
+                      aria-invalid={errors.email ? "true" : "false"}
+                      aria-describedby={errors.email ? "email-error" : undefined}
                       required
                     />
                     {errors.email && (
-                      <p className="text-sm text-red-500 mt-1">{errors.email}</p>
+                      <p id="email-error" className="text-sm text-red-500 mt-1" role="alert">{errors.email}</p>
                     )}
                   </motion.div>
                 </div>
@@ -357,10 +361,12 @@ export default function ContactSection() {
                     className={`hover:border-primary/50 focus:border-primary transition-colors ${
                       errors.subject ? "border-red-500" : ""
                     }`}
+                    aria-invalid={errors.subject ? "true" : "false"}
+                    aria-describedby={errors.subject ? "subject-error" : undefined}
                     required
                   />
                   {errors.subject && (
-                    <p className="text-sm text-red-500 mt-1">{errors.subject}</p>
+                    <p id="subject-error" className="text-sm text-red-500 mt-1" role="alert">{errors.subject}</p>
                   )}
                 </motion.div>
 
@@ -377,10 +383,12 @@ export default function ContactSection() {
                     className={`hover:border-primary/50 focus:border-primary transition-colors resize-none flex-1 ${
                       errors.message ? "border-red-500" : ""
                     }`}
+                    aria-invalid={errors.message ? "true" : "false"}
+                    aria-describedby={errors.message ? "message-error" : undefined}
                     required
                   />
                   {errors.message && (
-                    <p className="text-sm text-red-500 mt-1">{errors.message}</p>
+                    <p id="message-error" className="text-sm text-red-500 mt-1" role="alert">{errors.message}</p>
                   )}
                 </motion.div>
 

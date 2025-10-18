@@ -1,5 +1,6 @@
 import { getAllBlogPosts } from '@/lib/blog';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Calendar, Clock, Tag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -127,15 +128,15 @@ export default async function BlogPage({ params }: BlogPageProps) {
                   <Link href={`/${locale}/blog/${post.slug}`}>
                     <div className="flex flex-col md:flex-row gap-8 items-start">
                       {/* Featured Image */}
-                      <div className="w-full md:w-80 h-48 bg-gray-100 rounded-lg overflow-hidden shrink-0 group-hover:opacity-90 transition-opacity">
+                      <div className="w-full md:w-80 h-48 bg-gray-100 rounded-lg overflow-hidden shrink-0 group-hover:opacity-90 transition-opacity relative">
                         {post.metadata.image ? (
-                          <img
+                          <Image
                             src={post.metadata.image}
                             alt={post.metadata.title}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
                             width={320}
                             height={192}
+                            className="w-full h-full object-cover"
+                            sizes="(max-width: 768px) 100vw, 320px"
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-400">
