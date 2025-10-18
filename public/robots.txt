@@ -1,0 +1,18 @@
+# robots.txt for edwindev.cloud
+
+# Allow all bots to crawl the site
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/
+
+# Special rules for Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /private/
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://edwindev.cloud/sitemap.xml
