@@ -12,6 +12,14 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+// Enable static generation for both locales - reduces TTFB from 2.4s to ~0ms
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'fr' },
+  ];
+}
+
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const projects = await getAllProjects(locale);

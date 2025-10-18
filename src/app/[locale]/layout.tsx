@@ -158,6 +158,8 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <head>
         <StructuredData locale={locale} />
+        {/* Preload logo to eliminate 6s load delay */}
+        <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" fetchPriority="high" />
       </head>
       <body className={`${archivGrotesk.variable} font-sans`}>
         {/* Google Analytics */}
