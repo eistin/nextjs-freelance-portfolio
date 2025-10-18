@@ -73,7 +73,7 @@ export default function AboutSection() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
         {/* Left side - Image and visual elements */}
         <motion.div
-          className="lg:col-span-2 relative"
+          className="hidden lg:block lg:col-span-2 relative"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -121,7 +121,7 @@ export default function AboutSection() {
 
         {/* Right side - Content */}
         <motion.div
-          className="lg:col-span-3"
+          className="col-span-1 lg:col-span-3"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
