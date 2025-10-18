@@ -94,6 +94,7 @@ export default function Header() {
                 src="/logo.svg"
                 alt={t('header.logoAlt')}
                 fill
+                priority
                 className="object-contain"
               />
             </button>
@@ -154,6 +155,7 @@ export default function Header() {
                       src="/logo.svg"
                       alt={t('header.logoAlt')}
                       fill
+                      priority
                       className="object-contain"
                     />
                   </div>
