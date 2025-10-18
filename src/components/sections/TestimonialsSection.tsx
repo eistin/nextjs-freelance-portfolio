@@ -65,15 +65,15 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                     {/* Author Info */}
                     <div className="flex items-center gap-3 mt-auto">
                       <Avatar className="w-10 h-10">
-                        <AvatarImage src={testimonial.metadata.avatar} />
+                        <AvatarImage src={testimonial.metadata.avatar} alt={testimonial.metadata.name} />
                         <AvatarFallback className="text-sm bg-primary/10 text-primary">
                           {testimonial.metadata.name.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <h4 className="font-semibold text-sm">
+                        <p className="font-semibold text-sm">
                           {testimonial.metadata.name}
-                        </h4>
+                        </p>
                         <p className="text-xs text-muted-foreground">
                           {testimonial.metadata.role}
                         </p>
@@ -86,7 +86,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 <DialogHeader className="flex-shrink-0">
                   <DialogTitle className="flex items-center gap-3 mb-4">
                     <Avatar className="w-12 h-12">
-                      <AvatarImage src={testimonial.metadata.avatar} />
+                      <AvatarImage src={testimonial.metadata.avatar} alt={testimonial.metadata.name} />
                       <AvatarFallback className="bg-primary/10 text-primary">
                         {testimonial.metadata.name.charAt(0)}
                       </AvatarFallback>
@@ -159,15 +159,15 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                     {/* Author Info */}
                     <div className="flex items-center gap-3 mt-auto">
                       <Avatar className="w-9 h-9">
-                        <AvatarImage src={testimonial.metadata.avatar} />
+                        <AvatarImage src={testimonial.metadata.avatar} alt={testimonial.metadata.name} />
                         <AvatarFallback className="text-xs bg-primary/10 text-primary">
                           {testimonial.metadata.name.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <h4 className="font-semibold text-sm">
+                        <p className="font-semibold text-sm">
                           {testimonial.metadata.name}
-                        </h4>
+                        </p>
                         <p className="text-xs text-muted-foreground">
                           {testimonial.metadata.role}
                         </p>
@@ -180,7 +180,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 <DialogHeader className="flex-shrink-0">
                   <DialogTitle className="flex items-center gap-3 mb-4">
                     <Avatar className="w-12 h-12">
-                      <AvatarImage src={testimonial.metadata.avatar} />
+                      <AvatarImage src={testimonial.metadata.avatar} alt={testimonial.metadata.name} />
                       <AvatarFallback className="bg-primary/10 text-primary">
                         {testimonial.metadata.name.charAt(0)}
                       </AvatarFallback>

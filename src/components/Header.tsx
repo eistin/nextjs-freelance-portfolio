@@ -142,7 +142,7 @@ export default function Header() {
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon" className="relative">
+                <Button variant="ghost" size="icon" className="relative" aria-label={t('header.menuAria')}>
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>

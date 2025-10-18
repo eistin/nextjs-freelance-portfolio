@@ -11,7 +11,8 @@
         "logoAlt": "Logo Edwin Istin",
         "name": "Edwin Istin",
         "tagline": "Expert DevOps / SRE",
-        "navigateTo": "Naviguer vers"
+        "navigateTo": "Naviguer vers",
+        "menuAria": "Ouvrir le menu de navigation"
       }
     },
     "hero": {
