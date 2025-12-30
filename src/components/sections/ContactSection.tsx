@@ -82,7 +82,7 @@ export default function ContactSection() {
   const socialLinks = [
     { icon: Linkedin, href: "https://www.linkedin.com/in/edwin-istin/", labelKey: "linkedin" },
     { icon: Github, href: "https://github.com/eistin", labelKey: "github" },
-    { icon: Download, href: "/CV_DEVOPS_2025.pdf", labelKey: "downloadCv", download: "CV_DEVOPS_EDWIN_ISTIN_2025.pdf" },
+    { icon: Download, href: "/CV_DEVOPS_2026.pdf", labelKey: "downloadCv", download: "CV_DEVOPS_EDWIN_ISTIN_2026.pdf" },
   ];
 
   const contactInfo = [
