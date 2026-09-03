@@ -40,7 +40,7 @@ export default async function HomePage({ params }: Props) {
 
         {/* Recent Work Section */}
         <div id="projects" className="py-20 px-6">
-          <RecentWorkSection projects={projects} />
+          <RecentWorkSection projects={projects} locale={locale} />
         </div>
 
         {/* Testimonials Section - With background */}
