@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/ui/Reveal";
-import { ServiceCard } from "./ServiceCard";
+import { ServiceCard, type ServiceKey } from "./ServiceCard";
 
 export default async function ServicesSection() {
   const t = await getTranslations("services");
@@ -38,7 +38,7 @@ export default async function ServicesSection() {
         {services.map((service, index) => (
           <Reveal key={service.id} delayMs={index * 200}>
             <ServiceCard
-              serviceKey={service.key as "infrastructure" | "cicd" | "kubernetes" | "cloud"}
+              serviceKey={service.key as ServiceKey}
               id={service.id}
               title={t(`items.${service.key}.title`)}
               description={t(`items.${service.key}.description`)}

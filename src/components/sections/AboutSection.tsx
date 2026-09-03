@@ -94,7 +94,7 @@ export default async function AboutSection() {
 
                     <CardContent className="relative z-10 p-6 text-center">
                       {/* Icon with improved styling */}
-                      <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-transform group-hover:scale-105">
+                      <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-all group-hover:scale-105">
                         <Icon className="w-7 h-7 text-primary" />
                       </div>
 

@@ -4,7 +4,7 @@ import { ChevronRight, Code2, Rocket, Container, Cloud, type LucideIcon } from "
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useService } from "@/contexts/ServiceContext";
 
-type ServiceKey = "infrastructure" | "cicd" | "kubernetes" | "cloud";
+export type ServiceKey = "infrastructure" | "cicd" | "kubernetes" | "cloud";
 
 const ICONS: Record<ServiceKey, LucideIcon> = {
   infrastructure: Code2,

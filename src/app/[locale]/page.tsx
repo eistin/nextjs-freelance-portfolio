@@ -34,12 +34,12 @@ export default async function HomePage({ params }: Props) {
         </div>
 
         {/* Services Section - With background */}
-        <div id="services" className="py-20 px-6 bg-muted/30">
+        <div id="services" className="py-20 px-6 bg-muted/30 scroll-mt-20">
           <ServicesSection />
         </div>
 
         {/* Recent Work Section */}
-        <div id="projects" className="py-20 px-6">
+        <div id="projects" className="py-20 px-6 scroll-mt-20">
           <RecentWorkSection projects={projects} locale={locale} />
         </div>
 
@@ -49,12 +49,12 @@ export default async function HomePage({ params }: Props) {
         </div>
 
         {/* About Section - With background */}
-        <div id="about" className="py-20 px-6 bg-muted/30">
+        <div id="about" className="py-20 px-6 bg-muted/30 scroll-mt-20">
           <AboutSection />
         </div>
 
         {/* Contact Section */}
-        <div id="contact" className="py-20 px-6">
+        <div id="contact" className="py-20 px-6 scroll-mt-20">
           <ContactSection />
         </div>
       </main>

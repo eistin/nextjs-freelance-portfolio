@@ -62,7 +62,7 @@ export default async function RecentWorkSection({ projects, locale }: RecentWork
       </div>
 
       {/* See More Button */}
-      <Reveal className="text-center mt-8">
+      <Reveal className="text-center mt-8" delayMs={300}>
         <Link href={`/${locale}/recent-work`} className="cursor-pointer">
           <Button variant="outline" size="lg" className="gap-2 cursor-pointer">
             {t("seeMore")}

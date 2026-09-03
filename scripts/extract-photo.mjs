@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import sharp from "sharp";
 
 const svg = readFileSync("public/photo.svg", "utf8");

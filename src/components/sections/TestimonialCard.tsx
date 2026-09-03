@@ -14,17 +14,22 @@ interface TestimonialCardProps {
 export function TestimonialCard({ testimonial, variant }: TestimonialCardProps) {
   const isDesktop = variant === "desktop";
 
+  const cardSize = isDesktop
+    ? "w-80 h-64"
+    : "w-64 sm:w-72 h-60";
+  const contentPad = isDesktop ? "p-5" : "p-4";
+  const quoteMargin = isDesktop ? "mb-4" : "mb-3";
+  const quoteClamp = isDesktop ? "line-clamp-4" : "line-clamp-3";
+  const avatarSize = isDesktop ? "w-10 h-10" : "w-9 h-9";
+  const avatarFallbackText = isDesktop ? "text-sm bg-primary/10 text-primary" : "text-xs bg-primary/10 text-primary";
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Card
-          className={
-            isDesktop
-              ? "flex-shrink-0 w-80 h-64 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer"
-              : "flex-shrink-0 w-64 sm:w-72 h-60 hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer"
-          }
+          className={`flex-shrink-0 ${cardSize} hover:shadow-md transition-all duration-300 hover:border-primary/30 cursor-pointer`}
         >
-          <CardContent className={isDesktop ? "p-5 h-full flex flex-col" : "p-4 h-full flex flex-col"}>
+          <CardContent className={`${contentPad} h-full flex flex-col`}>
             {/* Rating Stars */}
             <div className="flex gap-1 mb-3">
               {[...Array(testimonial.metadata.rating || 5)].map((_, i) => (
@@ -36,17 +41,17 @@ export function TestimonialCard({ testimonial, variant }: TestimonialCardProps) 
             </div>
 
             {/* Testimonial Content */}
-            <blockquote className={isDesktop ? "text-sm mb-4 text-muted-foreground flex-grow overflow-hidden" : "text-sm mb-3 text-muted-foreground flex-grow overflow-hidden"}>
-              <div className={isDesktop ? "line-clamp-4" : "line-clamp-3"}>
+            <blockquote className={`text-sm ${quoteMargin} text-muted-foreground flex-grow overflow-hidden`}>
+              <div className={quoteClamp}>
                 &ldquo;{testimonial.content}&rdquo;
               </div>
             </blockquote>
 
             {/* Author Info */}
             <div className="flex items-center gap-3 mt-auto">
-              <Avatar className={isDesktop ? "w-10 h-10" : "w-9 h-9"}>
+              <Avatar className={avatarSize}>
                 <AvatarImage src={testimonial.metadata.avatar} alt={testimonial.metadata.name} />
-                <AvatarFallback className={isDesktop ? "text-sm bg-primary/10 text-primary" : "text-xs bg-primary/10 text-primary"}>
+                <AvatarFallback className={avatarFallbackText}>
                   {testimonial.metadata.name.charAt(0)}
                 </AvatarFallback>
               </Avatar>
