@@ -41,7 +41,7 @@ export default function HeroSection() {
           style={{ aspectRatio: '1' }}
         >
           <Image
-            src="/photo.svg"
+            src="/photo.webp"
             alt="Edwin Istin, DevOps and SRE Engineer"
             width={192}
             height={192}

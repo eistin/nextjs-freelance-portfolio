@@ -101,7 +101,7 @@ export default function AboutSection() {
             {/* Image container with modern styling */}
             <div className="relative overflow-hidden rounded-2xl">
               <Image
-                src="/photo.svg"
+                src="/photo.webp"
                 alt="Edwin Istin, DevOps and SRE Engineer"
                 width={400}
                 height={400}

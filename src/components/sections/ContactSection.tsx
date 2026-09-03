@@ -143,7 +143,7 @@ export default function ContactSection() {
             >
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20">
                 <Image
-                  src="/photo.svg"
+                  src="/photo.webp"
                   alt="Edwin Istin, DevOps and SRE Engineer"
                   width={128}
                   height={128}
