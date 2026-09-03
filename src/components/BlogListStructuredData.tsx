@@ -6,7 +6,7 @@ interface BlogListStructuredDataProps {
 }
 
 export function BlogListStructuredData({ posts, locale }: BlogListStructuredDataProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://edwindev.cloud";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theclouds.dev";
   const blogUrl = `${baseUrl}/${locale}/blog`;
 
   const structuredData = {

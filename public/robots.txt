@@ -1,4 +1,4 @@
-# robots.txt for edwindev.cloud
+# robots.txt for theclouds.dev
 
 # Allow all bots to crawl the site
 User-agent: *
@@ -15,4 +15,4 @@ Disallow: /private/
 Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://edwindev.cloud/sitemap.xml
+Sitemap: https://theclouds.dev/sitemap.xml

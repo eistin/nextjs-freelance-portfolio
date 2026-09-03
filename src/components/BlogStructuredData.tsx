@@ -6,7 +6,7 @@ interface BlogStructuredDataProps {
 }
 
 export function BlogStructuredData({ post, locale }: BlogStructuredDataProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://edwindev.cloud";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theclouds.dev";
   const postUrl = `${baseUrl}/${locale}/blog/${post.slug}`;
   const imageUrl = post.slug === 'hpa-vs-vpa-vs-keda' 
     ? `${baseUrl}/blog/hpa-vs-vpa-vs-keda.png`

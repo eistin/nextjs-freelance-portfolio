@@ -4,7 +4,7 @@ import { getProjectSlugs } from '@/lib/projects';
 import { getBlogSlugs } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://edwindev.cloud';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://theclouds.dev';
 
   // Main pages for each locale
   const mainPages = [

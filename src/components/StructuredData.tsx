@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 export async function StructuredData({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'metadata' });
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://edwindev.cloud';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://theclouds.dev';
 
   const structuredData = {
     "@context": "https://schema.org",

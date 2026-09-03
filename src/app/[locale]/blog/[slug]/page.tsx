@@ -48,7 +48,7 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://edwindev.cloud";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theclouds.dev";
   const currentUrl = `${baseUrl}/${locale}/blog/${slug}`;
   const imageUrl = post.metadata.image
     ? `${baseUrl}${post.metadata.image}`

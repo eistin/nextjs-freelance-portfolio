@@ -23,7 +23,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
   
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://edwindev.cloud";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theclouds.dev";
   const currentUrl = `${baseUrl}/${locale}/blog`;
 
   return {
