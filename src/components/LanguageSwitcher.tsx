@@ -80,7 +80,7 @@ export default function LanguageSwitcher() {
                   </span>
                 </div>
                 {lang.code === locale && (
-                  <div className="ml-auto w-2 h-2 rounded-full bg-primary transition-colors duration-200" />
+                  <div className="ml-auto w-2 h-2 rounded-full bg-primary" />
                 )}
               </button>
             ))}

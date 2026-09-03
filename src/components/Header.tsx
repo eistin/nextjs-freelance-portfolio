@@ -14,7 +14,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -23,10 +22,16 @@ export default function Header() {
   const params = useParams();
   const locale = params.locale as string;
   const [isOpen, setIsOpen] = useState(false);
+  // Drives background/shadow/border-radius/padding (was useTransform([0,100])).
   const [scrolled, setScrolled] = useState(false);
+  // Drives the header-narrowing maxWidth/margin (was the original hasScrolled effect).
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+      setHasScrolled(window.scrollY > 20);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -58,8 +63,11 @@ export default function Header() {
         className={cn(
           "mx-auto transition-all duration-300",
           scrolled
-            ? "bg-white/95 shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-3xl mx-4"
-            : "bg-transparent shadow-none rounded-none mx-0"
+            ? "bg-white/95 shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-3xl"
+            : "bg-transparent shadow-none rounded-none",
+          hasScrolled
+            ? "max-w-[calc(100%-32px)] mx-4"
+            : "max-w-full mx-0"
         )}
       >
         <nav className="container mx-auto px-6 py-4">
@@ -143,30 +151,26 @@ export default function Header() {
                 {/* Navigation Items */}
                 <nav className="flex flex-col px-6 py-8">
                   {navItems.map((item, index) => (
-                    <Reveal
+                    <button
                       key={item}
-                      delayMs={index * 100}
-                      className="border-b border-gray-100"
+                      className="group flex items-center justify-between py-4 text-left border-b border-gray-100 w-full cursor-pointer animate-in fade-in slide-in-from-right-4"
+                      style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
+                      onClick={() => {
+                        scrollToSection(item);
+                        setIsOpen(false);
+                      }}
                     >
-                      <button
-                        className="group flex items-center justify-between py-4 text-left w-full cursor-pointer"
-                        onClick={() => {
-                          scrollToSection(item);
-                          setIsOpen(false);
-                        }}
-                      >
-                        <span className="text-lg font-medium text-gray-900 group-hover:text-primary transition-colors uppercase tracking-wider">
-                          {t(item)}
-                        </span>
-                        <div className="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-primary transition-colors transition-transform hover:scale-125 active:scale-90" />
-                      </button>
-                    </Reveal>
+                      <span className="text-lg font-medium text-gray-900 group-hover:text-primary transition-colors uppercase tracking-wider">
+                        {t(item)}
+                      </span>
+                      <div className="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-primary transition-colors transition-transform hover:scale-125 active:scale-90" />
+                    </button>
                   ))}
 
                   {/* Blog Button for Mobile */}
-                  <Reveal
-                    delayMs={navItems.length * 100}
-                    className="py-4 border-b border-gray-100 last:border-b-0"
+                  <div
+                    className="py-4 border-b border-gray-100 last:border-b-0 animate-in fade-in slide-in-from-right-4"
+                    style={{ animationDelay: `${navItems.length * 100}ms`, animationFillMode: "both" }}
                   >
                     <Link href={`/${locale}/blog`} onClick={() => setIsOpen(false)}>
                       <Button
@@ -178,7 +182,7 @@ export default function Header() {
                         <ExternalLink className="w-3 h-3" />
                       </Button>
                     </Link>
-                  </Reveal>
+                  </div>
                 </nav>
 
                 {/* Language Switcher for Mobile */}
