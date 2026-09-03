@@ -1,13 +1,10 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 
-export default function HeroSection() {
-  const t = useTranslations("hero");
-  const tLogos = useTranslations("companyLogos");
+export default async function HeroSection() {
+  const t = await getTranslations("hero");
+  const tLogos = await getTranslations("companyLogos");
 
   const companyLogos = [
     { key: "alivio", src: "/logo_companies/alivio_logo.png", alt: tLogos("alivio") },
@@ -71,22 +68,16 @@ export default function HeroSection() {
           className="animate-fade-in-up"
           style={{ animationDelay: '0.3s' }}
         >
-          <Button
-            size="lg"
-            className="px-8 cursor-pointer"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            {t("cta")}
+          <Button asChild size="lg" className="px-8">
+            <a href="#contact">{t("cta")}</a>
           </Button>
         </div>
       </div>
 
       {/* Company Logos Infinite Carousel with Fade */}
-      <motion.div
-        className="mt-12 lg:mt-20 relative"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
+      <div
+        className="mt-12 lg:mt-20 relative animate-fade-in-up"
+        style={{ animationDelay: "0.8s" }}
       >
         {/* Responsive Fade gradients */}
         <div className="absolute left-0 top-0 bottom-0 w-8 lg:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -122,7 +113,7 @@ export default function HeroSection() {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
