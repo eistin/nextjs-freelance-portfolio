@@ -3,9 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import {
@@ -23,64 +21,30 @@ export default function RecentWorkPage({ projects }: RecentWorkPageProps) {
   const t = useTranslations("recentWork");
   const params = useParams();
   const locale = params.locale as string;
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.21, 0.47, 0.32, 0.98],
-      },
-    },
-  };
 
   return (
-    <div className="container mx-auto px-4 py-16" ref={ref}>
+    <div className="container mx-auto px-4 py-16">
       {/* Header */}
-      <motion.div
-        className="mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.6 }}
-      >
+      <Reveal className="mb-12">
         <Link href={`/${locale}`} className="cursor-pointer">
           <Button variant="ghost" className="gap-2 mb-6 pl-0 cursor-pointer">
             <ArrowLeft className="w-4 h-4" />
             {t("backToHome")}
           </Button>
         </Link>
-        
+
         <h1 className="text-4xl font-bold mb-4">
           {t("allProjects")}
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
           {t("pageDescription")}
         </p>
-      </motion.div>
+      </Reveal>
 
       {/* Projects Grid */}
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-      >
-        {projects.map((project) => (
-          <motion.div key={project.slug} variants={itemVariants}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project, index) => (
+          <Reveal key={project.slug} delayMs={index * 100}>
             <Link href={`/${locale}/projects/${project.slug}`}>
               <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300 h-full">
                 <CardContent className="p-6">
@@ -111,16 +75,14 @@ export default function RecentWorkPage({ projects }: RecentWorkPageProps) {
                 </CardContent>
               </Card>
             </Link>
-          </motion.div>
+          </Reveal>
         ))}
-      </motion.div>
+      </div>
 
       {/* Call to Action */}
-      <motion.div
+      <Reveal
         className="text-center mt-16 p-8 bg-muted/30 rounded-lg"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
+        delayMs={500}
       >
         <h2 className="text-2xl font-bold mb-4">
           {t("ctaTitle")}
@@ -134,7 +96,7 @@ export default function RecentWorkPage({ projects }: RecentWorkPageProps) {
             <ArrowUpRight className="w-4 h-4" />
           </Button>
         </Link>
-      </motion.div>
+      </Reveal>
     </div>
   );
 }
