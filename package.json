@@ -18,7 +18,6 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.16.0",
     "gray-matter": "^4.0.3",
     "gtag": "^1.0.1",
     "highlight.js": "^11.11.1",
