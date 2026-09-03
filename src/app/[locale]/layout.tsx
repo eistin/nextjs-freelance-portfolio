@@ -13,22 +13,22 @@ import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 const archivGrotesk = localFont({
   src: [
     {
-      path: "./fonts/ArchivGrotesk-Regular2.otf",
+      path: "./fonts/ArchivGrotesk-Regular2.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/ArchivGrotesk-Normal2.otf",
+      path: "./fonts/ArchivGrotesk-Normal2.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "./fonts/ArchivGrotesk-SemiBold2.otf",
+      path: "./fonts/ArchivGrotesk-SemiBold2.woff2",
       weight: "600",
       style: "normal",
     },
     {
-      path: "./fonts/ArchivGrotesk-Bold2.otf",
+      path: "./fonts/ArchivGrotesk-Bold2.woff2",
       weight: "700",
       style: "normal",
     },
