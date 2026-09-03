@@ -2,7 +2,6 @@
 
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
-import { motion } from "framer-motion";
 import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -60,12 +59,8 @@ export default function LanguageSwitcher() {
           />
           
           {/* Dropdown */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute top-full mt-2 right-0 z-50 min-w-[140px] bg-white/95 backdrop-blur-md rounded-xl border border-gray-200/60 shadow-lg overflow-hidden"
+          <div
+            className="absolute top-full mt-2 right-0 z-50 min-w-[140px] bg-white/95 backdrop-blur-md rounded-xl border border-gray-200/60 shadow-lg overflow-hidden animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-150 ease-out"
           >
             {languages.map((lang) => (
               <button
@@ -85,15 +80,11 @@ export default function LanguageSwitcher() {
                   </span>
                 </div>
                 {lang.code === locale && (
-                  <motion.div
-                    layoutId="activeLanguage"
-                    className="ml-auto w-2 h-2 rounded-full bg-primary"
-                    transition={{ duration: 0.2 }}
-                  />
+                  <div className="ml-auto w-2 h-2 rounded-full bg-primary transition-colors duration-200" />
                 )}
               </button>
             ))}
-          </motion.div>
+          </div>
         </>
       )}
     </div>

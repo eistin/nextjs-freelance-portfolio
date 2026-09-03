@@ -14,7 +14,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { Reveal } from "@/components/ui/Reveal";
+import { cn } from "@/lib/utils";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Header() {
@@ -22,32 +23,13 @@ export default function Header() {
   const params = useParams();
   const locale = params.locale as string;
   const [isOpen, setIsOpen] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  const { scrollY } = useScroll();
-  const headerBackground = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.95)"]
-  );
-
-  const headerShadow = useTransform(
-    scrollY,
-    [0, 100],
-    ["0px 0px 0px rgba(0,0,0,0)", "0px 4px 30px rgba(0,0,0,0.1)"]
-  );
-
-  const headerBorderRadius = useTransform(scrollY, [0, 100], ["0px", "24px"]);
-
-  const headerPadding = useTransform(scrollY, [0, 100], ["0px", "8px"]);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 100);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const navItems = ["home", "services", "projects", "about", "contact"];
@@ -57,7 +39,7 @@ export default function Header() {
     if (element) {
       const headerHeight = 80; // Account for fixed header height
       const elementPosition = element.offsetTop - headerHeight;
-      
+
       window.scrollTo({
         top: elementPosition,
         behavior: "smooth",
@@ -66,22 +48,19 @@ export default function Header() {
   };
 
   return (
-    <motion.header
-      className="fixed top-0 left-0 right-0 z-50"
-      style={{
-        padding: headerPadding,
-      }}
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled ? "p-2" : "p-0"
+      )}
     >
-      <motion.div
-        className="mx-auto transition-all duration-300"
-        style={{
-          background: headerBackground,
-          boxShadow: headerShadow,
-          borderRadius: headerBorderRadius,
-          maxWidth: hasScrolled ? "calc(100% - 32px)" : "100%",
-          marginLeft: hasScrolled ? "16px" : "0",
-          marginRight: hasScrolled ? "16px" : "0",
-        }}
+      <div
+        className={cn(
+          "mx-auto transition-all duration-300",
+          scrolled
+            ? "bg-white/95 shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-3xl mx-4"
+            : "bg-transparent shadow-none rounded-none mx-0"
+        )}
       >
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -124,11 +103,11 @@ export default function Header() {
                   ))}
                 </NavigationMenuList>
               </NavigationMenu>
-              
+
               {/* Blog Button - Different Style */}
               <Link href={`/${locale}/blog`}>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-200 gap-2 cursor-pointer"
                 >
@@ -136,7 +115,7 @@ export default function Header() {
                   <ExternalLink className="w-3 h-3" />
                 </Button>
               </Link>
-              
+
               <LanguageSwitcher />
             </div>
 
@@ -160,42 +139,38 @@ export default function Header() {
                     />
                   </div>
                 </div>
-                
+
                 {/* Navigation Items */}
                 <nav className="flex flex-col px-6 py-8">
                   {navItems.map((item, index) => (
-                    <motion.button
+                    <Reveal
                       key={item}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                      className="group flex items-center justify-between py-4 text-left border-b border-gray-100"
-                      onClick={() => {
-                        scrollToSection(item);
-                        setIsOpen(false);
-                      }}
+                      delayMs={index * 100}
+                      className="border-b border-gray-100"
                     >
-                      <span className="text-lg font-medium text-gray-900 group-hover:text-primary transition-colors uppercase tracking-wider">
-                        {t(item)}
-                      </span>
-                      <motion.div
-                        className="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-primary transition-colors"
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                      />
-                    </motion.button>
+                      <button
+                        className="group flex items-center justify-between py-4 text-left w-full cursor-pointer"
+                        onClick={() => {
+                          scrollToSection(item);
+                          setIsOpen(false);
+                        }}
+                      >
+                        <span className="text-lg font-medium text-gray-900 group-hover:text-primary transition-colors uppercase tracking-wider">
+                          {t(item)}
+                        </span>
+                        <div className="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-primary transition-colors transition-transform hover:scale-125 active:scale-90" />
+                      </button>
+                    </Reveal>
                   ))}
-                  
+
                   {/* Blog Button for Mobile */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: navItems.length * 0.1, duration: 0.3 }}
+                  <Reveal
+                    delayMs={navItems.length * 100}
                     className="py-4 border-b border-gray-100 last:border-b-0"
                   >
                     <Link href={`/${locale}/blog`} onClick={() => setIsOpen(false)}>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-200 gap-2 w-full cursor-pointer"
                       >
@@ -203,7 +178,7 @@ export default function Header() {
                         <ExternalLink className="w-3 h-3" />
                       </Button>
                     </Link>
-                  </motion.div>
+                  </Reveal>
                 </nav>
 
                 {/* Language Switcher for Mobile */}
@@ -224,7 +199,7 @@ export default function Header() {
             </Sheet>
           </div>
         </nav>
-      </motion.div>
-    </motion.header>
+      </div>
+    </header>
   );
 }
