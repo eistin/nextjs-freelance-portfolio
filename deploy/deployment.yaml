@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: portfolio
+      annotations:
+        secrets-version: "2"  # bump to roll pods after secret-only changes
     spec:
       containers:
         - name: portfolio
