@@ -11,8 +11,16 @@ spec:
     - name: main-gateway
       namespace: gateway
       sectionName: https-edwindev-wildcard
+    - name: main-gateway
+      namespace: gateway
+      sectionName: https-edwindev-apex
+    - name: main-gateway
+      namespace: gateway
+      sectionName: https-theclouds-apex
   hostnames:
     - portfolio.edwindev.cloud
+    - edwindev.cloud
+    - theclouds.dev
   rules:
     - backendRefs:
         - name: portfolio
