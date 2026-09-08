@@ -1,0 +1,4 @@
+creation_rules:
+  # Deploy-time secrets synced by ArgoCD via KSOPS
+  - path_regex: deploy/secrets\.sops\.yaml$
+    age: age14mycsk7clgt7z7g99eh3hqq90pjlk77s37udzkh68ksrekaum4yqznl4z2

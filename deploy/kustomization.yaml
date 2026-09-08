@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - httproute.yaml
+
+generators:
+  - secret-generator.yaml
+
+configMapGenerator:
+  - name: portfolio-config
+    namespace: portfolio
+    literals:
+      - CONTACT_EMAIL=istin.edwin@gmail.com
+      - FROM_EMAIL_DOMAIN=edwindev.cloud
+      - NEXT_PUBLIC_BASE_URL=https://edwindev.cloud
+      - NEXT_PUBLIC_GA_MEASUREMENT_ID=G-QQ3GP98E89
+
+images:
+  - name: ghcr.io/eistin/nextjs-freelance-portfolio
+    newTag: bootstrap  # rewritten by CI on every main push
