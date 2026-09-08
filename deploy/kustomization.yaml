@@ -21,4 +21,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/eistin/nextjs-freelance-portfolio
-    newTag: bootstrap  # rewritten by CI on every main push
+    newTag: dcb47ea2c85496714bbf5e4d3b19c6cfdf8614cb
