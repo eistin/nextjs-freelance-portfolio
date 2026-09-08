@@ -14,9 +14,12 @@ staged, low-risk cutover.
 
 ## Current state (verified 2026-09-08)
 
-- Serves at apex `edwindev.cloud` via Cloud Run domain mapping; Cloudflare
-  records are DNS-only (grey cloud), values from
-  `next-freelance-terraform/nextjs-portfolio` outputs.
+- **Amended 2026-09-09 after live DNS inspection:** the Cloud Run domain
+  mapping records actually live on **theclouds.dev** (4 proxied Google A
+  records 216.239.3{2,4,6,8}.21, 4 AAAA 2001:4860:4802:3{2,4,6,8}::15, plus
+  a stray Namecheap parking A 192.64.119.250), and `edwindev.cloud` apex is
+  a **proxied CNAME → theclouds.dev**. Both domains serve the portfolio
+  today, and both must keep serving it after migration (user decision).
 - CI: `.github/workflows/cloud-run.yml` — GCP workload identity → Artifact
   Registry (`stini-326916`) → `gcloud run services update`.
 - Runtime env (Terraform-managed on Cloud Run): `RESEND_API_KEY` (secret),
@@ -39,8 +42,8 @@ staged, low-risk cutover.
 | Manifests | `deploy/` Kustomize folder in this repo (cluster onboarding contract) | Code + deployment evolve together |
 | Secret | `RESEND_API_KEY` as **KSOPS-encrypted secret in `deploy/`** (repo gets its own `.sops.yaml`, same age key as stini-cluster) | Per the cluster's designed contract; first real exercise of the installed KSOPS machinery — the plan must verify the generator syncs |
 | Non-secret env | kustomize `configMapGenerator` | Simple, visible |
-| Routing | HTTPRoute with **two parentRefs** (`sectionName: https-edwindev-wildcard` and `https-edwindev-apex`) | Keeps the HTTP→HTTPS redirect unshadowed (established cluster ruling); apex + staging host need different listeners |
-| Cutover | **Staged**: serve `portfolio.edwindev.cloud` first, verify (incl. contact form), then add apex hostname + delete old grey-cloud records so external-dns takes over | Near-zero visitor risk; external-dns won't overwrite records it doesn't own, so old records must be removed manually |
+| Routing | HTTPRoute with **three parentRefs** (`sectionName: https-edwindev-wildcard`, `https-edwindev-apex`, `https-theclouds-apex`); hostnames `portfolio.edwindev.cloud` (staging), `edwindev.cloud`, `theclouds.dev` | Keeps the HTTP→HTTPS redirect unshadowed (established cluster ruling); each hostname needs its listener; **both apex domains keep serving the portfolio** (today's behavior) |
+| Cutover | **Staged**: serve `portfolio.edwindev.cloud` first, verify (incl. contact form), then add both apex hostnames + delete the old records (edwindev.cloud apex CNAME; theclouds.dev Google A/AAAA + parking A) so external-dns takes over both apexes | Near-zero visitor risk; external-dns won't overwrite records it doesn't own, so old records must be removed manually |
 | Cloud Run | **Decommission after cutover**: `terraform destroy` both `next-freelance-terraform` stacks (service, domain mapping, Artifact Registry, GitHub SA/WIF); archive that repo. The GCP project itself stays (hosts the cluster's state bucket) | Single source of truth; removes idle infra |
 | Repo location | Local move to `~/Workspace/stini-projects/`; GitHub repo unchanged | Nothing depends on the local path |
 
@@ -70,8 +73,8 @@ The Dockerfile gains `ARG`/`ENV` lines for the two `NEXT_PUBLIC_*` values
   liveness/readiness GET `/` on 3000.
 - `service.yaml` — ClusterIP 80 → 3000.
 - `httproute.yaml` — ns `portfolio`; parentRefs to `main-gateway` (ns
-  `gateway`) with the two sectionNames; hostnames: `portfolio.edwindev.cloud`
-  initially, apex `edwindev.cloud` added at cutover.
+  `gateway`) with the three sectionNames; hostnames: `portfolio.edwindev.cloud`
+  initially; `edwindev.cloud` and `theclouds.dev` added at cutover.
 - `namespace.yaml` — `portfolio`.
 - `secrets.sops.yaml` + `secret-generator.yaml` (KSOPS) — RESEND_API_KEY.
 - `.sops.yaml` at repo root — rule for `deploy/.*secret.*\.yaml$`, same age
@@ -89,12 +92,15 @@ The Dockerfile gains `ARG`/`ENV` lines for the two `NEXT_PUBLIC_*` values
 
 1. Deploy with staging hostname only → verify `https://portfolio.edwindev.cloud`
    (page, assets, GA beacon, **contact form end-to-end** — real email received).
-2. Add apex hostname + apex parentRef to `httproute.yaml`; push.
-3. Delete the old grey-cloud apex records (the Cloud Run domain-mapping
-   records) from the `edwindev.cloud` zone via Cloudflare API.
-4. external-dns creates proxied apex records (target annotation on the
-   Gateway). Verify `https://edwindev.cloud` serves from the cluster
-   (Cloudflare edge IPs, valid cert, contact form once more).
+2. Add both apex hostnames + parentRefs to `httproute.yaml`; push.
+3. Delete the old records via Cloudflare API: on `edwindev.cloud` the apex
+   CNAME → theclouds.dev; on `theclouds.dev` the 4 Google A + 4 Google AAAA
+   records and the stray parking A 192.64.119.250 (values recorded in the
+   implementation plan for rollback).
+4. external-dns creates proxied records for both apexes (target annotation
+   on the Gateway). Verify both `https://edwindev.cloud` and
+   `https://theclouds.dev` serve from the cluster (valid certs, contact
+   form once more on edwindev.cloud).
 5. Decommission: `terraform destroy` in `next-freelance-terraform`
    (`nextjs-portfolio` stack, then `infra` stack), delete `cloud-run.yml`
    from the portfolio repo (done in step 1's CI replacement), archive the
@@ -104,9 +110,9 @@ The Dockerfile gains `ARG`/`ENV` lines for the two `NEXT_PUBLIC_*` values
 
 - Before step 3, Cloud Run keeps serving the apex — abort at any point with
   zero visitor impact.
-- After step 3, rollback = re-create the grey-cloud records (values are in
-  `next-freelance-terraform` outputs / terraform state — capture them in the
-  plan before deletion) and remove the apex from the HTTPRoute.
+- After step 3, rollback = re-create the deleted records (exact values
+  recorded verbatim in the implementation plan) and remove the apex
+  hostnames from the HTTPRoute.
 - After step 5 (destroy), rollback is a redeploy to the cluster only — the
   staged verification makes this acceptable.
 
