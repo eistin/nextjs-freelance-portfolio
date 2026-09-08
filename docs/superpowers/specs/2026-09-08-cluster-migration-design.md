@@ -121,7 +121,7 @@ The Dockerfile gains `ARG`/`ENV` lines for the two `NEXT_PUBLIC_*` values
 - CI stays lean: no in-workflow container smoke step — the staging
   hostname (`portfolio.edwindev.cloud`) is the smoke test.
 - KSOPS verification: after the Application first syncs, confirm the
-  `resend-api-key` secret exists in ns `portfolio` and the ArgoCD app is
+  `portfolio-secrets` secret exists in ns `portfolio` and the ArgoCD app is
   Healthy — this validates the whole KSOPS chain for every future project.
 - Post-cutover checks: `dig` apex → Cloudflare edge; `curl -sI` apex → 200;
   `http://` → 301; contact form email received.
