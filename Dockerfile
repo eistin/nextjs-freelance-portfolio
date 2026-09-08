@@ -13,6 +13,13 @@ RUN npm ci
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+# NEXT_PUBLIC_* values are inlined into the client bundle at build time
+ARG NEXT_PUBLIC_BASE_URL
+ARG NEXT_PUBLIC_GA_MEASUREMENT_ID
+ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=$NEXT_PUBLIC_GA_MEASUREMENT_ID
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
