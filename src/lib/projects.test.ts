@@ -27,12 +27,13 @@ describe('getAllProjects', () => {
     expect(projects[0].content).not.toContain('---\ntitle:')
   })
 
-  it('never leaks the day rate into project output', async () => {
-    // The fixture deliberately carries a tjm field that the real artifact does
-    // not. toProject() names its output fields explicitly rather than spreading,
-    // so the rate cannot reach a public page — this test fails if that changes.
+  it('publishes only whitelisted mission fields, never unknown ones', async () => {
+    // The fixture deliberately carries an `internalRate` field that the real
+    // artifact does not. toProject() names its output fields explicitly rather
+    // than spreading the mission, so new artifact fields cannot reach a public
+    // page by default. This test fails if that ever changes.
     const json = JSON.stringify(await getAllProjects('fr', FIXTURE))
-    expect(json).not.toContain('tjm')
+    expect(json).not.toContain('internalRate')
     expect(json).not.toContain('999')
   })
 
