@@ -18,7 +18,7 @@
     "hero": {
       "title": "FREELANCE",
       "subtitle": "DEVOPS . SRE",
-      "description": "Hi, I'm Edwin Istin, DevOps Expert with 8+ years of experience helping tech companies overcome infrastructure challenges with personalized and efficient solutions.",
+      "description": "Hi, I'm Edwin Istin, DevOps Expert with 10+ years of experience helping tech companies overcome infrastructure challenges with personalized and efficient solutions.",
       "cta": "Get in touch"
     },
     "services": {
@@ -138,10 +138,10 @@
     },
     "about": {
       "title": "ABOUT ME",
-      "description": "I'm Edwin Istin, a passionate DevOps engineer with over 8 years of experience in crafting reliable and scalable infrastructure solutions. My journey began with discovering containerization technologies like LXC and Docker, which sparked my deep curiosity for the DevOps world. I've since developed extensive expertise in Kubernetes, Cloud Platforms (especially GCP), and Infrastructure-as-Code tools like Terraform and Ansible. I thrive on solving complex infrastructure challenges and helping companies scale efficiently.",
+      "description": "I'm Edwin Istin, a passionate DevOps engineer with over 10 years of experience in crafting reliable and scalable infrastructure solutions. My journey began with discovering containerization technologies like LXC and Docker, which sparked my deep curiosity for the DevOps world. I've since developed extensive expertise in Kubernetes, Cloud Platforms (especially GCP), and Infrastructure-as-Code tools like Terraform and Ansible. I thrive on solving complex infrastructure challenges and helping companies scale efficiently.",
       "stats": {
         "experience": {
-          "number": "8+",
+          "number": "10+",
           "label": "Years Of Experience"
         },
         "projects": {
@@ -246,14 +246,14 @@
     },
     "metadata": {
       "title": "Edwin Istin - DevOps & SRE Engineer | Freelance Expert Rennes France",
-      "description": "Edwin Istin: Expert DevOps & SRE Engineer from Rennes, France. 8+ years experience in Infrastructure as Code, CI/CD, Kubernetes, and Cloud Architecture. Freelance DevOps consultant.",
+      "description": "Edwin Istin: Expert DevOps & SRE Engineer from Rennes, France. 10+ years experience in Infrastructure as Code, CI/CD, Kubernetes, and Cloud Architecture. Freelance DevOps consultant.",
       "keywords": "Edwin Istin, Edwin Istin DevOps, Edwin Istin SRE, DevOps Engineer Rennes, SRE Consultant France, Infrastructure as Code Expert, CI/CD Specialist, Kubernetes Expert Rennes, Google Cloud Platform Consultant, Terraform Expert France, DevOps Freelance Rennes, Site Reliability Engineering, Edwin Istin Portfolio, Bretagne DevOps",
       "author": "Edwin Istin",
       "ogTitle": "Edwin Istin - Expert DevOps & SRE Engineer from Rennes, France",
-      "ogDescription": "Edwin Istin transforms infrastructure with 8+ years of DevOps expertise. Freelance consultant specializing in Kubernetes, GCP, Infrastructure as Code, and CI/CD automation. Based in Rennes, Bretagne.",
+      "ogDescription": "Edwin Istin transforms infrastructure with 10+ years of DevOps expertise. Freelance consultant specializing in Kubernetes, GCP, Infrastructure as Code, and CI/CD automation. Based in Rennes, Bretagne.",
       "ogImage": "/cloud-icon.png",
       "twitterTitle": "Edwin Istin - DevOps & SRE Expert | Rennes, France",
-      "twitterDescription": "Edwin Istin: DevOps & SRE Engineer with 8+ years experience. Kubernetes • GCP • Infrastructure as Code • CI/CD | Based in Rennes, France"
+      "twitterDescription": "Edwin Istin: DevOps & SRE Engineer with 10+ years experience. Kubernetes • GCP • Infrastructure as Code • CI/CD | Based in Rennes, France"
     },
     "blog": {
       "title": "Blog - Edwin Istin | DevOps & SRE Insights",

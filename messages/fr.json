@@ -18,7 +18,7 @@
     "hero": {
       "title": "FREELANCE",
       "subtitle": "DEVOPS / SRE",
-      "description": "Bonjour, je suis Edwin Istin, Expert DevOps avec plus de 8 ans d'expérience aidant les entreprises tech à surmonter leurs défis d'infrastructure avec des solutions personnalisées et efficaces.",
+      "description": "Bonjour, je suis Edwin Istin, Expert DevOps avec plus de 10 ans d'expérience aidant les entreprises tech à surmonter leurs défis d'infrastructure avec des solutions personnalisées et efficaces.",
       "cta": "Me contacter"
     },
     "services": {
@@ -138,10 +138,10 @@
     },
     "about": {
       "title": "À PROPOS DE MOI",
-      "description": "Je suis Edwin Istin, un ingénieur DevOps passionné avec plus de 8 ans d'expérience dans la création de solutions d'infrastructure fiables et évolutives. Mon parcours a débuté par la découverte des technologies de conteneurisation comme LXC et Docker, qui ont éveillé ma profonde curiosité pour le monde DevOps. J'ai depuis développé une expertise approfondie en Kubernetes, plateformes Cloud (notamment GCP), et outils Infrastructure-as-Code comme Terraform et Ansible. Je m'épanouis en résolvant des défis d'infrastructure complexes et en aidant les entreprises à scaler efficacement.",
+      "description": "Je suis Edwin Istin, un ingénieur DevOps passionné avec plus de 10 ans d'expérience dans la création de solutions d'infrastructure fiables et évolutives. Mon parcours a débuté par la découverte des technologies de conteneurisation comme LXC et Docker, qui ont éveillé ma profonde curiosité pour le monde DevOps. J'ai depuis développé une expertise approfondie en Kubernetes, plateformes Cloud (notamment GCP), et outils Infrastructure-as-Code comme Terraform et Ansible. Je m'épanouis en résolvant des défis d'infrastructure complexes et en aidant les entreprises à scaler efficacement.",
       "stats": {
         "experience": {
-          "number": "8+",
+          "number": "10+",
           "label": "Années d'expérience"
         },
         "projects": {
@@ -246,14 +246,14 @@
     },
     "metadata": {
       "title": "Edwin Istin - Ingénieur DevOps & SRE | Expert Freelance Rennes France",
-      "description": "Edwin Istin : Expert Ingénieur DevOps & SRE de Rennes, France. 8+ ans d'expérience en Infrastructure as Code, CI/CD, Kubernetes et Architecture Cloud. Consultant DevOps Freelance.",
+      "description": "Edwin Istin : Expert Ingénieur DevOps & SRE de Rennes, France. 10+ ans d'expérience en Infrastructure as Code, CI/CD, Kubernetes et Architecture Cloud. Consultant DevOps Freelance.",
       "keywords": "Edwin Istin, Edwin Istin DevOps, Edwin Istin SRE, Ingénieur DevOps Rennes, Consultant SRE France, Expert Infrastructure as Code, Spécialiste CI/CD, Expert Kubernetes Rennes, Consultant Google Cloud Platform, Expert Terraform France, DevOps Freelance Rennes, Site Reliability Engineering, Edwin Istin Portfolio, DevOps Bretagne",
       "author": "Edwin Istin",
       "ogTitle": "Edwin Istin - Expert Ingénieur DevOps & SRE de Rennes, France",
-      "ogDescription": "Edwin Istin transforme votre infrastructure avec 8+ ans d'expertise DevOps. Consultant freelance spécialisé en Kubernetes, GCP, Infrastructure as Code et automatisation CI/CD. Basé à Rennes, Bretagne.",
+      "ogDescription": "Edwin Istin transforme votre infrastructure avec 10+ ans d'expertise DevOps. Consultant freelance spécialisé en Kubernetes, GCP, Infrastructure as Code et automatisation CI/CD. Basé à Rennes, Bretagne.",
       "ogImage": "/cloud-icon.png",
       "twitterTitle": "Edwin Istin - Expert DevOps & SRE | Rennes, France",
-      "twitterDescription": "Edwin Istin : Ingénieur DevOps & SRE avec 8+ ans d'expérience. Kubernetes • GCP • Infrastructure as Code • CI/CD | Basé à Rennes, France"
+      "twitterDescription": "Edwin Istin : Ingénieur DevOps & SRE avec 10+ ans d'expérience. Kubernetes • GCP • Infrastructure as Code • CI/CD | Basé à Rennes, France"
     },
     "blog": {
       "title": "Blog - Edwin Istin | Conseils DevOps & SRE",
