@@ -45,6 +45,9 @@ export const DEFAULT_ARTIFACT_PATH = path.join(process.cwd(), 'profile.json');
 
 const FALLBACK_LOCALE = 'en';
 
+// Keyed by file path only, not mtime: running `npm run profile:pull` during a
+// `next dev` session will not invalidate this cache, so the dev server keeps
+// serving the previously-loaded artifact until restarted.
 let cache: { file: string; data: Artifact } | null = null;
 
 function readArtifact(file: string): Artifact {
