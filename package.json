@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "profile:pull": "gh api repos/eistin/profile-hub/contents/dist/profile.json -H 'Accept: application/vnd.github.raw' > profile.json"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
@@ -46,6 +49,7 @@
     "sharp": "^0.35.4",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.7"
   }
 }

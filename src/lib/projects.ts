@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
+import { DEFAULT_ARTIFACT_PATH, getMissions, type MissionMetadata } from './profile';
 
 export interface ProjectMetadata {
   title: string;
@@ -23,63 +23,52 @@ export interface Project {
 
 const projectsDirectory = path.join(process.cwd(), 'content/projects');
 
-export async function getProjectBySlug(slug: string, locale: string = 'en'): Promise<Project | null> {
-  try {
-    const fullPath = path.join(projectsDirectory, locale, `${slug}.md`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-
-    return {
-      slug,
-      metadata: data as ProjectMetadata,
-      content,
-    };
-  } catch {
-    // Fallback to English if the requested locale doesn't exist
-    if (locale !== 'en') {
-      return getProjectBySlug(slug, 'en');
-    }
-    return null;
-  }
+/** Markdown bodies stay in this repo; metadata comes from the profile-hub artifact. */
+function readBody(slug: string, locale: string): string {
+  const preferred = path.join(projectsDirectory, locale, `${slug}.md`);
+  const fallback = path.join(projectsDirectory, 'en', `${slug}.md`);
+  const file = fs.existsSync(preferred) ? preferred : fallback;
+  return fs.existsSync(file) ? fs.readFileSync(file, 'utf8').trim() : '';
 }
 
-export async function getAllProjects(locale: string = 'en'): Promise<Project[]> {
-  try {
-    const localeDirectory = path.join(projectsDirectory, locale);
-    const fileNames = fs.readdirSync(localeDirectory);
-    const projects = await Promise.all(
-      fileNames
-        .filter((name) => name.endsWith('.md'))
-        .map(async (name) => {
-          const slug = name.replace(/\.md$/, '');
-          return getProjectBySlug(slug, locale);
-        })
-    );
-
-    return projects
-      .filter((project): project is Project => project !== null)
-      .sort((a, b) => new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime());
-  } catch {
-    // Fallback to English if locale directory doesn't exist
-    if (locale !== 'en') {
-      return getAllProjects('en');
-    }
-    return [];
-  }
+/**
+ * Builds ProjectMetadata explicitly rather than by rest-spread, so the
+ * portfolio's public shape is pinned here and cannot drift if the artifact
+ * grows new fields (period, for instance, is deliberately not surfaced).
+ */
+function toProject(mission: MissionMetadata, locale: string): Project {
+  return {
+    slug: mission.slug,
+    metadata: {
+      title: mission.title,
+      category: mission.category,
+      client: mission.client,
+      duration: mission.duration,
+      teamSize: mission.teamSize,
+      technologies: mission.technologies,
+      featured: mission.featured,
+      publishedAt: mission.publishedAt,
+      challenge: mission.challenge,
+      impact: mission.impact,
+    },
+    content: readBody(mission.slug, locale),
+  };
 }
 
-export function getProjectSlugs(locale: string = 'en'): string[] {
-  try {
-    const localeDirectory = path.join(projectsDirectory, locale);
-    const fileNames = fs.readdirSync(localeDirectory);
-    return fileNames
-      .filter((name) => name.endsWith('.md'))
-      .map((name) => name.replace(/\.md$/, ''));
-  } catch {
-    // Fallback to English if locale directory doesn't exist
-    if (locale !== 'en') {
-      return getProjectSlugs('en');
-    }
-    return [];
-  }
+export async function getAllProjects(
+  locale: string = 'en',
+  artifactPath: string = DEFAULT_ARTIFACT_PATH,
+): Promise<Project[]> {
+  return getMissions(locale, artifactPath)
+    .map((m) => toProject(m, locale))
+    .sort((a, b) => new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime());
+}
+
+export async function getProjectBySlug(
+  slug: string,
+  locale: string = 'en',
+  artifactPath: string = DEFAULT_ARTIFACT_PATH,
+): Promise<Project | null> {
+  const mission = getMissions(locale, artifactPath).find((m) => m.slug === slug);
+  return mission ? toProject(mission, locale) : null;
 }
