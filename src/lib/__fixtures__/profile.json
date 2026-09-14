@@ -159,11 +159,7 @@
             "from": "2026-10-01",
             "daysPerWeek": 5
           },
-          "remote": "hybrid",
-          "tjm": {
-            "amount": 999,
-            "currency": "EUR"
-          }
+          "remote": "hybrid"
         }
       },
       "missions": [
@@ -194,7 +190,8 @@
           "featured": true,
           "publishedAt": "2026-03-01",
           "challenge": "Migrer les services client-facing d'une plateforme AdTech depuis l'on-premise vers GCP sans d\u00e9gradation de service",
-          "impact": "200+ applications migr\u00e9es, bases SQL Server et PostgreSQL bascul\u00e9es, z\u00e9ro d\u00e9gradation sur le trafic temps r\u00e9el"
+          "impact": "200+ applications migr\u00e9es, bases SQL Server et PostgreSQL bascul\u00e9es, z\u00e9ro d\u00e9gradation sur le trafic temps r\u00e9el",
+          "internalRate": 999
         },
         {
           "slug": "equativ-gcp-landing-zone",
