@@ -1,28 +1,30 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { Award, Briefcase, Users, ArrowUpRight } from "lucide-react";
+import { getProfile } from "@/lib/profile";
 
 export default async function AboutSection() {
   const t = await getTranslations("about");
+  const profile = getProfile(await getLocale());
 
   const stats = [
     {
       key: "experience",
-      number: t("stats.experience.number"),
+      number: profile.stats.experience,
       label: t("stats.experience.label"),
       icon: Award,
     },
     {
       key: "projects",
-      number: t("stats.projects.number"),
+      number: profile.stats.projects,
       label: t("stats.projects.label"),
       icon: Briefcase,
     },
     {
       key: "satisfaction",
-      number: t("stats.satisfaction.number"),
+      number: profile.stats.satisfaction,
       label: t("stats.satisfaction.label"),
       icon: Users,
     },
@@ -70,7 +72,7 @@ export default async function AboutSection() {
         <div className="col-span-1 lg:col-span-3">
           <Reveal className="mb-12">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              {t("description")}
+              {profile.bio.long}
             </p>
           </Reveal>
 

@@ -7,6 +7,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import ContactSection from "@/components/sections/ContactSection";
 import { getAllProjects } from "@/lib/projects";
 import { getAllTestimonials } from "@/lib/testimonials";
+import { getProfile } from "@/lib/profile";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -24,9 +25,10 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const projects = await getAllProjects(locale);
   const testimonials = await getAllTestimonials(locale);
+  const profile = getProfile(locale);
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
+      <Header name={profile.identity.name} tagline={profile.identity.headline} />
       <main>
         {/* Hero Section - Special padding for first section */}
         <div id="home" className="pt-20 sm:pt-16 md:pt-24 pb-20 px-6">

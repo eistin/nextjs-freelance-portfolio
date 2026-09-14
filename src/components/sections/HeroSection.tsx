@@ -1,10 +1,12 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { getProfile } from "@/lib/profile";
 
 export default async function HeroSection() {
   const t = await getTranslations("hero");
   const tLogos = await getTranslations("companyLogos");
+  const profile = getProfile(await getLocale());
 
   const companyLogos = [
     { key: "alivio", src: "/logo_companies/alivio_logo.png", alt: tLogos("alivio") },
@@ -66,7 +68,7 @@ export default async function HeroSection() {
           className="text-lg mb-8 text-muted-foreground max-w-2xl mx-auto animate-fade-in-up"
           style={{ animationDelay: '0.2s' }}
         >
-          {t("description")}
+          {profile.bio.medium}
         </p>
 
         <div

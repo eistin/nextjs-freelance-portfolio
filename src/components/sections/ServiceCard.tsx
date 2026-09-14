@@ -29,7 +29,7 @@ export function ServiceCard({ serviceKey, id, title, description, className }: S
     <div className={className}>
       <Card
         className="group h-full hover:shadow-lg transition-all duration-500 cursor-pointer overflow-hidden relative bg-card border border-border hover:border-primary/50"
-        onClick={() => selectServiceAndScroll(serviceKey)}
+        onClick={() => selectServiceAndScroll(serviceKey, title)}
       >
         <div className="absolute inset-0 opacity-[0.015]">
           <div
