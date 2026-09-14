@@ -3,6 +3,7 @@ import path from 'node:path'
 import { getAllProjects, getProjectBySlug } from './projects'
 
 const FIXTURE = path.join(process.cwd(), 'src/lib/__fixtures__/profile.json')
+const MISSING_MARKDOWN_FIXTURE = path.join(process.cwd(), 'src/lib/__fixtures__/profile-missing-markdown.json')
 
 describe('getAllProjects', () => {
   it('returns projects with the unchanged Project shape', async () => {
@@ -26,8 +27,22 @@ describe('getAllProjects', () => {
     expect(projects[0].content).not.toContain('---\ntitle:')
   })
 
-  it('does not expose the day rate', async () => {
-    expect(JSON.stringify(await getAllProjects('fr', FIXTURE))).not.toContain('tjm')
+  it('never leaks the day rate into project output', async () => {
+    // The fixture deliberately carries a tjm field that the real artifact does
+    // not. toProject() names its output fields explicitly rather than spreading,
+    // so the rate cannot reach a public page — this test fails if that changes.
+    const json = JSON.stringify(await getAllProjects('fr', FIXTURE))
+    expect(json).not.toContain('tjm')
+    expect(json).not.toContain('999')
+  })
+
+  it('throws when a mission has no markdown body in any locale', async () => {
+    // Metadata (profile-hub) and markdown bodies (this repo) are decoupled,
+    // so a mission can exist in the artifact with no corresponding .md file.
+    // That must fail the build loudly rather than publish a blank page.
+    await expect(getAllProjects('fr', MISSING_MARKDOWN_FIXTURE)).rejects.toThrow(
+      /no markdown body/,
+    )
   })
 })
 

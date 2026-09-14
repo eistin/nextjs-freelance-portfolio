@@ -28,7 +28,15 @@ function readBody(slug: string, locale: string): string {
   const preferred = path.join(projectsDirectory, locale, `${slug}.md`);
   const fallback = path.join(projectsDirectory, 'en', `${slug}.md`);
   const file = fs.existsSync(preferred) ? preferred : fallback;
-  return fs.existsSync(file) ? fs.readFileSync(file, 'utf8').trim() : '';
+  if (!fs.existsSync(file)) {
+    throw new Error(
+      `Mission "${slug}" has metadata in profile.json but no markdown body at ` +
+        `content/projects/${locale}/${slug}.md (nor the "en" fallback). ` +
+        `Mission metadata and case-study bodies live in different repos: add the ` +
+        `markdown here, or remove the mission from profile-hub's content/missions/.`,
+    );
+  }
+  return fs.readFileSync(file, 'utf8').trim();
 }
 
 /**
