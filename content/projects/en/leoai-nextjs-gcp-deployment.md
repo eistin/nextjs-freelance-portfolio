@@ -1,16 +1,3 @@
----
-title: "Next.js Deployment on GCP"
-category: "DEPLOYMENT"
-client: "LeoAI"
-duration: "3 weeks"
-teamSize: "solo"
-technologies: ["Google Cloud Platform", "Next.js", "Docker", "Terraform", "Cloud Run", "CloudSQL", "GitHub Actions", "Cloudflare"]
-featured: true
-publishedAt: "2024-09-01"
-challenge: "Migrate Next.js SaaS application to GCP with modern infrastructure"
-impact: "PHP to Next.js migration, automated infrastructure, complete CI/CD"
----
-
 # Next.js Deployment on GCP for LeoAI
 
 ## The Challenge

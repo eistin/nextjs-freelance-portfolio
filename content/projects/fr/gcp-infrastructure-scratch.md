@@ -1,16 +1,3 @@
----
-title: "Infrastructure GCP from Scratch"
-category: "INFRASTRUCTURE"
-client: "Teester (maintenant Skeepers)"
-duration: "6 mois"
-teamSize: "DevOps Solo + collaboration Lead Developer"
-technologies: ["Google Cloud Platform", "Terraform", "Kubernetes", "Docker", "GitLab CI", "Cloud SQL", "Redis", "Load Balancer"]
-featured: true
-publishedAt: "2023-01-15"
-challenge: "Construire une infrastructure évolutive from scratch pour une startup en croissance"
-impact: "Migration zéro-downtime, sécurité renforcée, déploiements automatisés"
----
-
 # Infrastructure GCP from Scratch
 
 ## Le Défi

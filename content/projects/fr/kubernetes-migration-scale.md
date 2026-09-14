@@ -1,16 +1,3 @@
----
-title: "Migration Kubernetes à Grande Échelle"
-category: "MIGRATION"
-client: "Groupe Le Monde"
-duration: "12 mois"
-teamSize: "5-7"
-technologies: ["Google Kubernetes Engine", "Compute Engine", "Prometheus", "Grafana", "Loki", "Docker", "Helm", "GitLab CI"]
-featured: true
-publishedAt: "2023-09-01"
-challenge: "Migrer l'infrastructure legacy Compute Engine vers Kubernetes à l'échelle entreprise"
-impact: "15+ clusters migrés, infrastructure moderne, observabilité avancée"
----
-
 # Migration Kubernetes à Grande Échelle
 
 ## Le Défi

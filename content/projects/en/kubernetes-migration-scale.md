@@ -1,16 +1,3 @@
----
-title: "Kubernetes Migration at Scale"
-category: "MIGRATION"
-client: "Le Monde Group"
-duration: "12 months"
-teamSize: "5-7"
-technologies: ["Google Kubernetes Engine", "Compute Engine", "Prometheus", "Grafana", "Loki", "Docker", "Helm", "GitLab CI"]
-featured: true
-publishedAt: "2023-09-01"
-challenge: "Migrate legacy Compute Engine infrastructure to Kubernetes at enterprise scale"
-impact: "15+ clusters migrated, modern infrastructure, advanced observability"
----
-
 # Kubernetes Migration at Scale
 
 ## The Challenge
