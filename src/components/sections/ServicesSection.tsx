@@ -1,32 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard, type ServiceKey } from "./ServiceCard";
+import { getProfile } from "@/lib/profile";
+
+// Layout only: which card is wide. Content comes from the profile.
+const WIDTHS = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-span-2"];
 
 export default async function ServicesSection() {
   const t = await getTranslations("services");
-
-  const services = [
-    {
-      id: "01",
-      key: "infrastructure",
-      width: "lg:col-span-2", // 65% width
-    },
-    {
-      id: "02",
-      key: "cicd",
-      width: "lg:col-span-1", // 35% width
-    },
-    {
-      id: "03",
-      key: "kubernetes",
-      width: "lg:col-span-1", // 35% width
-    },
-    {
-      id: "04",
-      key: "cloud",
-      width: "lg:col-span-2", // 65% width
-    },
-  ];
+  const profile = getProfile(await getLocale());
 
   return (
     <section className="container mx-auto">
@@ -35,14 +17,14 @@ export default async function ServicesSection() {
       </Reveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {services.map((service, index) => (
+        {profile.services.map((service, index) => (
           <Reveal key={service.id} delayMs={index * 200}>
             <ServiceCard
-              serviceKey={service.key as ServiceKey}
-              id={service.id}
-              title={t(`items.${service.key}.title`)}
-              description={t(`items.${service.key}.description`)}
-              className={service.width}
+              serviceKey={service.id as ServiceKey}
+              id={String(index + 1).padStart(2, "0")}
+              title={service.title}
+              description={service.description}
+              className={WIDTHS[index] ?? "lg:col-span-1"}
             />
           </Reveal>
         ))}

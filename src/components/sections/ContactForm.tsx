@@ -15,9 +15,8 @@ import { useAnalytics } from "@/lib/analytics";
 
 export function ContactForm() {
   const t = useTranslations("contact");
-  const tServices = useTranslations("services");
   const locale = useLocale();
-  const { selectedService, setSelectedService } = useService();
+  const { selectedService, selectedServiceTitle, setSelectedService } = useService();
   const [subject, setSubject] = useState("");
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<ActionResult | null>(null);
@@ -26,11 +25,10 @@ export function ContactForm() {
 
   // Update subject when service is selected
   useEffect(() => {
-    if (selectedService) {
-      const serviceTitle = tServices(`items.${selectedService}.title`);
-      setSubject(`${t("inquiryAbout")} ${serviceTitle}`);
+    if (selectedService && selectedServiceTitle) {
+      setSubject(`${t("inquiryAbout")} ${selectedServiceTitle}`);
     }
-  }, [selectedService, tServices, t]);
+  }, [selectedService, selectedServiceTitle, t]);
 
   const clearSelectedService = () => {
     setSelectedService(null);
@@ -72,7 +70,7 @@ export function ContactForm() {
                   {t("selectedService")}
                 </Badge>
                 <span className="font-semibold text-primary">
-                  {tServices(`items.${selectedService}.title`)}
+                  {selectedServiceTitle}
                 </span>
               </div>
               <Button

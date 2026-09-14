@@ -17,7 +17,12 @@ import {
 import { cn } from "@/lib/utils";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-export default function Header() {
+interface HeaderProps {
+  name: string;
+  tagline: string;
+}
+
+export default function Header({ name, tagline }: HeaderProps) {
   const t = useTranslations("navigation");
   const params = useParams();
   const locale = params.locale as string;
@@ -193,9 +198,9 @@ export default function Header() {
                 {/* Footer Info */}
                 <div className="absolute bottom-6 left-6 right-6">
                   <div className="text-center">
-                    <p className="text-sm text-gray-600 mb-2">{t('header.name')}</p>
+                    <p className="text-sm text-gray-600 mb-2">{name}</p>
                     <p className="text-xs text-gray-500 uppercase tracking-wider">
-                      {t('header.tagline')}
+                      {tagline}
                     </p>
                   </div>
                 </div>
