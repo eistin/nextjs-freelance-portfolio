@@ -1,0 +1,448 @@
+{
+  "locales": {
+    "fr": {
+      "profile": {
+        "identity": {
+          "name": "Edwin Istin",
+          "headline": "Expert DevOps / SRE",
+          "title": "Freelance DevOps / SRE",
+          "yearsExperience": 10,
+          "links": {
+            "portfolio": "https://edwindev.cloud",
+            "linkedin": "https://www.linkedin.com/in/PLACEHOLDER",
+            "malt": "https://www.malt.fr/profile/PLACEHOLDER",
+            "collective": "https://www.collective.work/PLACEHOLDER",
+            "github": "https://github.com/eistin"
+          }
+        },
+        "bio": {
+          "short": "Expert DevOps / SRE freelance, 10+ ans d'expérience en Kubernetes, GCP et Infrastructure as Code. J'aide les entreprises tech à scaler une infrastructure fiable et automatisée.",
+          "medium": "Bonjour, je suis Edwin Istin, Expert DevOps avec plus de 10 ans d'expérience aidant les entreprises tech à surmonter leurs défis d'infrastructure avec des solutions personnalisées et efficaces.",
+          "long": "Je suis Edwin Istin, un ingénieur DevOps passionné avec plus de 10 ans d'expérience dans la création de solutions d'infrastructure fiables et évolutives. Mon parcours a débuté par la découverte des technologies de conteneurisation comme LXC et Docker, qui ont éveillé ma profonde curiosité pour le monde DevOps. J'ai depuis développé une expertise approfondie en Kubernetes, plateformes Cloud (notamment GCP), et outils Infrastructure-as-Code comme Terraform et Ansible. Je m'épanouis en résolvant des défis d'infrastructure complexes et en aidant les entreprises à scaler efficacement."
+        },
+        "skills": [
+          {
+            "id": "gcp",
+            "label": "Google Cloud Platform",
+            "level": "expert",
+            "categories": [
+              "cloud"
+            ]
+          },
+          {
+            "id": "kubernetes",
+            "label": "Kubernetes",
+            "level": "expert",
+            "categories": [
+              "orchestration"
+            ]
+          },
+          {
+            "id": "terraform",
+            "label": "Terraform",
+            "level": "expert",
+            "categories": [
+              "iac"
+            ]
+          },
+          {
+            "id": "iac",
+            "label": "Infrastructure as Code (Terragrunt, Ansible)",
+            "level": "expert",
+            "categories": [
+              "iac"
+            ]
+          },
+          {
+            "id": "gitops",
+            "label": "GitOps (ArgoCD, FluxCD)",
+            "level": "advanced",
+            "categories": [
+              "cicd"
+            ]
+          },
+          {
+            "id": "gitlab-ci",
+            "label": "GitLab CI",
+            "level": "advanced",
+            "categories": [
+              "cicd"
+            ]
+          },
+          {
+            "id": "github-actions",
+            "label": "GitHub Actions",
+            "level": "advanced",
+            "categories": [
+              "cicd"
+            ]
+          },
+          {
+            "id": "docker",
+            "label": "Docker",
+            "level": "expert",
+            "categories": [
+              "containers"
+            ]
+          },
+          {
+            "id": "observability",
+            "label": "Observabilité (Prometheus, Grafana, Loki)",
+            "level": "advanced",
+            "categories": [
+              "sre"
+            ]
+          },
+          {
+            "id": "sre",
+            "label": "Site Reliability Engineering (SLO)",
+            "level": "advanced",
+            "categories": [
+              "sre"
+            ]
+          },
+          {
+            "id": "databases",
+            "label": "Migration de bases de données (Cloud SQL, PostgreSQL, MySQL, SQL Server)",
+            "level": "advanced",
+            "categories": [
+              "database"
+            ]
+          },
+          {
+            "id": "secrets-management",
+            "label": "Gestion des secrets (Secret Manager, External Secrets, cert-manager)",
+            "level": "proficient",
+            "categories": [
+              "security"
+            ]
+          },
+          {
+            "id": "python",
+            "label": "Python",
+            "level": "proficient",
+            "categories": [
+              "languages"
+            ]
+          }
+        ],
+        "stats": {
+          "experience": "10+",
+          "projects": "20+",
+          "satisfaction": "100%"
+        },
+        "services": [
+          {
+            "id": "infrastructure",
+            "title": "Infrastructure as Code (IaC)",
+            "description": "Gagnez du temps et évitez les erreurs manuelles avec une gestion de l'infrastructure entièrement codée. Modules Terraform, organisation Terragrunt, et Ansible pour le déploiement de ressources idempotentes."
+          },
+          {
+            "id": "cicd",
+            "title": "DevOps & CI/CD",
+            "description": "Simplifiez et automatisez vos processus de déploiement pour livrer vos applications plus rapidement et en toute sécurité. GitLab CI, GitHub Actions, GitOps (ArgoCD, FluxCD), Docker, Kubernetes, et Helm."
+          },
+          {
+            "id": "kubernetes",
+            "title": "Site Reliability Engineering (SRE)",
+            "description": "Gardez le contrôle de vos performances grâce à une surveillance proactive et des indicateurs de fiabilité. Prometheus, Grafana, Loki, Victoria Metrics, et mise en place de SLO d'applications."
+          },
+          {
+            "id": "cloud",
+            "title": "Google Cloud Platform (GCP)",
+            "description": "Concevez et mettez en place des architectures cloud sur mesure qui s'adaptent à vos besoins actuels et futurs. Définition d'architectures GCP, migration Kubernetes, et optimisation des coûts."
+          }
+        ],
+        "engagement": {
+          "availability": {
+            "status": "open",
+            "from": "2026-10-01",
+            "daysPerWeek": 5
+          },
+          "remote": "hybrid"
+        }
+      },
+      "missions": [
+        {
+          "slug": "equativ-central-migration",
+          "title": "Migration On-Prem → GCP à l'Échelle",
+          "client": "Equativ",
+          "category": "MIGRATION",
+          "duration": "8 mois",
+          "period": {
+            "start": "2025-08",
+            "end": "2026-03"
+          },
+          "teamSize": "Pilotage transverse d'une dizaine d'équipes",
+          "technologies": [
+            "Google Cloud Platform",
+            "GKE",
+            "Cloud SQL",
+            "Database Migration Service",
+            "Terraform",
+            "Terragrunt",
+            "ArgoCD",
+            "Kafka",
+            "SQL Server",
+            "PostgreSQL",
+            "HAProxy"
+          ],
+          "featured": true,
+          "publishedAt": "2026-03-01",
+          "challenge": "Migrer les services client-facing d'une plateforme AdTech depuis l'on-premise vers GCP sans dégradation de service",
+          "impact": "200+ applications migrées, bases SQL Server et PostgreSQL basculées, zéro dégradation sur le trafic temps réel"
+        },
+        {
+          "slug": "equativ-gcp-landing-zone",
+          "title": "Socle Cloud GCP Multi-Projets",
+          "client": "Equativ",
+          "category": "INFRASTRUCTURE",
+          "duration": "5 mois",
+          "period": {
+            "start": "2025-07",
+            "end": "2025-11"
+          },
+          "teamSize": "Équipe plateforme, en support d'une dizaine d'équipes produit",
+          "technologies": [
+            "Google Cloud Platform",
+            "GKE",
+            "Terraform",
+            "Terragrunt",
+            "ArgoCD",
+            "Google Secret Manager",
+            "External Secrets",
+            "cert-manager",
+            "HAProxy",
+            "Kafka"
+          ],
+          "featured": true,
+          "publishedAt": "2025-11-01",
+          "challenge": "Concevoir le socle Cloud multi-projets d'une plateforme AdTech traitant plusieurs milliards de requêtes par jour",
+          "impact": "Landing zone GCP industrialisée, GitOps à l'échelle, 3 000+ secrets migrés sans interruption"
+        }
+      ]
+    },
+    "en": {
+      "profile": {
+        "identity": {
+          "name": "Edwin Istin",
+          "headline": "DevOps / SRE Expert",
+          "title": "Freelance DevOps / SRE",
+          "yearsExperience": 10,
+          "links": {
+            "portfolio": "https://edwindev.cloud",
+            "linkedin": "https://www.linkedin.com/in/PLACEHOLDER",
+            "malt": "https://www.malt.fr/profile/PLACEHOLDER",
+            "collective": "https://www.collective.work/PLACEHOLDER",
+            "github": "https://github.com/eistin"
+          }
+        },
+        "bio": {
+          "short": "Freelance DevOps / SRE Expert with 10+ years of experience in Kubernetes, GCP, and Infrastructure as Code, helping tech companies scale reliable, automated infrastructure.",
+          "medium": "Hi, I'm Edwin Istin, DevOps Expert with 10+ years of experience helping tech companies overcome infrastructure challenges with personalized and efficient solutions.",
+          "long": "I'm Edwin Istin, a passionate DevOps engineer with over 10 years of experience in crafting reliable and scalable infrastructure solutions. My journey began with discovering containerization technologies like LXC and Docker, which sparked my deep curiosity for the DevOps world. I've since developed extensive expertise in Kubernetes, Cloud Platforms (especially GCP), and Infrastructure-as-Code tools like Terraform and Ansible. I thrive on solving complex infrastructure challenges and helping companies scale efficiently."
+        },
+        "skills": [
+          {
+            "id": "gcp",
+            "label": "Google Cloud Platform",
+            "level": "expert",
+            "categories": [
+              "cloud"
+            ]
+          },
+          {
+            "id": "kubernetes",
+            "label": "Kubernetes",
+            "level": "expert",
+            "categories": [
+              "orchestration"
+            ]
+          },
+          {
+            "id": "terraform",
+            "label": "Terraform",
+            "level": "expert",
+            "categories": [
+              "iac"
+            ]
+          },
+          {
+            "id": "iac",
+            "label": "Infrastructure as Code (Terragrunt, Ansible)",
+            "level": "expert",
+            "categories": [
+              "iac"
+            ]
+          },
+          {
+            "id": "gitops",
+            "label": "GitOps (ArgoCD, FluxCD)",
+            "level": "advanced",
+            "categories": [
+              "cicd"
+            ]
+          },
+          {
+            "id": "gitlab-ci",
+            "label": "GitLab CI",
+            "level": "advanced",
+            "categories": [
+              "cicd"
+            ]
+          },
+          {
+            "id": "github-actions",
+            "label": "GitHub Actions",
+            "level": "advanced",
+            "categories": [
+              "cicd"
+            ]
+          },
+          {
+            "id": "docker",
+            "label": "Docker",
+            "level": "expert",
+            "categories": [
+              "containers"
+            ]
+          },
+          {
+            "id": "observability",
+            "label": "Observability (Prometheus, Grafana, Loki)",
+            "level": "advanced",
+            "categories": [
+              "sre"
+            ]
+          },
+          {
+            "id": "sre",
+            "label": "Site Reliability Engineering (SLOs)",
+            "level": "advanced",
+            "categories": [
+              "sre"
+            ]
+          },
+          {
+            "id": "databases",
+            "label": "Database Migration (Cloud SQL, PostgreSQL, MySQL, SQL Server)",
+            "level": "advanced",
+            "categories": [
+              "database"
+            ]
+          },
+          {
+            "id": "secrets-management",
+            "label": "Secrets Management (Secret Manager, External Secrets, cert-manager)",
+            "level": "proficient",
+            "categories": [
+              "security"
+            ]
+          },
+          {
+            "id": "python",
+            "label": "Python",
+            "level": "proficient",
+            "categories": [
+              "languages"
+            ]
+          }
+        ],
+        "stats": {
+          "experience": "10+",
+          "projects": "20+",
+          "satisfaction": "100%"
+        },
+        "services": [
+          {
+            "id": "infrastructure",
+            "title": "Infrastructure as Code (IaC)",
+            "description": "Save time and avoid manual errors with fully coded infrastructure management. Terraform modules, Terragrunt organization, and Ansible for idempotent resource deployment."
+          },
+          {
+            "id": "cicd",
+            "title": "DevOps & CI/CD",
+            "description": "Simplify and automate your deployment processes for faster and secure application delivery. GitLab CI, GitHub Actions, GitOps (ArgoCD, FluxCD), Docker, Kubernetes, and Helm."
+          },
+          {
+            "id": "kubernetes",
+            "title": "Site Reliability Engineering (SRE)",
+            "description": "Keep control of your performance with proactive monitoring and reliability indicators. Prometheus, Grafana, Loki, Victoria Metrics, and application SLO setup."
+          },
+          {
+            "id": "cloud",
+            "title": "Google Cloud Platform (GCP)",
+            "description": "Design and implement custom cloud architectures that adapt to your current and future needs. GCP architecture definition, Kubernetes migration, and cost optimization."
+          }
+        ],
+        "engagement": {
+          "availability": {
+            "status": "open",
+            "from": "2026-10-01",
+            "daysPerWeek": 5
+          },
+          "remote": "hybrid"
+        }
+      },
+      "missions": [
+        {
+          "slug": "equativ-central-migration",
+          "title": "On-Prem → GCP Migration at Scale",
+          "client": "Equativ",
+          "category": "MIGRATION",
+          "duration": "8 months",
+          "period": {
+            "start": "2025-08",
+            "end": "2026-03"
+          },
+          "teamSize": "Cross-team programme lead, a dozen engineering teams",
+          "technologies": [
+            "Google Cloud Platform",
+            "GKE",
+            "Cloud SQL",
+            "Database Migration Service",
+            "Terraform",
+            "Terragrunt",
+            "ArgoCD",
+            "Kafka",
+            "SQL Server",
+            "PostgreSQL",
+            "HAProxy"
+          ],
+          "featured": true,
+          "publishedAt": "2026-03-01",
+          "challenge": "Migrate the client-facing services of an AdTech platform from on-premise to GCP with no service degradation",
+          "impact": "200+ applications migrated, SQL Server and PostgreSQL estates cut over, zero degradation on real-time traffic"
+        },
+        {
+          "slug": "equativ-gcp-landing-zone",
+          "title": "Multi-Project GCP Cloud Foundation",
+          "client": "Equativ",
+          "category": "INFRASTRUCTURE",
+          "duration": "5 months",
+          "period": {
+            "start": "2025-07",
+            "end": "2025-11"
+          },
+          "teamSize": "Platform team, supporting a dozen product teams",
+          "technologies": [
+            "Google Cloud Platform",
+            "GKE",
+            "Terraform",
+            "Terragrunt",
+            "ArgoCD",
+            "Google Secret Manager",
+            "External Secrets",
+            "cert-manager",
+            "HAProxy",
+            "Kafka"
+          ],
+          "featured": true,
+          "publishedAt": "2025-11-01",
+          "challenge": "Design the multi-project cloud foundation for an AdTech platform handling several billion requests per day",
+          "impact": "Industrialised GCP landing zone, GitOps at scale, 3,000+ secrets migrated with zero downtime"
+        }
+      ]
+    }
+  }
+}

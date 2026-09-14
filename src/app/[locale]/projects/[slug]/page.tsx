@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
+import { getAllProjects, getProjectBySlug } from '@/lib/projects';
 import { ProjectDetailView } from '@/components/project/ProjectDetailView';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 
@@ -12,14 +12,18 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const locales = ['en', 'fr'];
-  
-  return locales.flatMap((locale) => {
-    const slugs = getProjectSlugs(locale);
-    return slugs.map((slug) => ({
-      locale,
-      slug,
-    }));
-  });
+
+  const params = await Promise.all(
+    locales.map(async (locale) => {
+      const projects = await getAllProjects(locale);
+      return projects.map((project) => ({
+        locale,
+        slug: project.slug,
+      }));
+    })
+  );
+
+  return params.flat();
 }
 
 export async function generateMetadata({ params }: PageProps) {

@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
-import { getProjectSlugs } from '@/lib/projects';
+import { getAllProjects } from '@/lib/projects';
 import { getBlogSlugs } from '@/lib/blog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://theclouds.dev';
 
   // Main pages for each locale
@@ -28,8 +28,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  // Get project slugs and generate URLs for project pages in all locales
-  const projectSlugs = getProjectSlugs('en'); // Get English slugs as reference
+  // Get project slugs and generate URLs for project pages in all locales.
+  // Sorted alphabetically to match the pre-migration readdirSync-based order
+  // (getAllProjects now returns publishedAt-descending order instead).
+  const projectSlugs = (await getAllProjects('en')).map((project) => project.slug).sort(); // Get English slugs as reference
   const projectUrls = routing.locales.flatMap((locale) =>
     projectSlugs.map((projectSlug) => ({
       url: `${baseUrl}/${locale}/projects/${projectSlug}`,

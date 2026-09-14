@@ -43,3 +43,6 @@ next-env.d.ts
 # claude
 .claude/
 .superpowers/
+
+# Build-time artifact fetched from profile-hub; never committed here.
+/profile.json
