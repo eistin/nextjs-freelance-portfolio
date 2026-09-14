@@ -14,6 +14,11 @@ export default async function HeroSection() {
       alt: tLogos("breteuil"),
     },
     {
+      key: "equativ",
+      src: "/logo_companies/equativ_logo.png",
+      alt: tLogos("equativ"),
+    },
+    {
       key: "lemonde",
       src: "/logo_companies/le_monde_logo.svg",
       alt: tLogos("lemonde"),
