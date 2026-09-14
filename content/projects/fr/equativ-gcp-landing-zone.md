@@ -1,16 +1,3 @@
----
-title: "Socle Cloud GCP Multi-Projets"
-category: "INFRASTRUCTURE"
-client: "Equativ"
-duration: "5 mois"
-teamSize: "Équipe plateforme, en support d'une dizaine d'équipes produit"
-technologies: ["Google Cloud Platform", "GKE", "Terraform", "Terragrunt", "ArgoCD", "Google Secret Manager", "External Secrets", "cert-manager", "HAProxy", "Kafka"]
-featured: true
-publishedAt: "2025-11-01"
-challenge: "Concevoir le socle Cloud multi-projets d'une plateforme AdTech traitant plusieurs milliards de requêtes par jour"
-impact: "Landing zone GCP industrialisée, GitOps à l'échelle, 3 000+ secrets migrés sans interruption"
----
-
 # Socle Cloud GCP Multi-Projets
 
 ## Le Défi

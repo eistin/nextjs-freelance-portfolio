@@ -1,16 +1,3 @@
----
-title: "On-Prem → GCP Migration at Scale"
-category: "MIGRATION"
-client: "Equativ"
-duration: "8 months"
-teamSize: "Cross-team programme lead, a dozen engineering teams"
-technologies: ["Google Cloud Platform", "GKE", "Cloud SQL", "Database Migration Service", "Terraform", "Terragrunt", "ArgoCD", "Kafka", "SQL Server", "PostgreSQL", "HAProxy"]
-featured: true
-publishedAt: "2026-03-01"
-challenge: "Migrate the client-facing services of an AdTech platform from on-premise to GCP with no service degradation"
-impact: "200+ applications migrated, SQL Server and PostgreSQL estates cut over, zero degradation on real-time traffic"
----
-
 # On-Prem → GCP Migration at Scale
 
 ## The Challenge

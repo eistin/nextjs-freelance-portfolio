@@ -1,16 +1,3 @@
----
-title: "Multi-Project GCP Cloud Foundation"
-category: "INFRASTRUCTURE"
-client: "Equativ"
-duration: "5 months"
-teamSize: "Platform team, supporting a dozen product teams"
-technologies: ["Google Cloud Platform", "GKE", "Terraform", "Terragrunt", "ArgoCD", "Google Secret Manager", "External Secrets", "cert-manager", "HAProxy", "Kafka"]
-featured: true
-publishedAt: "2025-11-01"
-challenge: "Design the multi-project cloud foundation for an AdTech platform handling several billion requests per day"
-impact: "Industrialised GCP landing zone, GitOps at scale, 3,000+ secrets migrated with zero downtime"
----
-
 # Multi-Project GCP Cloud Foundation
 
 ## The Challenge

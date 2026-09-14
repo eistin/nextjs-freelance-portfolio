@@ -1,16 +1,3 @@
----
-title: "Migration Database AWS vers GCP"
-category: "MIGRATION"
-client: "Nexelec"
-duration: "2 semaines"
-teamSize: "solo"
-technologies: ["Google Cloud Platform", "Cloud SQL", "Terraform", "MySQL", "Cloud Run", "IAM", "Secret Manager"]
-featured: true
-publishedAt: "2024-09-01"
-challenge: "Migrer l'infrastructure database AWS vers GCP avec synchronisation multi-usines"
-impact: "2 bases industrielles migrées, backup automatisé, infrastructure sécurisée"
----
-
 # Migration Database AWS vers GCP pour Nexelec
 
 ## Le Défi

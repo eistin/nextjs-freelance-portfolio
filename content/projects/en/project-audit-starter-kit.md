@@ -1,16 +1,3 @@
----
-title: "Project Audit & Starter Kit"
-category: "CONSULTING"
-client: "L'Oréal Paris"
-duration: "3 months"
-teamSize: "2 DevOps Engineers"
-technologies: ["Google Cloud Platform", "Terraform", "Docker", "Kubernetes", "GitLab CI", "Python", "React", "Node.js"]
-featured: true
-publishedAt: "2023-06-01"
-challenge: "Audit projects and create standardized deployment framework"
-impact: "15 Terraform modules, 4 boilerplate projects, standardized best practices"
----
-
 # Project Audit & Starter Kit for L'Oréal Paris
 
 ## The Challenge
