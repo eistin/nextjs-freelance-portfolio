@@ -41,9 +41,29 @@ describe('getAllProjects', () => {
     // Metadata (profile-hub) and markdown bodies (this repo) are decoupled,
     // so a mission can exist in the artifact with no corresponding .md file.
     // That must fail the build loudly rather than publish a blank page.
+    // The fixture's mission has caseStudy: true, so it still reaches
+    // toProject() and exercises the throw — the guard must not be weakened
+    // by the caseStudy filter.
     await expect(getAllProjects('fr', MISSING_MARKDOWN_FIXTURE)).rejects.toThrow(
       /no markdown body/,
     )
+  })
+
+  it('excludes platform-only missions (caseStudy: false)', async () => {
+    // The fixture carries a 20th mission "platform-only-mission" with
+    // caseStudy: false and no markdown file. If the filter did not exist
+    // (or ran too late), this mission would either appear in the output or
+    // throw the missing-markdown error. Neither should happen: it must be
+    // silently absent.
+    const projects = await getAllProjects('fr', FIXTURE)
+    expect(projects.find((p) => p.slug === 'platform-only-mission')).toBeUndefined()
+  })
+
+  it('never leaks caseStudy onto the public ProjectMetadata shape', async () => {
+    // toProject() builds ProjectMetadata by naming fields explicitly. This
+    // test fails if caseStudy is ever spread through instead.
+    const json = JSON.stringify(await getAllProjects('fr', FIXTURE))
+    expect(json).not.toContain('caseStudy')
   })
 })
 
@@ -56,5 +76,12 @@ describe('getProjectBySlug', () => {
 
   it('returns null for an unknown slug', async () => {
     expect(await getProjectBySlug('nope', 'fr', FIXTURE)).toBeNull()
+  })
+
+  it('returns null for a platform-only slug (caseStudy: false) rather than throwing', async () => {
+    // "platform-only-mission" has no markdown body. If getProjectBySlug did
+    // not filter on caseStudy, this would throw the missing-markdown error
+    // instead of behaving like an unknown slug.
+    expect(await getProjectBySlug('platform-only-mission', 'fr', FIXTURE)).toBeNull()
   })
 })
