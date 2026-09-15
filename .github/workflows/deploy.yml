@@ -10,6 +10,12 @@ permissions:
   contents: write
   packages: write
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  # Never cancel: a cancelled run could abort a mid-flight GHCR push, and the
+  # tag-bump commit that follows it would never happen.
+  cancel-in-progress: false
+
 env:
   IMAGE: ghcr.io/eistin/nextjs-freelance-portfolio
 
