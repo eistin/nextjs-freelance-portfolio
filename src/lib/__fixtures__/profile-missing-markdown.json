@@ -16,9 +16,9 @@
           }
         },
         "bio": {
-          "short": "Expert DevOps / SRE freelance, 10+ ans d'exp\u00e9rience en Kubernetes, GCP et Infrastructure as Code. J'aide les entreprises tech \u00e0 scaler une infrastructure fiable et automatis\u00e9e.",
-          "medium": "Bonjour, je suis Edwin Istin, Expert DevOps avec plus de 10 ans d'exp\u00e9rience aidant les entreprises tech \u00e0 surmonter leurs d\u00e9fis d'infrastructure avec des solutions personnalis\u00e9es et efficaces.",
-          "long": "Je suis Edwin Istin, un ing\u00e9nieur DevOps passionn\u00e9 avec plus de 10 ans d'exp\u00e9rience dans la cr\u00e9ation de solutions d'infrastructure fiables et \u00e9volutives. Mon parcours a d\u00e9but\u00e9 par la d\u00e9couverte des technologies de conteneurisation comme LXC et Docker, qui ont \u00e9veill\u00e9 ma profonde curiosit\u00e9 pour le monde DevOps. J'ai depuis d\u00e9velopp\u00e9 une expertise approfondie en Kubernetes, plateformes Cloud (notamment GCP), et outils Infrastructure-as-Code comme Terraform et Ansible. Je m'\u00e9panouis en r\u00e9solvant des d\u00e9fis d'infrastructure complexes et en aidant les entreprises \u00e0 scaler efficacement."
+          "short": "Expert DevOps / SRE freelance, 10+ ans d'expérience en Kubernetes, GCP et Infrastructure as Code. J'aide les entreprises tech à scaler une infrastructure fiable et automatisée.",
+          "medium": "Bonjour, je suis Edwin Istin, Expert DevOps avec plus de 10 ans d'expérience aidant les entreprises tech à surmonter leurs défis d'infrastructure avec des solutions personnalisées et efficaces.",
+          "long": "Je suis Edwin Istin, un ingénieur DevOps passionné avec plus de 10 ans d'expérience dans la création de solutions d'infrastructure fiables et évolutives. Mon parcours a débuté par la découverte des technologies de conteneurisation comme LXC et Docker, qui ont éveillé ma profonde curiosité pour le monde DevOps. J'ai depuis développé une expertise approfondie en Kubernetes, plateformes Cloud (notamment GCP), et outils Infrastructure-as-Code comme Terraform et Ansible. Je m'épanouis en résolvant des défis d'infrastructure complexes et en aidant les entreprises à scaler efficacement."
         },
         "skills": [
           {
@@ -87,7 +87,7 @@
           },
           {
             "id": "observability",
-            "label": "Observabilit\u00e9 (Prometheus, Grafana, Loki)",
+            "label": "Observabilité (Prometheus, Grafana, Loki)",
             "level": "advanced",
             "categories": [
               "sre"
@@ -103,7 +103,7 @@
           },
           {
             "id": "databases",
-            "label": "Migration de bases de donn\u00e9es (Cloud SQL, PostgreSQL, MySQL, SQL Server)",
+            "label": "Migration de bases de données (Cloud SQL, PostgreSQL, MySQL, SQL Server)",
             "level": "advanced",
             "categories": [
               "database"
@@ -135,22 +135,22 @@
           {
             "id": "infrastructure",
             "title": "Infrastructure as Code (IaC)",
-            "description": "Gagnez du temps et \u00e9vitez les erreurs manuelles avec une gestion de l'infrastructure enti\u00e8rement cod\u00e9e. Modules Terraform, organisation Terragrunt, et Ansible pour le d\u00e9ploiement de ressources idempotentes."
+            "description": "Gagnez du temps et évitez les erreurs manuelles avec une gestion de l'infrastructure entièrement codée. Modules Terraform, organisation Terragrunt, et Ansible pour le déploiement de ressources idempotentes."
           },
           {
             "id": "cicd",
             "title": "DevOps & CI/CD",
-            "description": "Simplifiez et automatisez vos processus de d\u00e9ploiement pour livrer vos applications plus rapidement et en toute s\u00e9curit\u00e9. GitLab CI, GitHub Actions, GitOps (ArgoCD, FluxCD), Docker, Kubernetes, et Helm."
+            "description": "Simplifiez et automatisez vos processus de déploiement pour livrer vos applications plus rapidement et en toute sécurité. GitLab CI, GitHub Actions, GitOps (ArgoCD, FluxCD), Docker, Kubernetes, et Helm."
           },
           {
             "id": "kubernetes",
             "title": "Site Reliability Engineering (SRE)",
-            "description": "Gardez le contr\u00f4le de vos performances gr\u00e2ce \u00e0 une surveillance proactive et des indicateurs de fiabilit\u00e9. Prometheus, Grafana, Loki, Victoria Metrics, et mise en place de SLO d'applications."
+            "description": "Gardez le contrôle de vos performances grâce à une surveillance proactive et des indicateurs de fiabilité. Prometheus, Grafana, Loki, Victoria Metrics, et mise en place de SLO d'applications."
           },
           {
             "id": "cloud",
             "title": "Google Cloud Platform (GCP)",
-            "description": "Concevez et mettez en place des architectures cloud sur mesure qui s'adaptent \u00e0 vos besoins actuels et futurs. D\u00e9finition d'architectures GCP, migration Kubernetes, et optimisation des co\u00fbts."
+            "description": "Concevez et mettez en place des architectures cloud sur mesure qui s'adaptent à vos besoins actuels et futurs. Définition d'architectures GCP, migration Kubernetes, et optimisation des coûts."
           }
         ],
         "engagement": {
@@ -173,7 +173,7 @@
             "start": "2025-08",
             "end": "2026-03"
           },
-          "teamSize": "Pilotage transverse d'une dizaine d'\u00e9quipes",
+          "teamSize": "Pilotage transverse d'une dizaine d'équipes",
           "technologies": [
             "Google Cloud Platform",
             "GKE",
@@ -189,8 +189,9 @@
           ],
           "featured": true,
           "publishedAt": "2026-03-01",
-          "challenge": "Migrer les services client-facing d'une plateforme AdTech depuis l'on-premise vers GCP sans d\u00e9gradation de service",
-          "impact": "200+ applications migr\u00e9es, bases SQL Server et PostgreSQL bascul\u00e9es, z\u00e9ro d\u00e9gradation sur le trafic temps r\u00e9el"
+          "challenge": "Migrer les services client-facing d'une plateforme AdTech depuis l'on-premise vers GCP sans dégradation de service",
+          "impact": "200+ applications migrées, bases SQL Server et PostgreSQL basculées, zéro dégradation sur le trafic temps réel",
+          "caseStudy": true
         }
       ]
     }

@@ -68,6 +68,7 @@ export async function getAllProjects(
   artifactPath: string = DEFAULT_ARTIFACT_PATH,
 ): Promise<Project[]> {
   return getMissions(locale, artifactPath)
+    .filter((m) => m.caseStudy)
     .map((m) => toProject(m, locale))
     .sort((a, b) => new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime());
 }
@@ -77,6 +78,6 @@ export async function getProjectBySlug(
   locale: string = 'en',
   artifactPath: string = DEFAULT_ARTIFACT_PATH,
 ): Promise<Project | null> {
-  const mission = getMissions(locale, artifactPath).find((m) => m.slug === slug);
+  const mission = getMissions(locale, artifactPath).find((m) => m.slug === slug && m.caseStudy);
   return mission ? toProject(mission, locale) : null;
 }

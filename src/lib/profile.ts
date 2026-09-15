@@ -35,6 +35,7 @@ export interface MissionMetadata {
   publishedAt: string;
   challenge: string;
   impact: string;
+  caseStudy: boolean;
 }
 
 interface Artifact {
