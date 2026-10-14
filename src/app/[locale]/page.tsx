@@ -46,7 +46,7 @@ export default async function HomePage({ params }: Props) {
         </div>
 
         {/* Testimonials Section - With background */}
-        <div className="py-20 px-6 bg-muted/30">
+        <div id="testimonials" className="py-20 px-6 bg-muted/30 scroll-mt-20">
           <TestimonialsSection testimonials={testimonials} />
         </div>
 

@@ -42,7 +42,7 @@ export default function Header({ name, tagline }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems = ["home", "services", "projects", "about", "contact"];
+  const navItems = ["home", "services", "projects", "testimonials", "about", "contact"];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
