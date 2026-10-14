@@ -21,4 +21,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/eistin/nextjs-freelance-portfolio
-    newTag: c690a79b334aa3e2652cc8a0c11175121f3ae6ae
+    newTag: 2fb978126e72639d7766843b34cab67625dd0c59
