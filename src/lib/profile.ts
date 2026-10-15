@@ -3,6 +3,7 @@ import path from 'path';
 
 export interface Skill { id: string; label: string; level: string; categories: string[] }
 export interface Service { id: string; title: string; description: string }
+export interface Stat { id: string; value: string; label: string }
 
 export interface PortfolioProfile {
   identity: {
@@ -18,7 +19,7 @@ export interface PortfolioProfile {
     availability: { status: string; from: string; daysPerWeek: number };
     remote: string;
   };
-  stats: { experience: string; projects: string; satisfaction: string };
+  stats: Stat[];
   services: Service[];
 }
 

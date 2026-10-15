@@ -74,18 +74,7 @@
     }
   },
   "about": {
-    "title": "À PROPOS DE MOI",
-    "stats": {
-      "experience": {
-        "label": "Années d'expérience"
-      },
-      "projects": {
-        "label": "Projets complétés"
-      },
-      "satisfaction": {
-        "label": "Satisfaction client"
-      }
-    }
+    "title": "À PROPOS DE MOI"
   },
   "contact": {
     "title": "ME CONTACTER",

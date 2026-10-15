@@ -74,18 +74,7 @@
     }
   },
   "about": {
-    "title": "ABOUT ME",
-    "stats": {
-      "experience": {
-        "label": "Years Of Experience"
-      },
-      "projects": {
-        "label": "Complete Projects"
-      },
-      "satisfaction": {
-        "label": "Client Satisfaction"
-      }
-    }
+    "title": "ABOUT ME"
   },
   "contact": {
     "title": "CONTACT ME",

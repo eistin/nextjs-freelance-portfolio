@@ -126,11 +126,18 @@
             ]
           }
         ],
-        "stats": {
-          "experience": "10+",
-          "projects": "20+",
-          "satisfaction": "100%"
-        },
+        "stats": [
+          {
+            "id": "experience",
+            "value": "10+",
+            "label": "Années d'expérience"
+          },
+          {
+            "id": "missions",
+            "value": "20",
+            "label": "Missions livrées"
+          }
+        ],
         "services": [
           {
             "id": "infrastructure",
