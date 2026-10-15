@@ -3,7 +3,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Star } from "lucide-react";
+import { Linkedin, Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { type Testimonial } from "@/lib/testimonials";
 
 interface TestimonialCardProps {
@@ -12,6 +13,7 @@ interface TestimonialCardProps {
 }
 
 export function TestimonialCard({ testimonial, variant }: TestimonialCardProps) {
+  const t = useTranslations("testimonials");
   const isDesktop = variant === "desktop";
 
   const cardSize = isDesktop
@@ -43,7 +45,7 @@ export function TestimonialCard({ testimonial, variant }: TestimonialCardProps) 
             {/* Testimonial Content */}
             <blockquote className={`text-sm ${quoteMargin} text-muted-foreground flex-grow overflow-hidden`}>
               <div className={quoteClamp}>
-                &ldquo;{testimonial.content}&rdquo;
+                &ldquo;{testimonial.content.trim()}&rdquo;
               </div>
             </blockquote>
 
@@ -77,9 +79,23 @@ export function TestimonialCard({ testimonial, variant }: TestimonialCardProps) 
               </AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="font-semibold text-lg">
-                {testimonial.metadata.name}
-              </h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-semibold text-lg">
+                  {testimonial.metadata.name}
+                </h3>
+                {testimonial.metadata.linkedin && (
+                  <a
+                    href={testimonial.metadata.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    aria-label={t("viewLinkedIn", { name: testimonial.metadata.name })}
+                    title={t("viewLinkedIn", { name: testimonial.metadata.name })}
+                    className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-sm"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
               <p className="text-sm text-muted-foreground">
                 {testimonial.metadata.role} • {testimonial.metadata.company}
               </p>
@@ -99,8 +115,10 @@ export function TestimonialCard({ testimonial, variant }: TestimonialCardProps) 
           </div>
 
           {/* Full Testimonial Content */}
-          <blockquote className="text-base text-muted-foreground leading-relaxed">
-            &ldquo;{testimonial.content}&rdquo;
+          {/* pre-line: some testimonials are multi-paragraph with bullet lists,
+              and the raw markdown body is rendered as text, not parsed. */}
+          <blockquote className="text-base text-muted-foreground leading-relaxed whitespace-pre-line">
+            &ldquo;{testimonial.content.trim()}&rdquo;
           </blockquote>
         </div>
       </DialogContent>

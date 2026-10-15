@@ -5,6 +5,7 @@ company: "Nexelec"
 featured: true
 avatar: "/testimonials/loic.jpg"
 rating: 5
+linkedin: "https://www.linkedin.com/in/lo%C3%AFc-quinquis-6841869b/"
 ---
 
 I had the chance to collaborate with Edwin on several Cloud & DevOps projects (GCP, Terraform, Docker, GitHub, CI/CD, PostgreSQL).

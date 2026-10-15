@@ -6,6 +6,7 @@ featured: true
 avatar: "/testimonials/kylian.jpg"
 rating: 5
 publishedAt: "2024-09-03"
+linkedin: "https://www.linkedin.com/in/kylian-colson/"
 ---
 
 J'ai travaillé avec Edwin sur plusieurs projets au cours des dernières années. C'est un développeur consciencieux qui fournit systématiquement les solutions les plus précises et les mieux adaptées. Rigoureux et pragmatique, il ne se contente pas de coder—j'ai été témoin de son véritable intérêt pour la conception et l'architecture de solutions complètes.

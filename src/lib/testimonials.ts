@@ -10,6 +10,8 @@ export interface TestimonialMetadata {
   avatar: string;
   rating: number;
   publishedAt: string;
+  /** Profile URL of the author, shown as a LinkedIn link in the dialog. Optional: not every author has one. */
+  linkedin?: string;
 }
 
 export interface Testimonial {
@@ -20,9 +22,13 @@ export interface Testimonial {
 
 const testimonialsDirectory = path.join(process.cwd(), 'content/testimonials');
 
-export async function getTestimonialBySlug(slug: string, locale: string = 'en'): Promise<Testimonial | null> {
+export async function getTestimonialBySlug(
+  slug: string,
+  locale: string = 'en',
+  baseDir: string = testimonialsDirectory
+): Promise<Testimonial | null> {
   try {
-    const fullPath = path.join(testimonialsDirectory, locale, `${slug}.md`);
+    const fullPath = path.join(baseDir, locale, `${slug}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
@@ -34,22 +40,25 @@ export async function getTestimonialBySlug(slug: string, locale: string = 'en'):
   } catch {
     // Fallback to English if the requested locale doesn't exist
     if (locale !== 'en') {
-      return getTestimonialBySlug(slug, 'en');
+      return getTestimonialBySlug(slug, 'en', baseDir);
     }
     return null;
   }
 }
 
-export async function getAllTestimonials(locale: string = 'en'): Promise<Testimonial[]> {
+export async function getAllTestimonials(
+  locale: string = 'en',
+  baseDir: string = testimonialsDirectory
+): Promise<Testimonial[]> {
   try {
-    const localeDirectory = path.join(testimonialsDirectory, locale);
+    const localeDirectory = path.join(baseDir, locale);
     const fileNames = fs.readdirSync(localeDirectory);
     const testimonials = await Promise.all(
       fileNames
         .filter((name) => name.endsWith('.md'))
         .map(async (name) => {
           const slug = name.replace(/\.md$/, '');
-          return getTestimonialBySlug(slug, locale);
+          return getTestimonialBySlug(slug, locale, baseDir);
         })
     );
 
@@ -59,7 +68,7 @@ export async function getAllTestimonials(locale: string = 'en'): Promise<Testimo
   } catch {
     // Fallback to English if locale directory doesn't exist
     if (locale !== 'en') {
-      return getAllTestimonials('en');
+      return getAllTestimonials('en', baseDir);
     }
     return [];
   }

@@ -36,7 +36,8 @@
   },
   "testimonials": {
     "title": "TÉMOIGNAGES",
-    "verifiedClient": "Client Vérifié"
+    "verifiedClient": "Client Vérifié",
+    "viewLinkedIn": "Voir le profil LinkedIn de {name}"
   },
   "stories": {
     "title": "ARTICLES",

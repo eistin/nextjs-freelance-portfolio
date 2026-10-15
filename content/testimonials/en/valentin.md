@@ -6,6 +6,7 @@ featured: true
 avatar: "/testimonials/valentin.png"
 rating: 5
 publishedAt: "2024-09-04"
+linkedin: "https://www.linkedin.com/in/valentin-dosimont-228025b6/"
 ---
 
 I contacted Edwin to review an infrastructure that we had built ourselves as part of a migration from Amazon ECS to Kubernetes.
