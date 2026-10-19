@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS analytics_event (
   source        text,                   -- 'linkedin' | 'google' | 'direct' | 'malt' | host | 'other'
   referrer_host text,                   -- raw host, null when direct or same-origin
   device        text,                   -- 'desktop' | 'mobile' | 'tablet'
-  element       text,                   -- kind='click' only, e.g. 'contact_cta'
+  element       text,                   -- kind='click' only, e.g. 'hero_cta'
   dwell_ms      integer                 -- kind='leave' only, visible time on that page
 );
 
@@ -218,9 +218,14 @@ Three event kinds:
 
 - **view**: on first load and on every client-side route change. Carries path,
   locale, and `document.referrer`.
-- **click**: on named elements only. The existing `trackButtonClick` calls
-  already name them (`contact_cta`, `github_link`, and so on); any element
-  without a name is not tracked.
+- **click**: on named elements only; any element without a name is not tracked.
+  Instrumentation is thin and that is a known gap rather than an oversight. At
+  the time of writing the named elements are the three contact links
+  (`linkedin`, `github`, `downloadCv`), the hero's primary call to action
+  (`hero_cta`), and the contact form, whose `trackFormEvent` calls reach the
+  collector as `form_submit` and `form_error`. The navigation, the project
+  cards and the blog links are deliberately not instrumented yet, so panel 8
+  reads as incomplete coverage rather than as absent engagement.
 - **leave**: when the page is hidden or replaced, carrying visible time on that
   page. Sent with `navigator.sendBeacon` so it survives unload. Visible time
   accumulates only while `document.visibilityState === 'visible'`, so a tab left
