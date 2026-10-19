@@ -289,7 +289,7 @@ Pure, no database, no I/O. Reads `cf-connecting-ip`, `cf-ipcountry`, `user-agent
 - [ ] **Step 4: Run the tests and verify they pass**
 
 Run: `npx vitest run src/lib/analytics/event.test.ts`
-Expected: PASS, 15 tests
+Expected: PASS, all tests
 
 - [ ] **Step 5: Implement `src/lib/analytics/db.ts`**
 
@@ -387,7 +387,7 @@ Nothing here is applied by hand. ArgoCD syncs it.
 
 - [ ] **Step 1: Write `deploy/postgres.yaml`**
 
-Copy the `hixels/deploy/postgres.yaml` shape: `instances: 1`, `storage.size: 5Gi`, requests `cpu: 100m` / `memory: 192Mi`, limit `memory: 384Mi` (below hixels because this database is tiny and the node is tight). Carry the `argocd.argoproj.io/sync-options: Prune=false` annotation and its comment: there are no backups. Declare the application database `analytics`, its owner role, and a second read-only role via `spec.managed.roles`, both drawing passwords from `portfolio-secrets`.
+Copy the `hixels/deploy/postgres.yaml` shape: `instances: 1`, `storage.size: 5Gi`, requests `cpu: 100m` / `memory: 192Mi`, limit `memory: 384Mi` (below hixels because this database is tiny and the node is tight). Carry the `argocd.argoproj.io/sync-options: Prune=false` annotation and its comment: there are no backups. Declare the application database `analytics`, its owner role `portfolio_app`, and a second read-only role `grafana_ro` via `spec.managed.roles`, both drawing passwords from `portfolio-secrets`. `grafana_ro` gets `CONNECT` on the database, `USAGE` on `public`, and `SELECT` on `analytics_event` only. These three names are fixed: Tasks 7 and 8 depend on them verbatim.
 
 - [ ] **Step 2: Generate the secrets and encrypt them**
 
@@ -435,15 +435,24 @@ git commit -m "feat(deploy): add portfolio-db and analytics retention"
 
 - [ ] **Step 1: Encrypt the read-only password into the monitoring namespace**
 
-Same value as Task 6, as a Secret named `analytics-db-readonly` with key `password`. Register it in the monitoring `kustomization.yaml` secret generator.
+The value must be the one Task 6 already generated, and it must never be pasted anywhere. Read it from the portfolio worktree with `sops -d` and pipe it straight into the new SOPS file for this repo:
+
+```bash
+export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
+# read the grafana_ro password out of the portfolio repo's encrypted secret,
+# write it into a Secret named analytics-db-readonly (key: password) in the
+# monitoring namespace, and encrypt that file in place with sops.
+```
+
+Do not print the value, do not include it in your report, and do not write it to any unencrypted file. Register the new file in the monitoring `kustomization.yaml` secret generator beside the existing one.
 
 - [ ] **Step 2: Add the datasource and the env block to `grafana.yaml`**
 
-A second entry under `datasources.datasources.yaml.datasources`: type `grafana-postgresql-datasource`, uid `portfolio-analytics`, url `portfolio-db-rw.portfolio.svc:5432`, database `analytics`, user the read-only role, `secureJsonData.password: $ANALYTICS_DB_PASSWORD`, `jsonData.sslmode: require`, and `isDefault` absent so VictoriaMetrics stays default. Then add an `env` block to the Helm `valuesObject` reading `ANALYTICS_DB_PASSWORD` from that Secret. No `env` block exists today, so this is a new key.
+A second entry under `datasources.datasources.yaml.datasources`: type `grafana-postgresql-datasource`, uid `portfolio-analytics`, url `portfolio-db-rw.portfolio.svc:5432`, database `analytics`, user `grafana_ro`, `secureJsonData.password: $ANALYTICS_DB_PASSWORD`, `jsonData.sslmode: require`, and `isDefault` absent so VictoriaMetrics stays default. Then add an `env` block to the Helm `valuesObject` reading `ANALYTICS_DB_PASSWORD` from that Secret. No `env` block exists today, so this is a new key.
 
 - [ ] **Step 3: Verify the manifests render and no plaintext leaked**
 
-Run: `cd stini-cluster && kustomize build argocd/base > /dev/null && kustomize build argocd/monitoring > /dev/null && echo OK`
+Run: `cd stini-cluster && export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt" && kustomize build argocd/base > /dev/null && kustomize build --enable-alpha-plugins --enable-exec argocd/monitoring > /dev/null && echo OK`
 Expected: `OK`
 
 - [ ] **Step 4: Commit**
@@ -484,7 +493,7 @@ Add the file to `configMapGenerator.files` in the monitoring kustomization, besi
 
 - [ ] **Step 5: Verify it renders**
 
-Run: `cd stini-cluster && kustomize build argocd/monitoring > /dev/null && echo OK`
+Run: `cd stini-cluster && export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt" && kustomize build --enable-alpha-plugins --enable-exec argocd/monitoring > /dev/null && echo OK`
 Expected: `OK`
 
 - [ ] **Step 6: Commit**
