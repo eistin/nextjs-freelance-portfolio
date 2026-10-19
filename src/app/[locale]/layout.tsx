@@ -9,6 +9,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { Metadata } from "next";
 import Script from "next/script";
 import { GA_MEASUREMENT_ID } from "@/lib/gtag";
+import { AnalyticsPageview } from "@/components/AnalyticsPageview";
 
 const archivGrotesk = localFont({
   src: [
@@ -160,28 +161,34 @@ export default async function LocaleLayout({
         <StructuredData locale={locale} />
         {/* Preload logo to eliminate 6s load delay */}
         <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" fetchPriority="high" />
+        {/* Google Analytics: the dataLayer shim is defined during parse so
+            calls queue up until the lazily loaded library processes them.
+            send_page_view is off because AnalyticsPageview sends every view,
+            including the first one. */}
+        {GA_MEASUREMENT_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
+              `,
+            }}
+          />
+        )}
       </head>
       <body className={`${archivGrotesk.variable} font-sans`}>
-        {/* Google Analytics */}
         {GA_MEASUREMENT_ID && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
               strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="lazyOnload">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}', {
-                  page_path: window.location.pathname,
-                });
-              `}
-            </Script>
+            <AnalyticsPageview />
           </>
         )}
-        
+
         <NextIntlClientProvider>
           <ServiceProvider>
             {children}
