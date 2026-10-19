@@ -8,6 +8,11 @@ metadata:
     # precious. A rename/refactor must still never auto-prune it, because
     # pruning would drop the volume and all history with it.
     argocd.argoproj.io/sync-options: Prune=false
+    # TEMPORARY, to be reverted in the next commit. Proves the anti-goal that
+    # the collector never degrades the website: with the database hibernated,
+    # the site must still serve and /api/collect must still answer 204.
+    # Hibernation keeps the volume, unlike scaling to zero.
+    cnpg.io/hibernation: "on"
 spec:
   instances: 1
   storage:
