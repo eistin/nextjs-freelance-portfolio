@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Build-time artifact fetched from profile-hub; never committed here.
 /profile.json
+
+# git worktrees for isolated feature work
+.worktrees/
