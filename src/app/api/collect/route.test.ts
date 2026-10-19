@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 
 // The one justified mock: there is no test database, and the database-down
 // path is the headline guarantee.
@@ -32,6 +32,12 @@ function req(
 }
 
 const good = { kind: 'view', path: '/en', locale: 'en' }
+
+afterEach(() => {
+  // Without this each beforeEach re-wraps the previous console spy and
+  // mock.calls accumulates across the whole file.
+  vi.restoreAllMocks()
+})
 
 beforeEach(() => {
   insertEvent.mockReset()
@@ -99,10 +105,34 @@ describe('POST /api/collect', () => {
     expect(res.status).toBe(204)
   })
 
-  test('ensureSchema throwing: still 204', async () => {
-    ensureSchema.mockRejectedValue(new Error('db down'))
-    const res = await POST(req({ ...good, path: '/schema-down' }))
-    expect(res.status).toBe(204)
+  // schemaReady is memoised at module level, so these need a fresh module
+  // instance or the first passing test would short-circuit ensureSchema.
+  describe('schema bootstrap (fresh module per test)', () => {
+    async function freshPost() {
+      vi.resetModules()
+      return (await import('./route')).POST
+    }
+
+    test('ensureSchema rejecting: 204, the rejection really ran, no insert', async () => {
+      ensureSchema.mockRejectedValue(new Error('db down'))
+      const post = await freshPost()
+      const res = await post(req(good))
+      expect(res.status).toBe(204)
+      expect(ensureSchema).toHaveBeenCalledTimes(1)
+      expect(insertEvent).not.toHaveBeenCalled()
+    })
+
+    test('a failed bootstrap is retried so the next request recovers', async () => {
+      ensureSchema.mockRejectedValueOnce(new Error('db down'))
+      const post = await freshPost()
+      expect((await post(req(good))).status).toBe(204)
+      expect(insertEvent).not.toHaveBeenCalled()
+
+      const res = await post(req(good))
+      expect(res.status).toBe(204)
+      expect(ensureSchema).toHaveBeenCalledTimes(2)
+      expect(insertEvent).toHaveBeenCalledTimes(1)
+    })
   })
 
   test('errors are logged without the ip or user agent', async () => {
