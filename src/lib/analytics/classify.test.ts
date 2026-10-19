@@ -1,10 +1,15 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import {
   classifySource,
   deviceFromUserAgent,
   isBot,
   normalisePath,
 } from "./classify";
+
+// A locale list that differs from the real one, to prove normalisePath reads it.
+vi.mock("@/i18n/routing", () => ({
+  routing: { locales: ["fr", "en", "de"] },
+}));
 
 const FIREFOX =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:128.0) Gecko/20100101 Firefox/128.0";
@@ -73,6 +78,20 @@ describe("deviceFromUserAgent", () => {
 
   test("buckets a desktop as desktop", () => {
     expect(deviceFromUserAgent(FIREFOX)).toBe("desktop");
+  });
+
+  test("buckets an Android tablet (no Mobile token) as tablet", () => {
+    expect(
+      deviceFromUserAgent(
+        "Mozilla/5.0 (Linux; Android 13; SM-X700) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
+      ),
+    ).toBe("tablet");
+  });
+
+  test("buckets an explicit tablet token as tablet", () => {
+    expect(deviceFromUserAgent("Mozilla/5.0 (X11; Linux) Tablet Browser/1.0")).toBe(
+      "tablet",
+    );
   });
 
   test("falls back to desktop for an unrecognised agent", () => {
@@ -144,6 +163,26 @@ describe("classifySource", () => {
     });
   });
 
+  test("strips www. from an unknown host source but keeps it in referrerHost", () => {
+    expect(classifySource("https://www.example.org/post", null)).toEqual({
+      source: "example.org",
+      referrerHost: "www.example.org",
+    });
+  });
+
+  test("www.edwindev.cloud is same-origin and direct", () => {
+    expect(classifySource("https://www.edwindev.cloud/blog", null)).toEqual({
+      source: "direct",
+      referrerHost: null,
+    });
+  });
+
+  test("same-origin referrer with utm_source: utm wins, host is null", () => {
+    expect(
+      classifySource("https://edwindev.cloud/blog", "newsletter"),
+    ).toEqual({ source: "newsletter", referrerHost: null });
+  });
+
   test("utm_source wins over the referrer", () => {
     expect(
       classifySource("https://www.google.fr/", "newsletter"),
@@ -169,6 +208,10 @@ describe("normalisePath", () => {
 
   test("strips the en locale prefix", () => {
     expect(normalisePath("/en/blog")).toBe("/blog");
+  });
+
+  test("reads the locale list from routing, not a hardcoded pair", () => {
+    expect(normalisePath("/de/blog")).toBe("/blog");
   });
 
   test("leaves an unprefixed path alone", () => {
