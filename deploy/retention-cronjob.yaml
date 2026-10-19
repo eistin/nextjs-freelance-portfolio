@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: analytics-retention
+  namespace: portfolio
+spec:
+  schedule: "17 3 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: retention
+              image: ghcr.io/cloudnative-pg/postgresql:17
+              command:
+                - psql
+                - -v
+                - ON_ERROR_STOP=1
+                - -h
+                - portfolio-db-rw.portfolio.svc
+                - -U
+                - portfolio_app
+                - -d
+                - analytics
+                - -c
+                - "DELETE FROM analytics_event WHERE at < now() - interval '24 months'"
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: portfolio-db-app
+                      key: password
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 32Mi
+                limits:
+                  memory: 128Mi

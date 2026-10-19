@@ -1,0 +1,53 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: portfolio-db
+  namespace: portfolio
+  annotations:
+    # No backups exist for this database, by decision: analytics data is not
+    # precious. A rename/refactor must still never auto-prune it, because
+    # pruning would drop the volume and all history with it.
+    argocd.argoproj.io/sync-options: Prune=false
+spec:
+  instances: 1
+  storage:
+    size: 5Gi
+  # Smaller than hixels-db: this database is tiny and the node is tight.
+  resources:
+    requests:
+      cpu: 100m
+      memory: 192Mi
+    limits:
+      memory: 384Mi
+  bootstrap:
+    initdb:
+      database: analytics
+      owner: portfolio_app
+      # Password for the owner role comes from a basic-auth Secret
+      # (CNPG reads the username and password keys from it).
+      secret:
+        name: portfolio-db-app
+      # Runs once, as superuser inside "analytics", at database creation. The
+      # application creates analytics_event later, at its first startup, so a
+      # plain GRANT SELECT ON analytics_event would fail here (no such table).
+      # Default privileges solve the ordering: every table portfolio_app
+      # creates in schema public from now on is selectable by grafana_ro.
+      # The role is created here, NOLOGIN, because managed roles are only
+      # reconciled after the cluster is up; the managed entry below then
+      # adopts it and sets LOGIN plus the password.
+      postInitApplicationSQL:
+        - CREATE ROLE grafana_ro NOLOGIN
+        - GRANT CONNECT ON DATABASE analytics TO grafana_ro
+        - GRANT USAGE ON SCHEMA public TO grafana_ro
+        - ALTER DEFAULT PRIVILEGES FOR ROLE portfolio_app IN SCHEMA public GRANT SELECT ON TABLES TO grafana_ro
+  managed:
+    roles:
+      - name: grafana_ro
+        ensure: present
+        login: true
+        superuser: false
+        createdb: false
+        createrole: false
+        inherit: true
+        passwordSecret:
+          name: portfolio-db-grafana-ro
