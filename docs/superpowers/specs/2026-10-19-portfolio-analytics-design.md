@@ -407,13 +407,45 @@ and must be updated in the same commit, or it will mislead the next reader.
 This is not retroactive: history older than the current 30-day window is already
 gone.
 
+## Live verification, 2026-10-19
+
+Deployed and checked against the real cluster on the day of the merge:
+
+- `portfolio-db` healthy, schema created by the app on first request:
+  `analytics_event` plus all three indexes.
+- A request through Cloudflare returned 204 and wrote one row. **The row
+  existing at all proves `CF-Connecting-IP` arrived**, because the collector
+  drops the event when that header is absent.
+- `country` came back as `FR`, so Cloudflare IP Geolocation is enabled on the
+  zone and panel 11 has data. This was an open question at design time.
+- No IP and no user agent in any column, checked by regex across every text
+  field of the row.
+- `grafana_ro` on the live database: `SELECT` works, `INSERT` and `DELETE` are
+  both refused. The `ALTER DEFAULT PRIVILEGES` ordering works against a table
+  created later by `portfolio_app`, as it did in the pre-merge Docker test.
+- Grafana holds `ANALYTICS_DB_PASSWORD` in its environment and logged
+  `inserting datasource from configuration name=portfolio-analytics`.
+- Node memory 66% to 68% after adding a third Postgres instance. The portfolio
+  pod measures **79Mi against its 320Mi limit** with the `pg` pool loaded, so
+  that limit is generous rather than tight.
+
+**Still owed:** the two-network session id check. Visiting from two different
+networks must produce two different `session_id` values. Everything above is
+consistent with it passing, but until it is done, panel 1 is unverified rather
+than trusted.
+
 ## Retiring GA
 
 GA stays exactly as it is for now, which costs nothing because it already works.
-After about a month of both running:
 
-1. Compare GA's visitor count for a full month against panel 1 for the same
-   month. The difference is the ad-blocked fraction, and it is worth knowing once.
+**Compare on or after 2026-11-19**, one month after the merge. Then:
+
+1. Compare GA's **users** against panel 1 **visitors** for the same month. Do
+   NOT compare page views: the GA tag fires a `page_view` on query-string
+   changes while the first-party tracker deliberately does not, since
+   `normalisePath` strips the query and firing twice would double-count every
+   UTM-tagged arrival. Comparing page views would understate the ad-blocked
+   fraction for reasons unrelated to ad blocking.
 2. Then remove GA: the inline shim and `<Script>` in
    `src/app/[locale]/layout.tsx`, `src/lib/gtag.ts`, its tests, the GA branch of
    `src/lib/analytics.ts`, `NEXT_PUBLIC_GA_MEASUREMENT_ID` from the Dockerfile,
