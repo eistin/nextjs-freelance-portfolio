@@ -15,7 +15,22 @@ function getPool(): Pool | null {
     return null
   }
   // max 4: sized for a single replica.
-  pool ??= new Pool({ connectionString: url, max: 4 })
+  if (!pool) {
+    // Timeouts keep a blackholed database from pinning requests and pg's
+    // queue until the OS TCP timeout.
+    pool = new Pool({
+      connectionString: url,
+      max: 4,
+      connectionTimeoutMillis: 3000,
+      query_timeout: 5000,
+      statement_timeout: 5000,
+    })
+    // An idle client dying (database restart, failover) emits 'error' outside
+    // any request. Without a listener Node treats it as an uncaught exception.
+    pool.on('error', (err) => {
+      console.error('analytics: idle client error:', err.message)
+    })
+  }
   return pool
 }
 

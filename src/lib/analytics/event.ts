@@ -27,6 +27,8 @@ const MAX_DWELL_MS = 1_800_000
 /** Longest raw url we will parse; anything longer is junk or an attack. */
 const MAX_RAW_URL = 2048
 const MAX_PATH = 256
+/** A DNS hostname is at most 253 characters; the URL parser accepts far more. */
+const MAX_HOST = 253
 /**
  * Real campaign names are short ("newsletter", "linkedin", "malt"). 32 keeps
  * every plausible label whole while bounding what a forged request can store.
@@ -119,7 +121,12 @@ export function buildEvent(
   // The browser sends document.referrer in the body; the Referer header of the
   // beacon itself is our own page, so it is only a fallback.
   const referrer = str(b.referrer) ?? headers.get('referer')
-  const { source, referrerHost } = classifySource(referrer, utmSourceFrom(rawPath))
+  const classified = classifySource(
+    referrer !== null && referrer.length <= MAX_RAW_URL ? referrer : null,
+    utmSourceFrom(rawPath),
+  )
+  const source = classified.source.slice(0, MAX_HOST)
+  const referrerHost = classified.referrerHost?.slice(0, MAX_HOST) ?? null
 
   return {
     sessionId: sessionId(ip, userAgent, now, secret),

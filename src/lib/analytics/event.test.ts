@@ -55,7 +55,15 @@ describe('buildEvent', () => {
   })
 
   test('drops the event when CF-Connecting-IP is absent', () => {
-    expect(buildEvent(headers({ 'cf-connecting-ip': null }), view, NOW, SECRET)).toBeNull()
+    // x-forwarded-for must never stand in for it: its index depends on hop count.
+    expect(
+      buildEvent(
+        headers({ 'cf-connecting-ip': null, 'x-forwarded-for': '198.51.100.9' }),
+        view,
+        NOW,
+        SECRET,
+      ),
+    ).toBeNull()
   })
 
   test('drops the event when the user agent is a bot', () => {
@@ -130,6 +138,17 @@ describe('buildEvent', () => {
 
   test('nulls a locale that is not a supported one', () => {
     expect(buildEvent(headers(), { ...view, locale: 'zz' }, NOW, SECRET)?.locale).toBeNull()
+  })
+
+  test('caps an over-long referrer so no field is unbounded', () => {
+    const row = buildEvent(
+      headers(),
+      { ...view, referrer: 'https://' + 'a'.repeat(70_000) + '.com/' },
+      NOW,
+      SECRET,
+    )
+    expect((row?.referrerHost ?? '').length).toBeLessThanOrEqual(253)
+    expect((row?.source ?? '').length).toBeLessThanOrEqual(253)
   })
 
   describe('utm_source bounding', () => {

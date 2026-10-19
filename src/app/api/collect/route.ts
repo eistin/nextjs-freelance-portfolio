@@ -1,29 +1,38 @@
 import { ensureSchema, insertEvent } from '@/lib/analytics/db'
+import { createRateLimiter } from '@/lib/analytics/ratelimit'
 import { buildEvent, isUsableSecret } from '@/lib/analytics/event'
 
 // pg needs Node APIs and cannot run on the edge runtime.
 export const runtime = 'nodejs'
 
-const LIMIT_PER_HOUR = 300
-const WINDOW_MS = 3_600_000
-const hits = new Map<string, number[]>()
+const limiter = createRateLimiter({
+  limit: 300,
+  windowMs: 3_600_000,
+  maxKeys: 10_000,
+})
 
-/** In-process rolling window per session id; true when the event is allowed. */
-function allow(id: string, nowMs: number): boolean {
-  // Opportunistic sweep so the map cannot grow without bound.
-  if (hits.size > 10_000) {
-    for (const [k, ts] of hits) {
-      if (ts[ts.length - 1] < nowMs - WINDOW_MS) hits.delete(k)
+/** A real event is a few hundred bytes; 8 KB is generous and bounds memory. */
+const MAX_BODY_BYTES = 8192
+
+/** Reads the body up to the cap; null when it is larger. Never buffers more. */
+async function readBounded(request: Request): Promise<string | null> {
+  const declared = Number(request.headers.get('content-length'))
+  if (Number.isFinite(declared) && declared > MAX_BODY_BYTES) return null
+  if (!request.body) return ''
+  const reader = request.body.getReader()
+  const chunks: Uint8Array[] = []
+  let total = 0
+  for (;;) {
+    const { done, value } = await reader.read()
+    if (done) break
+    total += value.byteLength
+    if (total > MAX_BODY_BYTES) {
+      await reader.cancel().catch(() => {})
+      return null
     }
+    chunks.push(value)
   }
-  const recent = (hits.get(id) ?? []).filter((t) => t > nowMs - WINDOW_MS)
-  if (recent.length >= LIMIT_PER_HOUR) {
-    hits.set(id, recent)
-    return false
-  }
-  recent.push(nowMs)
-  hits.set(id, recent)
-  return true
+  return Buffer.concat(chunks).toString('utf8')
 }
 
 let secretWarned = false
@@ -45,7 +54,9 @@ export async function POST(request: Request): Promise<Response> {
 
     let body: unknown
     try {
-      body = await request.json()
+      const text = await readBounded(request)
+      if (text === null) return new Response(null, { status: 204 })
+      body = JSON.parse(text)
     } catch {
       return new Response(null, { status: 204 })
     }
@@ -57,7 +68,7 @@ export async function POST(request: Request): Promise<Response> {
       now,
       secret,
     )
-    if (!row || !allow(row.sessionId, now.getTime())) {
+    if (!row || !limiter.allow(row.sessionId, now.getTime())) {
       return new Response(null, { status: 204 })
     }
 
