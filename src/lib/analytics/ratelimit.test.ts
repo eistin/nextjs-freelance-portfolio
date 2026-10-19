@@ -21,6 +21,17 @@ describe('createRateLimiter', () => {
     expect(rl.allow('a', 2000)).toBe(true)
   })
 
+  test('a key stores a fixed-size record however many requests it makes', () => {
+    // The guard that matters for memory: 10,000 keys times an unbounded
+    // per-key payload is what can OOMKill the pod. Keeping timestamps here
+    // would make this serialisation grow without limit.
+    const rl = createRateLimiter({ limit: 10_000, windowMs: 1000, maxKeys: 100 })
+    for (let i = 0; i < 5000; i++) rl.allow('a', 1)
+    expect(Object.keys(rl.peek('a') ?? {}).sort()).toEqual(['count', 'windowStart'])
+    expect(rl.peek('a')?.count).toBe(5000)
+    expect(JSON.stringify(rl.peek('a')).length).toBeLessThan(64)
+  })
+
   test('the key count stays bounded under a flood of fresh ids', () => {
     const rl = mk(100)
     // All within one window, so none is evictable by age.

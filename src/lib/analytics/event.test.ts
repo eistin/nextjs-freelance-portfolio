@@ -140,6 +140,79 @@ describe('buildEvent', () => {
     expect(buildEvent(headers(), { ...view, locale: 'zz' }, NOW, SECRET)?.locale).toBeNull()
   })
 
+  test('ignores the beacon own Referer header as a referrer signal', () => {
+    // The beacon posts from one of our own pages, so the Referer header is
+    // never a traffic source. A direct visit on an alias hostname arrives with
+    // no document.referrer and must stay direct.
+    const row = buildEvent(
+      headers({ referer: 'https://theclouds.dev/recent-work' }),
+      { kind: 'view', path: '/recent-work', locale: 'en' },
+      NOW,
+      SECRET,
+    )
+    expect(row?.source).toBe('direct')
+    expect(row?.referrerHost).toBeNull()
+  })
+
+  test('nulls a CF-IPCountry that arrives as joined duplicate headers', () => {
+    // Headers.get joins duplicates with ", ", which char(2) rejects with
+    // 22001 and would discard the whole event.
+    const row = buildEvent(
+      headers({ 'cf-ipcountry': 'FR, US' }),
+      { ...view, referrer: 'https://www.linkedin.com/feed/' },
+      NOW,
+      SECRET,
+    )
+    expect(row).toEqual({
+      sessionId: expect.stringMatching(/^[0-9a-f]{16}$/),
+      kind: 'view',
+      path: '/blog',
+      locale: 'en',
+      country: null,
+      source: 'linkedin',
+      referrerHost: 'www.linkedin.com',
+      device: 'desktop',
+      element: null,
+      dwellMs: null,
+    })
+  })
+
+  test('nulls an over-long CF-IPCountry and keeps the rest of the row', () => {
+    const row = buildEvent(
+      headers({ 'cf-ipcountry': 'A'.repeat(40) }),
+      { ...view, referrer: 'https://www.linkedin.com/feed/' },
+      NOW,
+      SECRET,
+    )
+    expect(row).toEqual({
+      sessionId: expect.stringMatching(/^[0-9a-f]{16}$/),
+      kind: 'view',
+      path: '/blog',
+      locale: 'en',
+      country: null,
+      source: 'linkedin',
+      referrerHost: 'www.linkedin.com',
+      device: 'desktop',
+      element: null,
+      dwellMs: null,
+    })
+  })
+
+  test('caps a referrer host that passes the raw url gate', () => {
+    // 2013 characters, so it clears MAX_RAW_URL (2048) and really does reach
+    // classifySource; its 2004-character host is what the slice must cut. The
+    // over-long-referrer test below is dropped before that point, so only this
+    // case guards MAX_HOST.
+    const row = buildEvent(
+      headers(),
+      { ...view, referrer: 'https://' + 'a'.repeat(2000) + '.com/' },
+      NOW,
+      SECRET,
+    )
+    expect(row?.referrerHost?.length).toBe(253)
+    expect(row?.source.length).toBe(253)
+  })
+
   test('caps an over-long referrer so no field is unbounded', () => {
     const row = buildEvent(
       headers(),

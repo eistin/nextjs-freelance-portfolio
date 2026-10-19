@@ -34,6 +34,13 @@ const MAX_HOST = 253
  * every plausible label whole while bounding what a forged request can store.
  */
 const MAX_UTM_SOURCE = 32
+/**
+ * country is char(2) in Postgres. Headers.get joins duplicate headers with
+ * ", ", so a duplicated CF-IPCountry arrives as "FR, US", which the INSERT
+ * rejects with 22001 and takes the whole event down with it. Anything that is
+ * not exactly two alphanumerics is stored as null instead.
+ */
+const COUNTRY_PATTERN = /^[A-Z0-9]{2}$/
 
 /**
  * Minimum secret length. The real value is `openssl rand -hex 32` (64 chars).
@@ -50,6 +57,11 @@ export function isUsableSecret(secret: string | undefined | null): secret is str
 
 function str(value: unknown): string | null {
   return typeof value === 'string' ? value : null
+}
+
+/** Keeps a well-shaped two-character code, nulls everything else. */
+function countryFrom(value: string | null): string | null {
+  return value !== null && COUNTRY_PATTERN.test(value) ? value : null
 }
 
 function utmSourceFrom(rawUrl: string): string | null {
@@ -118,9 +130,11 @@ export function buildEvent(
 
   const locale = routing.locales.find((l) => l === b.locale) ?? null
 
-  // The browser sends document.referrer in the body; the Referer header of the
-  // beacon itself is our own page, so it is only a fallback.
-  const referrer = str(b.referrer) ?? headers.get('referer')
+  // Only document.referrer, from the body, can be a traffic source. The
+  // beacon's own Referer header is always a page of this site, on whichever of
+  // our hostnames served it, so using it as a fallback would turn a direct
+  // visit on an alias domain into a referral from ourselves.
+  const referrer = str(b.referrer)
   const classified = classifySource(
     referrer !== null && referrer.length <= MAX_RAW_URL ? referrer : null,
     utmSourceFrom(rawPath),
@@ -133,7 +147,7 @@ export function buildEvent(
     kind,
     path,
     locale,
-    country: headers.get('cf-ipcountry'),
+    country: countryFrom(headers.get('cf-ipcountry')),
     source,
     referrerHost,
     device: deviceFromUserAgent(userAgent),

@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { getProfile } from "@/lib/profile";
+import { HeroCta } from "./HeroCta";
 
 export default async function HeroSection() {
   const t = await getTranslations("hero");
@@ -75,9 +75,7 @@ export default async function HeroSection() {
           className="animate-fade-in-up"
           style={{ animationDelay: '0.3s' }}
         >
-          <Button asChild size="lg" className="px-8">
-            <a href="#contact">{t("cta")}</a>
-          </Button>
+          <HeroCta href="#contact" label={t("cta")} />
         </div>
       </div>
 
