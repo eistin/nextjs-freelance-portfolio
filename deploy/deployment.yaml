@@ -13,7 +13,7 @@ spec:
       labels:
         app: portfolio
       annotations:
-        secrets-version: "3"  # bump to roll pods after secret-only changes
+        secrets-version: "4"  # bump to roll pods after secret-only changes
     spec:
       containers:
         - name: portfolio

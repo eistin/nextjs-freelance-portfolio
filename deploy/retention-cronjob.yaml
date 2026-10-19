@@ -11,6 +11,12 @@ spec:
   jobTemplate:
     spec:
       backoffLimit: 2
+      # concurrencyPolicy: Forbid above means a run that never finishes blocks
+      # every later run, silently and forever: retention stops, rows older than
+      # 24 months accumulate, and the privacy position quietly stops holding.
+      # A hung connection (a CNPG failover mid-delete, for instance) is exactly
+      # that case, so the Job is killed after 10 minutes and the slot is freed.
+      activeDeadlineSeconds: 600
       template:
         spec:
           restartPolicy: OnFailure
@@ -27,6 +33,11 @@ spec:
                 - portfolio_app
                 - -d
                 - analytics
+                # Server-side belt to the activeDeadlineSeconds braces: the
+                # delete itself cannot block past 5 minutes, so psql returns
+                # rather than waiting on a lock until the Job is killed.
+                - -c
+                - "SET statement_timeout = '300s'"
                 - -c
                 - "DELETE FROM analytics_event WHERE at < now() - interval '24 months'"
               env:
