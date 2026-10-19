@@ -177,6 +177,19 @@ describe("classifySource", () => {
     });
   });
 
+  test.each([
+    "https://portfolio.edwindev.cloud/blog",
+    "https://edwindev.cloud/blog",
+    "https://theclouds.dev/blog",
+    "https://www.theclouds.dev/blog",
+    "https://www.portfolio.edwindev.cloud/blog",
+  ])("referrer from own hostname %s is direct", (referrer) => {
+    expect(classifySource(referrer, null)).toEqual({
+      source: "direct",
+      referrerHost: null,
+    });
+  });
+
   test("same-origin referrer with utm_source: utm wins, host is null", () => {
     expect(
       classifySource("https://edwindev.cloud/blog", "newsletter"),

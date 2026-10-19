@@ -1,6 +1,20 @@
 import { routing } from "@/i18n/routing";
 
-const SITE_HOST = "edwindev.cloud";
+/**
+ * Every hostname the site serves. Source of truth: deploy/httproute.yaml.
+ * If you add a hostname there, add it here too, or visits arriving from it
+ * will be counted as referrals from "another site". Each entry also matches
+ * its www. form.
+ */
+const SITE_HOSTS: ReadonlySet<string> = new Set([
+  "portfolio.edwindev.cloud",
+  "edwindev.cloud",
+  "theclouds.dev",
+]);
+
+function isSiteHost(hostname: string): boolean {
+  return SITE_HOSTS.has(hostname.replace(/^www\./, ""));
+}
 
 const BOT_PATTERN =
   /bot|crawl|spider|slurp|headless|lighthouse|curl|wget|preview|monitor/i;
@@ -37,7 +51,7 @@ export function classifySource(
     try {
       const parsed = new URL(referrer).hostname.toLowerCase();
       // Same-origin navigation is not a traffic source.
-      if (parsed !== SITE_HOST && parsed !== `www.${SITE_HOST}` && parsed) {
+      if (parsed && !isSiteHost(parsed)) {
         host = parsed;
       }
     } catch {
