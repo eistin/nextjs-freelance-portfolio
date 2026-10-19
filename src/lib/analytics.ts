@@ -2,6 +2,7 @@
 // Integrates with Google Analytics 4 and stores events locally
 
 import * as gtag from './gtag';
+import { send } from './analytics/beacon';
 
 export interface AnalyticsEvent {
   type: string;
@@ -63,6 +64,15 @@ class Analytics {
 
     // Send to Google Analytics 4
     this.sendToGA4(event);
+
+    // Second destination: the first-party collector. Never throws.
+    if (type === 'button') {
+      send({
+        kind: 'click',
+        path: window.location.pathname,
+        element: (label?.split(' -> ')[0] || 'unknown').slice(0, 100),
+      });
+    }
   }
 
   private sendToGA4(event: AnalyticsEvent) {
