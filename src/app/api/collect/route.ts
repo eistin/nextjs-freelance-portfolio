@@ -1,5 +1,5 @@
 import { ensureSchema, insertEvent } from '@/lib/analytics/db'
-import { buildEvent } from '@/lib/analytics/event'
+import { buildEvent, isUsableSecret } from '@/lib/analytics/event'
 
 // pg needs Node APIs and cannot run on the edge runtime.
 export const runtime = 'nodejs'
@@ -26,10 +26,23 @@ function allow(id: string, nowMs: number): boolean {
   return true
 }
 
+let secretWarned = false
 let schemaReady: Promise<void> | null = null
 
 export async function POST(request: Request): Promise<Response> {
   try {
+    const secret = process.env.ANALYTICS_SALT_SECRET
+    if (!isUsableSecret(secret)) {
+      // Fail closed, loudly but once: no hashing, no insert, still 204.
+      if (!secretWarned) {
+        secretWarned = true
+        console.error(
+          'analytics: ANALYTICS_SALT_SECRET is missing or too short, all events are dropped',
+        )
+      }
+      return new Response(null, { status: 204 })
+    }
+
     let body: unknown
     try {
       body = await request.json()
@@ -42,7 +55,7 @@ export async function POST(request: Request): Promise<Response> {
       request.headers,
       body,
       now,
-      process.env.ANALYTICS_SALT_SECRET ?? '',
+      secret,
     )
     if (!row || !allow(row.sessionId, now.getTime())) {
       return new Response(null, { status: 204 })

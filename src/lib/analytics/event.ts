@@ -33,6 +33,19 @@ const MAX_PATH = 256
  */
 const MAX_UTM_SOURCE = 32
 
+/**
+ * Minimum secret length. The real value is `openssl rand -hex 32` (64 chars).
+ * 32 characters is at least 128 bits of hex, far beyond brute force, while
+ * still rejecting empty, placeholder and typo values. A weak or empty key
+ * makes session_id reversible to an IP (the scheme is public, IPv4 is small),
+ * so a bad secret must fail closed.
+ */
+export const MIN_SECRET_LENGTH = 32
+
+export function isUsableSecret(secret: string | undefined | null): secret is string {
+  return typeof secret === 'string' && secret.length >= MIN_SECRET_LENGTH
+}
+
 function str(value: unknown): string | null {
   return typeof value === 'string' ? value : null
 }
@@ -59,6 +72,9 @@ export function buildEvent(
   now: Date,
   secret: string,
 ): AnalyticsRow | null {
+  // Fail closed: never hash with a missing or weak secret.
+  if (!isUsableSecret(secret)) return null
+
   // Cloudflare sets this and strips any client-supplied copy. Absent means the
   // request did not come through Cloudflare, so it is not a real visit.
   const ip = headers.get('cf-connecting-ip')

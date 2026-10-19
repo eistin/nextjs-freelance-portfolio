@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest'
 import { buildEvent } from './event'
 
 const NOW = new Date('2026-10-19T12:00:00Z')
-const SECRET = 'test-secret'
+const SECRET = 'test-secret-'.padEnd(64, 'x')
 const DESKTOP_UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15'
 
@@ -40,6 +40,18 @@ describe('buildEvent', () => {
       element: null,
       dwellMs: null,
     })
+  })
+
+  test('returns null when the secret is empty', () => {
+    expect(buildEvent(headers(), view, NOW, '')).toBeNull()
+  })
+
+  test('returns null when the secret is below the minimum length', () => {
+    expect(buildEvent(headers(), view, NOW, 'x'.repeat(31))).toBeNull()
+  })
+
+  test('a valid secret still produces a row', () => {
+    expect(buildEvent(headers(), view, NOW, 'x'.repeat(32))).not.toBeNull()
   })
 
   test('drops the event when CF-Connecting-IP is absent', () => {
